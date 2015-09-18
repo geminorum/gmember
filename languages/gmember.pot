@@ -1,0 +1,509 @@
+#: gmember.php:79
+msgid "gMember"
+msgstr ""
+
+#: gmember.php:84
+msgid "Logs"
+msgstr ""
+
+#: includes/admin.class.php:14
+msgid "Latest Signups"
+msgstr ""
+
+#: includes/admin.class.php:38
+msgid "No User?!"
+msgstr ""
+
+#: includes/admin.class.php:43
+#: includes/profile.class.php:53
+msgid "Registered"
+msgstr ""
+
+#: includes/admin.class.php:44
+msgid "Name"
+msgstr ""
+
+#: includes/admin.class.php:45
+msgid "E-mail"
+msgstr ""
+
+#: includes/admin.class.php:60
+msgid "j/m"
+msgstr ""
+
+#: includes/admin.class.php:61
+msgid "j/m/Y"
+msgstr ""
+
+#: includes/admin.class.php:73
+msgid "Last Registered: %s ago"
+msgstr ""
+
+#: includes/admin.class.php:74
+msgid "Total Users: %s"
+msgstr ""
+
+#: includes/cleanup.class.php:71
+#: includes/spam.class.php:12
+msgid "Submit Changes"
+msgstr ""
+
+#: includes/fields.class.php:187
+msgid "Change your password!"
+msgstr ""
+
+#: includes/fields.class.php:188
+msgid "Change your randomly generated password to one that you will remember."
+msgstr ""
+
+#: includes/filtered.class.php:30
+msgid "Search Authors"
+msgstr ""
+
+#: includes/filtered.class.php:31
+msgid "Include by author display name in general post search queries."
+msgstr ""
+
+#: includes/filtered.class.php:36
+msgid "Store Last Login"
+msgstr ""
+
+#: includes/filtered.class.php:41
+msgid "Store Online Users"
+msgstr ""
+
+#: includes/filtered.class.php:54
+msgid "Signup IP"
+msgstr ""
+
+#: includes/filtered.class.php:59
+msgid "Network Signup URL"
+msgstr ""
+
+#: includes/filtered.class.php:60
+msgid "Full URL to the custom sign-up page. You can use <code>[signup-form]</code> shortcode or any other registration mechanisem."
+msgstr ""
+
+#: includes/filtered.class.php:75
+msgid "Display Name"
+msgstr ""
+
+#: includes/filtered.class.php:76
+msgid "Member's Universal Sidewide Display Name"
+msgstr ""
+
+#: includes/filtered.class.php:80
+msgctxt "BP Display Name Option"
+msgid "&mdash; Default &mdash;"
+msgstr ""
+
+#: includes/filtered.class.php:81
+msgctxt "BP Display Name Option"
+msgid "First and Last Name"
+msgstr ""
+
+#: includes/filtered.class.php:82
+msgctxt "BP Display Name Option"
+msgid "Username"
+msgstr ""
+
+#: includes/filtered.class.php:83
+msgctxt "BP Display Name Option"
+msgid "Nickname"
+msgstr ""
+
+#: includes/filtered.class.php:84
+msgctxt "BP Display Name Option"
+msgid "First Name"
+msgstr ""
+
+#: includes/filtered.class.php:85
+msgctxt "BP Display Name Option"
+msgid "Last Name"
+msgstr ""
+
+#: includes/filtered.class.php:108
+msgid "There was an error durring updating proccess"
+msgstr ""
+
+#: includes/filtered.class.php:109
+msgid "Settings successfully updated."
+msgstr ""
+
+#: includes/filtered.class.php:116
+#: includes/filtered.class.php:117
+msgid "gMember Settings"
+msgstr ""
+
+#: includes/filtered.class.php:124
+msgid "Overview"
+msgstr ""
+
+#: includes/filtered.class.php:125
+msgid "General"
+msgstr ""
+
+#: includes/filtered.class.php:126
+msgid "SignUp"
+msgstr ""
+
+#: includes/filtered.class.php:127
+msgid "BuddyPress"
+msgstr ""
+
+#: includes/filtered.class.php:128
+msgid "CleanUp"
+msgstr ""
+
+#: includes/filtered.class.php:137
+msgctxt "User Group Tax Name"
+msgid "User Groups"
+msgstr ""
+
+#: includes/filtered.class.php:138
+msgctxt "User Group Tax Menu Name"
+msgid "User Groups"
+msgstr ""
+
+#: includes/filtered.class.php:139
+msgctxt "User Group Tax Labels"
+msgid "User Group"
+msgstr ""
+
+#: includes/filtered.class.php:140
+msgctxt "User Group Tax Labels"
+msgid "All User Groups"
+msgstr ""
+
+#: includes/filtered.class.php:141
+msgctxt "User Group Tax Labels"
+msgid "Parent User Group"
+msgstr ""
+
+#: includes/filtered.class.php:142
+msgctxt "User Group Tax Labels"
+msgid "Parent User Group:"
+msgstr ""
+
+#: includes/filtered.class.php:143
+msgctxt "User Group Tax Labels"
+msgid "Search User Groups"
+msgstr ""
+
+#: includes/filtered.class.php:144
+msgctxt "User Group Tax Labels"
+msgid "Edit User Group"
+msgstr ""
+
+#: includes/filtered.class.php:145
+msgctxt "User Group Tax Labels"
+msgid "Update User Group"
+msgstr ""
+
+#: includes/filtered.class.php:146
+msgctxt "User Group Tax Labels"
+msgid "Add New User Group"
+msgstr ""
+
+#: includes/filtered.class.php:147
+msgctxt "User Group Tax Labels"
+msgid "New User Group"
+msgstr ""
+
+#: includes/filtered.class.php:148
+msgctxt "User Group Tax Labels"
+msgid "Separate user groups with commas"
+msgstr ""
+
+#: includes/filtered.class.php:149
+msgctxt "User Group Tax Labels"
+msgid "Add or remove user groups"
+msgstr ""
+
+#: includes/filtered.class.php:150
+msgctxt "User Group Tax Labels"
+msgid "Choose from most used user groups"
+msgstr ""
+
+#: includes/filtered.class.php:151
+msgctxt "User Group Tax Labels"
+msgid "No User Groups found."
+msgstr ""
+
+#: includes/groups.class.php:88
+msgid "Users"
+msgstr ""
+
+#: includes/groups.class.php:109
+msgid "Group"
+msgstr ""
+
+#: includes/groups.class.php:112
+msgid "Select Group"
+msgstr ""
+
+#: includes/groups.class.php:132
+msgid "There are no groups available."
+msgstr ""
+
+#: includes/login.class.php:72
+#: includes/login.class.php:75
+msgid "Username or Email"
+msgstr ""
+
+#: includes/login.class.php:75
+msgid "username"
+msgstr ""
+
+#: includes/login.class.php:83
+msgid "<strong>ERROR</strong>: Invalid Username or Email. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
+msgstr ""
+
+#: includes/login.class.php:86
+msgid "<strong>ERROR</strong>: The username/Email field is empty."
+msgstr ""
+
+#: includes/login.class.php:98
+#: includes/login.class.php:105
+msgid "%s ago"
+msgstr ""
+
+#: includes/login.class.php:108
+msgid "No Data Available"
+msgstr ""
+
+#: includes/login.class.php:116
+msgid "Registration IP"
+msgstr ""
+
+#: includes/login.class.php:120
+msgid "Registration on"
+msgstr ""
+
+#: includes/login.class.php:124
+#: includes/profile.class.php:55
+msgid "Last Login"
+msgstr ""
+
+#: includes/login.class.php:130
+msgid " Disable User Account"
+msgstr ""
+
+#: includes/login.class.php:133
+msgid "If checked, the user cannot login with this account."
+msgstr ""
+
+#: includes/login.class.php:137
+msgid " Disable Password Reset"
+msgstr ""
+
+#: includes/login.class.php:140
+msgid "If checked, the user cannot reset his password via wp-login.php"
+msgstr ""
+
+#: includes/login.class.php:146
+msgid "Slug"
+msgstr ""
+
+#: includes/login.class.php:148
+msgid "This will be used in the URL of the user's page"
+msgstr ""
+
+#: includes/login.class.php:230
+msgid "Account disabled"
+msgstr ""
+
+#: includes/profile.class.php:54
+msgid "Register IP"
+msgstr ""
+
+#: includes/profile.class.php:54
+msgid "N/A"
+msgstr ""
+
+#: includes/profile.class.php:55
+#: includes/profile.class.php:58
+msgid "Never"
+msgstr ""
+
+#: includes/profile.class.php:58
+msgid "Last Active"
+msgstr ""
+
+#: includes/profile.class.php:67
+msgid "Timestamps"
+msgstr ""
+
+#: includes/profile.class.php:131
+msgid "Google+ Profile"
+msgstr ""
+
+#: includes/profile.class.php:132
+msgid "Twitter"
+msgstr ""
+
+#: includes/profile.class.php:133
+msgid "Mobile Phone"
+msgstr ""
+
+#: includes/profile.class.php:140
+msgid "Nickname for this site"
+msgstr ""
+
+#: includes/profile.class.php:142
+msgid "This will be displayed as your name in this site only"
+msgstr ""
+
+#: includes/signup.class.php:95
+msgid ""
+"To activate your user, please click the following link:\n"
+"\n"
+"%s\n"
+"\n"
+"After you activate, you will receive *another email* with your login."
+msgstr ""
+
+#: includes/signup.class.php:115
+msgid "Get your own %s account in seconds"
+msgstr ""
+
+#: includes/signup.class.php:120
+msgid "You are logged in already. No need to register again!"
+msgstr ""
+
+#: includes/signup.class.php:122
+msgid "Registration has been disabled."
+msgstr ""
+
+#: includes/signup.class.php:126
+msgid "Username:"
+msgstr ""
+
+#: includes/signup.class.php:127
+msgid "Email&nbsp;Address:"
+msgstr ""
+
+#: includes/signup.class.php:128
+msgid "Password:"
+msgstr ""
+
+#: includes/signup.class.php:129
+msgid "Submit"
+msgstr ""
+
+#: includes/signup.class.php:133
+msgid "(Must be at least 4 characters, letters and numbers only.)"
+msgstr ""
+
+#: includes/signup.class.php:134
+msgid "We send your registration email to this address. (Double-check your email address before continuing.)"
+msgstr ""
+
+#: includes/signup.class.php:146
+#: includes/signup.class.php:182
+msgid "Your account is now active!"
+msgstr ""
+
+#: includes/signup.class.php:151
+msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
+msgstr ""
+
+#: includes/signup.class.php:152
+msgid "Your site at <a href=\"%1$s\">%2$s</a> is active. You may now log in to your site using your chosen username of &#8220;%3$s&#8221;. Please check your email inbox at %4$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%5$s\">reset your password</a>."
+msgstr ""
+
+#: includes/signup.class.php:163
+msgid "An error occurred during the activation"
+msgstr ""
+
+#: includes/signup.class.php:204
+msgid "Your account is now activated. <a href=\"%1$s\">View your site</a> or <a href=\"%2$s\">Log in</a>"
+msgstr ""
+
+#: includes/signup.class.php:205
+msgid "Your account is now activated. <a href=\"%1$s\">Log in</a> or go back to the <a href=\"%2$s\">homepage</a>."
+msgstr ""
+
+#: includes/signup.class.php:256
+msgid "Please try again."
+msgstr ""
+
+#: includes/signup.class.php:271
+msgid "%s is your new username"
+msgstr ""
+
+#: includes/signup.class.php:273
+msgid "But, before you can start using your new username, <strong>you must activate it</strong>."
+msgstr ""
+
+#: includes/signup.class.php:274
+msgid "Check your inbox at <strong>%s</strong> and click the link given."
+msgstr ""
+
+#: includes/signup.class.php:275
+msgid "If you do not activate your username within two days, you will have to sign up again."
+msgstr ""
+
+#: includes/signup.class.php:442
+msgid "Only lowercase letters (a-z) and numbers are allowed."
+msgstr ""
+
+#: includes/signup.class.php:443
+msgid "Sorry, usernames may not contain the character &#8220;_&#8221;!"
+msgstr ""
+
+#: includes/widgets.class.php:28
+msgid "gMember: Online Users"
+msgstr ""
+
+#: includes/widgets.class.php:29
+msgid "Ajax powered online users, with cache plugins compatibility."
+msgstr ""
+
+#: includes/widgets.class.php:50
+msgid "gMember: Login / Profile"
+msgstr ""
+
+#: includes/widgets.class.php:51
+msgid "none-Ajax Login / Profile widget"
+msgstr ""
+
+#: includes/widgets.class.php:61
+msgid "Username"
+msgstr ""
+
+#: includes/widgets.class.php:62
+msgid "Password"
+msgstr ""
+
+#: includes/widgets.class.php:63
+msgid "Log In"
+msgstr ""
+
+#: includes/widgets.class.php:82
+msgid "Log Out"
+msgstr ""
+
+#: includes/widgets.class.php:102
+msgid "Logged-out Title"
+msgstr ""
+
+#: includes/widgets.class.php:105
+msgid "Username Label"
+msgstr ""
+
+#: includes/widgets.class.php:108
+msgid "Password Label"
+msgstr ""
+
+#: includes/widgets.class.php:111
+msgid "Log-In Button Text"
+msgstr ""
+
+#: includes/widgets.class.php:114
+msgid "Logged-in Title"
+msgstr ""
+
+#: includes/widgets.class.php:117
+msgid "Log-Out Button Text"
+msgstr ""

@@ -1,0 +1,470 @@
+<?php defined( 'ABSPATH' ) or die( 'Restricted access' );
+
+class gMemberSignUp extends gPluginModuleCore
+{
+
+	var $_init_priority    = 5;
+	var $_signup_form_page = FALSE;
+
+	public function setup_actions()
+	{
+		add_action( 'user_register', array( &$this, 'user_register' ) );
+
+		if ( ! is_multisite() )
+			return;
+
+		// add_filter( 'sanitize_user', array( &$this, 'sanitize_username' ), 12, 3 );
+		// add_filter( 'wpmu_validate_user_signup', array( &$this, 'wpmu_validate_user_signup_email' ), 12, 1 );
+
+		parent::setup_actions();
+	}
+
+	public function init()
+	{
+		global $gMemberNetwork;
+
+		$this->url = $gMemberNetwork->settings->get( 'signup_url', '' );
+
+		if ( $this->url ) {
+			$this->check_wp_signup();
+			add_filter( 'wp_signup_location', array( &$this, 'wp_signup_location' ), 15 ); // for WP
+			add_filter( 'bp_get_signup_page', array( &$this, 'wp_signup_location' ), 15 ); // for BuddyPress
+			add_filter( 'bp_get_activation_page', array( &$this, 'wp_signup_location' ), 15 ); // for BuddyPress, probably no need!
+		}
+
+		// WORKING BUT DISABLED UNTIL COMPELETE REWRITE
+		// add_shortcode( 'signup-form', array( &$this, 'signup_form_shortcode' ) );
+	}
+
+	// helper
+	public function check_wp_signup()
+	{
+		if ( is_admin() )
+			return;
+
+		$action = ! empty( $_GET['action'] ) ? $_GET['action'] : '';
+
+		// Not at the WP core signup page and action is not register
+		if ( ! empty( $_SERVER['SCRIPT_NAME'] )
+			&& FALSE === strpos( $_SERVER['SCRIPT_NAME'], 'wp-signup.php' )
+			&& ( 'register' != $action ) )
+				return;
+
+		wp_redirect( $this->url );
+		exit();
+	}
+
+	public function wp_signup_location( $url )
+	{
+		if ( $this->url )
+			return esc_url( trailingslashit( $this->url ) );
+
+		return $url;
+	}
+
+	public function user_register( $user_id )
+	{
+		global $gMemberNetwork;
+
+		if ( $gMemberNetwork->settings->get( 'signup_ip', TRUE ) )
+			update_user_meta( $user_id, $this->constants['meta_register_ip'], $_SERVER['REMOTE_ADDR'] ); // http://wordpress.org/plugins/register-ip-multisite/
+
+		// NO NEED: we're not going to let the meta stored in the first place!
+		// update_user_meta( $user_id, 'show_welcome_panel', 0 ); // http://wpengineer.com/2470/hide-welcome-panel-for-wordpress-multisite/
+	}
+
+	// we use this to modify the activation url sent by the activation email
+	public function site_url( $url, $path, $scheme, $blog_id )
+	{
+		if ( ! $this->_signup_form_page || empty( $path )
+			|| FALSE === strpos( $path, 'wp-activate.php?key=' ) )
+				return $url;
+
+		return add_query_arg( 'key',
+			str_replace( 'wp-activate.php?key=', '', $path ),
+			$this->_signup_form_page
+		);
+	}
+
+	// must dep
+	public function wpmu_signup_user_notification_email( $email, $user, $user_email, $key, $meta )
+	{
+		if ( ! $this->_signup_form_page )
+			return $email;
+
+		return sprintf ( __( "To activate your user, please click the following link:\n\n%s\n\nAfter you activate, you will receive *another email* with your login." ),
+			add_query_arg( 'key', $key, $this->_signup_form_page )
+		);
+	}
+
+	public function signup_form_shortcode( $atts, $content = NULL, $tag = '' )
+	{
+		global $current_site;
+
+		if ( ! is_multisite() )
+			return $content;
+
+		if ( is_page() ) {
+			$this->_signup_form_page = get_page_link();
+			// add_filter( 'wpmu_signup_user_notification_email', array( &$this, 'wpmu_signup_user_notification_email' ), 10, 5 );
+			add_filter( 'site_url', array( &$this, 'site_url' ), 10, 4 );
+		}
+
+		$args = shortcode_atts( array(
+			'class'              => 'member-signup',
+			'title'              => sprintf( __( 'Get your own %s account in seconds' ), $current_site->site_name ),
+			'title_wrap'         => 'h3',
+			'field_wrap'         => 'div',
+			'field_wrap_class'   => 'member-signup-field',
+			'logged_in_redirect' => false,
+			'logged_in_text'     => __( 'You are logged in already. No need to register again!' ),
+			'disabled_redirect'  => false,
+			'disabled_text'      => __( 'Registration has been disabled.' ),
+		), $atts, $tag );
+
+		$labels = apply_filters( 'gmember_signup_form_labels', array(
+			'user_name'  => __( 'Username:' ),
+			'user_email' => __( 'Email&nbsp;Address:' ),
+			'user_pass'  => __( 'Password:' ),
+			'submit'     => __( 'Submit' ),
+		), $args );
+
+		$descriptions = apply_filters( 'gmember_signup_form_descriptions', array(
+			'user_name'  => __( '(Must be at least 4 characters, letters and numbers only.)' ),
+			'user_email' => __( 'We send your registration email to this address. (Double-check your email address before continuing.)' ),
+		), $args );
+
+		if ( isset( $_GET['key'] ) || isset( $_POST['key'] ) ) {
+			$key = ! empty( $_GET['key'] ) ? $_GET['key'] : $_POST['key'];
+			$current = wpmu_activate_signup( $key );
+			if ( is_wp_error( $current ) ) {
+				if ( 'already_active' == $current->get_error_code() || 'blog_taken' == $current->get_error_code() ) {
+					$signup = $current->get_error_data();
+
+					$activate = gPluginFormHelper::html( $args['title_wrap'], array(
+						'class' => 'member-signup-title member-signup-activate-title',
+					), __( 'Your account is now active!' ) );
+
+					$activate .= gPluginFormHelper::html( 'p', array(
+						'class' => 'lead-in member-signup-activate-text',
+					), ( '' == $signup->domain.$signup->path ?
+							sprintf( __( 'Your account has been activated. You may now <a href="%1$s">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href="%4$s">reset your password</a>.'), network_site_url( 'wp-login.php', 'login' ), $signup->user_login, $signup->user_email, wp_lostpassword_url() ) :
+							sprintf( __( 'Your site at <a href="%1$s">%2$s</a> is active. You may now log in to your site using your chosen username of &#8220;%3$s&#8221;. Please check your email inbox at %4$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href="%5$s">reset your password</a>.'), 'http://' . $signup->domain, $signup->domain, $signup->user_login, $signup->user_email, wp_lostpassword_url() )
+					) );
+
+					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+					return gPluginFormHelper::html( 'div', array(
+						'class' => $args['class'].' member-signup-activate',
+					), $activate );
+
+				} else {
+					$activate = gPluginFormHelper::html( $args['title_wrap'], array(
+						'class' => 'member-signup-title member-signup-activate-title member-signup-activate-error-title',
+					), __( 'An error occurred during the activation' ) );
+
+					$activate .= gPluginFormHelper::html( 'p', array(
+						'class' => 'member-signup-activate-error-text',
+					), $current->get_error_message() );
+
+					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+					return gPluginFormHelper::html( 'div', array(
+						'class' => $args['class'].' member-signup-activate-error',
+					), $activate );
+
+				}
+
+			} else {
+
+				$user = get_userdata( (int) $current['user_id'] );
+
+				$activate = gPluginFormHelper::html( $args['title_wrap'], array(
+					'class' => 'member-signup-title member-signup-activate-title',
+				), __( 'Your account is now active!' ) );
+
+				$welcome = '<p>'.gPluginFormHelper::html( 'span', array(
+					'class' => 'h3',
+				), $labels['user_name'] );
+				$welcome .= gPluginFormHelper::html( 'span', array(), $user->user_login ).'</p>';
+
+				$welcome .= '<p>'.gPluginFormHelper::html( 'span', array(
+					'class' => 'h3',
+				), $labels['user_pass'] );
+				$welcome .= gPluginFormHelper::html( 'span', array(), $current['password'] ).'</p>';
+
+				$activate .= gPluginFormHelper::html( 'div', array(
+					'id' => 'signup-welcome',
+					'class' => 'member-signup-activate-welcome',
+				), $welcome );
+
+				$url = get_blogaddress_by_id( (int) $current['blog_id'] );
+
+				$activate .= gPluginFormHelper::html( 'p', array(
+					'class' => 'view member-signup-activate-text',
+				), ( $url != network_home_url( '', 'http' ) ?
+					sprintf( __('Your account is now activated. <a href="%1$s">View your site</a> or <a href="%2$s">Log in</a>'), $url, $url . 'wp-login.php' ) :
+					sprintf( __('Your account is now activated. <a href="%1$s">Log in</a> or go back to the <a href="%2$s">homepage</a>.' ), network_site_url( 'wp-login.php', 'login' ), network_home_url() )
+					) );
+
+				defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+				return gPluginFormHelper::html( 'div', array(
+					'class' => $args['class'].' member-signup-activate',
+				), $activate );
+			}
+		}
+
+		if ( is_user_logged_in() ) {
+			if ( $args['logged_in_redirect'] ) {
+				wp_redirect( $args['logged_in_redirect'] ); die();
+			} else {
+				$logged_in = gPluginFormHelper::html( 'p', array(
+					'class' => 'member-signup-logged-in',
+				), $args['logged_in_text'] );
+				return gPluginFormHelper::html( 'div', array(
+					'class' => $args['class'],
+				), $logged_in );
+			}
+		}
+
+		$active_signup = apply_filters( 'wpmu_active_signup', get_site_option( 'registration', 'all' ) ); // return "all", "none", "blog" or "user"
+		if ( $active_signup == 'none' ) {
+			if ( $args['disabled_redirect'] ) {
+				wp_redirect( $args['disabled_redirect'] ); die();
+			} else {
+				$disabled = gPluginFormHelper::html( 'p', array(
+					'class' => 'member-signup-disabled',
+				), $args['logged_disabled'] );
+				return gPluginFormHelper::html( 'div', array(
+					'class' => $args['class'],
+				), $disabled );
+			}
+		}
+
+		$current = array(
+			'stage'      => isset( $_POST['stage'] ) ?  $_POST['stage'] : 'default',
+			'user_name'  => isset( $_POST['user_name'] ) ? $_POST['user_name'] : '',
+			'user_email' => isset( $_POST['user_email'] ) ? $_POST['user_email'] : '',
+			'errors'     => new WP_Error(),
+		);
+
+		switch ( $current['stage'] ) {
+			case 'validate-user-signup' : {
+				// removed beacause: the filter not checked wp nounce if its not on wp-signup.php and wp_die is not acceptable!
+				remove_filter( 'wpmu_validate_user_signup', 'signup_nonce_check' );
+				if ( wp_create_nonce( 'member_signup_form_'.$_POST['member_signup_form_id']) != $_POST['_member_signup_form'] ) {
+					$error = gPluginFormHelper::html( 'p', array(
+						'class' => 'member-signup-error',
+					), __( 'Please try again.' ) );
+					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+					return gPluginFormHelper::html( 'div', array(
+						'class' => $args['class'],
+					), $error );
+				}
+
+				$current = array_merge( $current, wpmu_validate_user_signup( $current['user_name'], $current['user_email'] ) );
+				//$result = array('user_name' => $user_name, 'orig_username' => $orig_username, 'user_email' => $user_email, 'errors' => $errors);
+				if ( ! $current['errors']->get_error_code() ) {
+
+					wpmu_signup_user( $current['user_name'], $current['user_email'], apply_filters( 'add_signup_meta', array() ) );
+
+					$confirm = gPluginFormHelper::html( $args['title_wrap'], array(
+						'class' => 'member-signup-title member-signup-title-confirm',
+					), sprintf( __( '%s is your new username' ), $current['user_name'] ) );
+
+					$confirm .= gPluginFormHelper::html( 'p', array(), __( 'But, before you can start using your new username, <strong>you must activate it</strong>.' ) );
+					$confirm .= gPluginFormHelper::html( 'p', array(), sprintf( __( 'Check your inbox at <strong>%s</strong> and click the link given.' ), $current['user_email'] ) );
+					$confirm .= gPluginFormHelper::html( 'p', array(), __( 'If you do not activate your username within two days, you will have to sign up again.' ) );
+
+					ob_start();
+					do_action( 'signup_finished' );
+					$confirm .= ob_get_clean();
+
+					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+					return gPluginFormHelper::html( 'div', array(
+						'class' => $args['class'].' member-signup-confirm',
+					), $confirm );
+				}
+			}
+		}
+
+		$current = apply_filters( 'signup_user_init', $current ); // allow definition of default variables
+
+		ob_start();
+		do_action( 'preprocess_signup_form' );
+		$pre = ob_get_clean();
+
+		$header = gPluginFormHelper::html( $args['title_wrap'], array(
+			'class' => 'member-signup-title',
+		), $args['title'] );
+
+		$fields_hidden = gPluginFormHelper::html( 'input', array(
+			'type'  => 'hidden',
+			'name'  => 'stage',
+			'value' => 'validate-user-signup',
+		), false );
+
+		remove_action( 'signup_hidden_fields', 'signup_nonce_fields' );
+		$id_nonce = mt_rand();
+		$fields_hidden .= gPluginFormHelper::html( 'input', array(
+			'type'  => 'hidden',
+			'name'  => 'member_signup_form_id',
+			'value' => $id_nonce,
+		), false );
+		$fields_hidden .= wp_nonce_field( 'member_signup_form_'.$id_nonce, '_member_signup_form', false, false );
+
+
+
+		ob_start();
+		do_action( 'signup_hidden_fields' );
+		$fields_hidden .= ob_get_clean();
+
+		$field_user_name = gPluginFormHelper::html( 'label', array(
+			'for' => 'user_name',
+		), $labels['user_name'] );
+
+		if ( $username_error = $current['errors']->get_error_message( 'user_name' ) )
+			$field_user_name .= gPluginFormHelper::html( 'p', array(
+				'class' => 'error',
+			), $username_error );
+
+		$field_user_name .= gPluginFormHelper::html( 'input', array(
+			'name'      => 'user_name',
+			'id'        => 'user_name',
+			'class'     => 'textInput',
+			'type'      => 'text',
+			'value'     => esc_attr( $current['user_name'] ),
+			'maxlength' => '60',
+		), false );
+
+		if ( $descriptions['user_name'] )
+			$field_user_name .= gPluginFormHelper::html( 'p', array(
+				'class' => 'description formHint',
+			), $descriptions['user_name'] );
+
+		$field_user_name = gPluginFormHelper::html( $args['field_wrap'], array(
+			'class' => $args['field_wrap_class'].' ctrlHolder',
+		), $field_user_name );
+
+		$field_user_email = gPluginFormHelper::html( 'label', array(
+			'for' => 'user_email',
+		), $labels['user_email'] );
+
+		if ( $useremail_error = $current['errors']->get_error_message( 'user_email' ) )
+			$field_user_email .= gPluginFormHelper::html( 'p', array(
+				'class' => 'error',
+			), $useremail_error );
+
+		$field_user_email .= gPluginFormHelper::html( 'input', array(
+			'name'      => 'user_email',
+			'id'        => 'user_email',
+			'class'     => 'textInput',
+			'type'      => 'text',
+			'value'     => esc_attr( $current['user_email'] ),
+			'maxlength' => '200',
+		), false );
+
+		if ( $descriptions['user_email'] )
+			$field_user_email .= gPluginFormHelper::html( 'p', array(
+				'class' => 'description formHint',
+			), $descriptions['user_email'] );
+
+		$field_user_email = gPluginFormHelper::html( $args['field_wrap'], array(
+			'class' => $args['field_wrap_class'].' ctrlHolder',
+		), $field_user_email );
+
+		$user_email = gPluginFormHelper::html( 'fieldset', array(), $field_user_name.$field_user_email );
+
+		ob_start();
+		do_action( 'signup_extra_fields', $current['errors'], $args );
+		$fields_extra = ob_get_clean();
+
+		$submit = gPluginFormHelper::html( 'input', array(
+			'name' => 'submit',
+			'class' => 'primaryAction',
+			'type' => 'submit',
+			'value' => esc_attr( $labels['submit'] ),
+		), false );
+
+		$submit = gPluginFormHelper::html( 'p', array(
+			'class' => 'submit buttonHolder',
+		), $submit );
+
+		$form = gPluginFormHelper::html( 'form', array(
+			'id' => 'member_signup_form',
+			'method' => 'post',
+			'class' => 'uniForm',
+			'action' => '', // TODO : get current url
+		), $fields_hidden.$user_email.$fields_extra.$submit );
+
+		defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
+		return gPluginFormHelper::html( 'div', array(
+			'class' => $args['class'],
+		), $pre.$header.$form );
+	}
+
+
+
+
+
+
+
+
+
+	// originally from : http://wordpress.org/plugins/network-username-restrictions-override/
+	// email addresses can contain characters not allowed in the strict set, such as '+'.
+	public function sanitize_username( $username, $raw_username, $strict )
+	{
+		if ( is_email( $raw_username ) ) {
+			$gMemberNetwork =& gMemberNetwork::getInstance();
+			if ( $gMemberNetwork->get_option( 'signup_with_email', false ) )
+				return $raw_username;
+		}
+		return $username;
+	}
+
+	// Originally from : http://wordpress.org/plugins/network-username-restrictions-override/
+	public function wpmu_validate_user_signup_email( $result )
+	{
+		$gMemberNetwork =& gMemberNetwork::getInstance();
+		if ( ! $gMemberNetwork->get_option( 'signup_with_email', false ) )
+			return $result;
+
+		if ( ! is_wp_error( $result['errors'] ) )
+			return $result;
+
+		// WHAT TO DO? : check if user_name is_email too?
+
+		$new_errors = new WP_Error();
+
+		foreach ( $result['errors']->get_error_codes() as $code ) {
+			$messages = $result['errors']->get_error_messages( $code );
+			if ( $code == 'user_name' ) {
+				foreach ( $messages as $message ) {
+					if ( $message == __( 'Only lowercase letters (a-z) and numbers are allowed.' )
+						|| $message == __( 'Sorry, usernames may not contain the character &#8220;_&#8221;!' ) ) {
+							if ( is_email( $result['user_name'] ) )
+								continue;
+					}
+					$new_errors->add( $code, $message );
+				}
+			} else {
+				foreach ( $messages as $message )
+					$new_errors->add( $code, $message );
+			}
+		}
+
+		$result['errors'] = $new_errors;
+		return $result;
+	}
+
+}
+
+// http://wordpress.org/extend/plugins/recently-registered/
+//
+// use this, but disable register!
+// http://digwp.com/2010/12/login-register-password-code/
+
+// filter the URL WordPress redirects to after registration.
+// https://gist.github.com/chrisguitarguy/1850631
+
+// Don't allow people to view the default WordPress registration page
+// https://gist.github.com/chrisguitarguy/2012290
