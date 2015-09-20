@@ -95,11 +95,11 @@ function gmember_init(){
 	$constants = array(
 		'plugin_dir' => GMEMBER_DIR,
 		'plugin_url' => GMEMBER_URL,
-		'class_filters' => 'gMemberFiltered',
+		'plugin_ver' => GMEMBER_VERSION,
+
+		'class_filters'          => 'gMemberFiltered',
 		//'class_mustache' => 'gMemberMustache',
-
-		'theme_templates_dir' => 'gmember-templates',
-
+		'theme_templates_dir'    => 'gmember-templates',
 		'class_network_settings' => 'gMemberNetworkSettings',
 		//'class_component_settings' => 'gMemberComponentSettings',
 		//'class_module_settings' => 'gMemberModuleSettings',
