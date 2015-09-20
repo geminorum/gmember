@@ -40,7 +40,7 @@ class gMemberNetwork extends gPluginNetworkCore
 
 	public function load_textdomain()
 	{
-		load_plugin_textdomain( GMEMBER_TEXTDOMAIN, false, 'gmember/languages' );
+		load_plugin_textdomain( GMEMBER_TEXTDOMAIN, FALSE, 'gmember/languages' );
 	}
 
 	public function network_settings_save()
@@ -72,9 +72,6 @@ class gMemberNetwork extends gPluginNetworkCore
 				}
 
 			} else if ( 'import' == $sub ) {
-
-
-
 
 
 			} else if ( 'update' == $_POST['action'] ) {
