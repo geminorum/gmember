@@ -10,6 +10,10 @@ class gMemberAdmin extends gPluginModuleCore
 			add_action( 'wp_network_dashboard_setup', array( &$this, 'wp_network_dashboard_setup' ) );
 			add_filter( 'wpmu_users_columns', array( &$this, 'wpmu_users_columns' ) );
 			add_filter( 'manage_users_custom_column', array( &$this, 'manage_users_custom_column' ), 10, 3 );
+
+			// FIXME: WTF: network users table does not have sort the filter!
+			// add_filter( 'manage_users_sortable_columns', array( &$this ,'manage_users_sortable_columns') );
+			// add_filter( 'request', array( &$this ,'manage_users_request') );
 		}
 	}
 
@@ -125,5 +129,24 @@ class gMemberAdmin extends gPluginModuleCore
 		$html .= '</tbody></table>';
 
 		echo $html;
+	}
+
+	public function manage_users_sortable_columns( $columns )
+	{
+		$columns['timestamps'] = 'timestamps';
+		return $columns;
+	}
+
+	public function manage_users_request( $vars )
+	{
+		if ( isset( $vars['orderby'] )
+			&& 'timestamps' == $vars['orderby'] )
+
+				$vars = array_merge( $vars, array(
+					'meta_key' => 'registerdate',
+					'orderby'  => 'meta_value'
+				) );
+
+		return $vars;
 	}
 }
