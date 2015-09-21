@@ -43,6 +43,12 @@ class gMemberNetwork extends gPluginNetworkCore
 		load_plugin_textdomain( GMEMBER_TEXTDOMAIN, FALSE, 'gmember/languages' );
 	}
 
+	protected function setup_constants()
+	{
+		defined( 'GPLUGIN_SESSION_COOKIE' ) or define( 'GPLUGIN_SESSION_COOKIE', '_gs_session' );
+		defined( 'GPLUGIN_SESSION_CRON_ROUTINE' ) or define( 'GPLUGIN_SESSION_CRON_ROUTINE', 'hourly' );
+	}
+
 	public function network_settings_save()
 	{
 		global $gMemberNetwork;

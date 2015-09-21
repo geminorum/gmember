@@ -43,10 +43,6 @@ if ( file_exists( WP_PLUGIN_DIR.'/gmember-custom.php' ) )
 
 defined( 'GMEMBER_TEXTDOMAIN' ) or define( 'GMEMBER_TEXTDOMAIN', 'gmember' );
 
-// defined( 'WP_SESSION_COOKIE' ) or define( 'WP_SESSION_COOKIE', '_gs_session' );
-defined( 'GPLUGIN_SESSION_COOKIE' ) or define( 'GPLUGIN_SESSION_COOKIE', '_gs_session' );
-defined( 'GPLUGIN_SESSION_CRON_ROUTINE' ) or define( 'GPLUGIN_SESSION_CRON_ROUTINE', 'hourly' );
-
 function gmember_init(){
 	global $gMemberNetwork;
 
@@ -96,6 +92,7 @@ function gmember_init(){
 		'plugin_dir' => GMEMBER_DIR,
 		'plugin_url' => GMEMBER_URL,
 		'plugin_ver' => GMEMBER_VERSION,
+		'plugin_vdb' => GMEMBER_VERSION_DB,
 
 		'class_filters'          => 'gMemberFiltered',
 		//'class_mustache' => 'gMemberMustache',
