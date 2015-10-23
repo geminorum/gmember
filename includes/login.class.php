@@ -14,10 +14,10 @@ class gMemberLogin extends gPluginModuleCore
 		$this->_main_site_id = gPluginWPHelper::get_current_site_blog_id();
 
 		remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
-		add_filter( 'authenticate', array( &$this, 'authenticate' ), 20, 3 );
+		add_filter( 'authenticate', array( $this, 'authenticate' ), 20, 3 );
 
-		add_action( 'login_form', array( &$this, 'login_form' ) );
-		add_filter( 'wp_login_errors', array( &$this, 'wp_login_errors' ), 20, 2 );
+		add_action( 'login_form', array( $this, 'login_form' ) );
+		add_filter( 'wp_login_errors', array( $this, 'wp_login_errors' ), 20, 2 );
 
 		// WORKING : add settings
 		// allow only one session per user
@@ -28,21 +28,21 @@ class gMemberLogin extends gPluginModuleCore
 	{
 		// working, but disabled due to problem with redirects on wp networks
 		// $this->redirect_to_main_site();
-		// add_filter( 'login_url', array( &$this, 'login_url' ), 10, 2 );
+		// add_filter( 'login_url', array( $this, 'login_url' ), 10, 2 );
 
-		add_action( 'wp_login', array( &$this, 'wp_login' ), 10, 2 );
-		add_filter( 'login_message', array( &$this, 'login_message' ) );
-		add_filter( 'login_redirect', array( &$this, 'login_redirect' ), 11, 3 );
-		add_filter( 'logout_redirect', array( &$this, 'logout_redirect' ), 11, 3 );
+		add_action( 'wp_login', array( $this, 'wp_login' ), 10, 2 );
+		add_filter( 'login_message', array( $this, 'login_message' ) );
+		add_filter( 'login_redirect', array( $this, 'login_redirect' ), 11, 3 );
+		add_filter( 'logout_redirect', array( $this, 'logout_redirect' ), 11, 3 );
 
-		add_filter( 'allow_password_reset', array( &$this, 'allow_password_reset' ), 10, 2 );
+		add_filter( 'allow_password_reset', array( $this, 'allow_password_reset' ), 10, 2 );
 	}
 
 	public function admin_init()
 	{
-		add_action( 'personal_options', array( &$this, 'personal_options' ), 8, 1 );
-		add_action( 'personal_options_update', array( &$this, 'edit_user_profile_update' ), 10, 1 );
-		add_action( 'edit_user_profile_update', array( &$this, 'edit_user_profile_update' ), 10, 1 );
+		add_action( 'personal_options', array( $this, 'personal_options' ), 8, 1 );
+		add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
+		add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 	}
 
 	// originally from : http://wordpress.org/extend/plugins/wp-email-login/ v4.6.4

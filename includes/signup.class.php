@@ -8,13 +8,13 @@ class gMemberSignUp extends gPluginModuleCore
 
 	public function setup_actions()
 	{
-		add_action( 'user_register', array( &$this, 'user_register' ) );
+		add_action( 'user_register', array( $this, 'user_register' ) );
 
 		if ( ! is_multisite() )
 			return;
 
-		// add_filter( 'sanitize_user', array( &$this, 'sanitize_username' ), 12, 3 );
-		// add_filter( 'wpmu_validate_user_signup', array( &$this, 'wpmu_validate_user_signup_email' ), 12, 1 );
+		// add_filter( 'sanitize_user', array( $this, 'sanitize_username' ), 12, 3 );
+		// add_filter( 'wpmu_validate_user_signup', array( $this, 'wpmu_validate_user_signup_email' ), 12, 1 );
 
 		parent::setup_actions();
 	}
@@ -27,13 +27,13 @@ class gMemberSignUp extends gPluginModuleCore
 
 		if ( $this->url ) {
 			$this->check_wp_signup();
-			add_filter( 'wp_signup_location', array( &$this, 'wp_signup_location' ), 15 ); // for WP
-			add_filter( 'bp_get_signup_page', array( &$this, 'wp_signup_location' ), 15 ); // for BuddyPress
-			add_filter( 'bp_get_activation_page', array( &$this, 'wp_signup_location' ), 15 ); // for BuddyPress, probably no need!
+			add_filter( 'wp_signup_location', array( $this, 'wp_signup_location' ), 15 ); // for WP
+			add_filter( 'bp_get_signup_page', array( $this, 'wp_signup_location' ), 15 ); // for BuddyPress
+			add_filter( 'bp_get_activation_page', array( $this, 'wp_signup_location' ), 15 ); // for BuddyPress, probably no need!
 		}
 
 		// WORKING BUT DISABLED UNTIL COMPELETE REWRITE
-		// add_shortcode( 'signup-form', array( &$this, 'signup_form_shortcode' ) );
+		// add_shortcode( 'signup-form', array( $this, 'signup_form_shortcode' ) );
 	}
 
 	// helper
@@ -106,8 +106,8 @@ class gMemberSignUp extends gPluginModuleCore
 
 		if ( is_page() ) {
 			$this->_signup_form_page = get_page_link();
-			// add_filter( 'wpmu_signup_user_notification_email', array( &$this, 'wpmu_signup_user_notification_email' ), 10, 5 );
-			add_filter( 'site_url', array( &$this, 'site_url' ), 10, 4 );
+			// add_filter( 'wpmu_signup_user_notification_email', array( $this, 'wpmu_signup_user_notification_email' ), 10, 5 );
+			add_filter( 'site_url', array( $this, 'site_url' ), 10, 4 );
 		}
 
 		$args = shortcode_atts( array(

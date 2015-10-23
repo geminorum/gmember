@@ -5,8 +5,8 @@ class gMemberBuddyPress extends gPluginModuleCore
 
 	public function setup_actions()
 	{
-		add_filter( 'bp_displayed_user_fullname', array( &$this, 'bp_displayed_user_fullname' ), 9 );
-		add_filter( 'bp_get_member_name', array( &$this, 'bp_get_member_name' ), 9 );
+		add_filter( 'bp_displayed_user_fullname', array( $this, 'bp_displayed_user_fullname' ), 9 );
+		add_filter( 'bp_get_member_name', array( $this, 'bp_get_member_name' ), 9 );
 	}
 
 	public function bp_displayed_user_fullname( $default )

@@ -10,10 +10,10 @@ class gMemberOnline extends gPluginModuleCore
 		if ( ! $gMemberNetwork->settings->get( 'store_online', FALSE ) )
 			return;
 
-		add_action( 'wp_logout', array( &$this, 'wp_logout' ) );
-		add_action( 'wp_login', array( &$this, 'wp_login' ), 10, 2 );
-		add_filter( 'heartbeat_received', array( &$this, 'heartbeat_received' ), 10, 3 );
-		add_filter( 'heartbeat_nopriv_received', array( &$this, 'heartbeat_received' ), 10, 3 );
+		add_action( 'wp_logout', array( $this, 'wp_logout' ) );
+		add_action( 'wp_login', array( $this, 'wp_login' ), 10, 2 );
+		add_filter( 'heartbeat_received', array( $this, 'heartbeat_received' ), 10, 3 );
+		add_filter( 'heartbeat_nopriv_received', array( $this, 'heartbeat_received' ), 10, 3 );
 	}
 
 	public function wp_login( $username, $user )

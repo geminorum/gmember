@@ -5,21 +5,21 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function plugins_loaded()
 	{
-		add_action( 'set_current_user', array( &$this, 'set_current_user' ), 15 );
-		add_filter( 'the_author', array( &$this, 'the_author' ), 12 );
-		add_filter( 'get_the_author_display_name', array( &$this, 'get_the_author_display_name' ), 12, 2 );
-		add_filter( 'p2_get_user_display_name', array( &$this, 'p2_get_user_display_name' ), 12 );
-		add_filter( 'p2_get_archive_author', array( &$this, 'p2_get_archive_author' ), 12 );
+		add_action( 'set_current_user', array( $this, 'set_current_user' ), 15 );
+		add_filter( 'the_author', array( $this, 'the_author' ), 12 );
+		add_filter( 'get_the_author_display_name', array( $this, 'get_the_author_display_name' ), 12, 2 );
+		add_filter( 'p2_get_user_display_name', array( $this, 'p2_get_user_display_name' ), 12 );
+		add_filter( 'p2_get_archive_author', array( $this, 'p2_get_archive_author' ), 12 );
 	}
 
 	public function init()
 	{
 		if ( ! is_admin() ) {
-			add_filter( 'edit_profile_url', array( &$this, 'edit_profile_url' ), 8, 3 );
+			add_filter( 'edit_profile_url', array( $this, 'edit_profile_url' ), 8, 3 );
 
 			// FIXME: too early for settings
 			// if ( $gMemberNetwork->settings->get( 'search_authors', FALSE ) )
-			// 	add_filter( 'posts_search', array( &$this, 'posts_search' ) );
+			// 	add_filter( 'posts_search', array( $this, 'posts_search' ) );
 		}
 
 	}
@@ -140,7 +140,7 @@ class gMemberProfile extends gPluginModuleCore
 		global $wpdb;
 
 		// get all of the users of the blog and see if the search query matches either the display name or the user login
-		add_filter( 'pre_user_query', array( &$this, 'pre_user_query' ) );
+		add_filter( 'pre_user_query', array( $this, 'pre_user_query' ) );
 
 		$matching_users = get_users( array(
 			'count_total'   => FALSE,
@@ -152,7 +152,7 @@ class gMemberProfile extends gPluginModuleCore
 			),
 		) );
 
-		remove_filter( 'pre_user_query', array( &$this, 'pre_user_query' ) );
+		remove_filter( 'pre_user_query', array( $this, 'pre_user_query' ) );
 
 		// don't modify the query if there aren't any matching users
 		if ( empty( $matching_users ) )

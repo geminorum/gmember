@@ -6,14 +6,14 @@ class gMemberAdmin extends gPluginModuleCore
 	public function setup_actions()
 	{
 		if ( is_network_admin() ) {
-			add_action( 'admin_print_styles', array( &$this, 'admin_print_styles' ) );
-			add_action( 'wp_network_dashboard_setup', array( &$this, 'wp_network_dashboard_setup' ) );
-			add_filter( 'wpmu_users_columns', array( &$this, 'wpmu_users_columns' ) );
-			add_filter( 'manage_users_custom_column', array( &$this, 'manage_users_custom_column' ), 10, 3 );
+			add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
+			add_action( 'wp_network_dashboard_setup', array( $this, 'wp_network_dashboard_setup' ) );
+			add_filter( 'wpmu_users_columns', array( $this, 'wpmu_users_columns' ) );
+			add_filter( 'manage_users_custom_column', array( $this, 'manage_users_custom_column' ), 10, 3 );
 
 			// FIXME: WTF: network users table does not have sort the filter!
-			// add_filter( 'manage_users_sortable_columns', array( &$this ,'manage_users_sortable_columns') );
-			// add_filter( 'request', array( &$this ,'manage_users_request') );
+			// add_filter( 'manage_users_sortable_columns', array( $this ,'manage_users_sortable_columns') );
+			// add_filter( 'request', array( $this ,'manage_users_request') );
 		}
 	}
 
@@ -27,7 +27,7 @@ class gMemberAdmin extends gPluginModuleCore
 	{
 		wp_add_dashboard_widget( 'gmember-signups',
 			__( 'Latest Signups', GMEMBER_TEXTDOMAIN ),
-			array( &$this, 'dashboard_signups' )
+			array( $this, 'dashboard_signups' )
 		);
 	}
 

@@ -7,18 +7,18 @@ class gMemberGroups extends gPluginModuleCore
 	{
 		parent::setup_actions();
 
-		add_filter( 'sanitize_user', array( &$this, 'sanitize_user' ) );
+		add_filter( 'sanitize_user', array( $this, 'sanitize_user' ) );
 
 		if ( is_admin() ) {
-			add_filter( 'parent_file', array( &$this, 'parent_file' ) );
+			add_filter( 'parent_file', array( $this, 'parent_file' ) );
 
-			add_filter( 'manage_edit-'.$this->constants['group_tax'].'_columns', array( &$this, 'manage_columns' ) );
-			add_action( 'manage_'.$this->constants['group_tax'].'_custom_column', array( &$this, 'custom_column' ), 10, 3 );
+			add_filter( 'manage_edit-'.$this->constants['group_tax'].'_columns', array( $this, 'manage_columns' ) );
+			add_action( 'manage_'.$this->constants['group_tax'].'_custom_column', array( $this, 'custom_column' ), 10, 3 );
 
-			add_action( 'show_user_profile', array( &$this, 'edit_user_profile' ), 5 );
-			add_action( 'edit_user_profile', array( &$this, 'edit_user_profile' ), 5 );
-			add_action( 'personal_options_update', array( &$this, 'edit_user_profile_update' ) );
-			add_action( 'edit_user_profile_update', array( &$this, 'edit_user_profile_update' ) );
+			add_action( 'show_user_profile', array( $this, 'edit_user_profile' ), 5 );
+			add_action( 'edit_user_profile', array( $this, 'edit_user_profile' ), 5 );
+			add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ) );
+			add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ) );
 		}
 	}
 

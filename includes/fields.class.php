@@ -6,10 +6,10 @@ class gMemberFields extends gPluginModuleCore
 	public function init()
 	{
 		if ( is_admin() ) {
-			add_filter( 'show_user_profile', array( &$this, 'edit_user_profile' ), 10, 1  );
-			add_action( 'edit_user_profile', array( &$this, 'edit_user_profile' ), 10, 1  );
-			add_action( 'personal_options_update', array( &$this, 'edit_user_profile_update' ), 10, 1 );
-			add_action( 'edit_user_profile_update', array( &$this, 'edit_user_profile_update' ), 10, 1 );
+			add_filter( 'show_user_profile', array( $this, 'edit_user_profile' ), 10, 1  );
+			add_action( 'edit_user_profile', array( $this, 'edit_user_profile' ), 10, 1  );
+			add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
+			add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 		}
 	}
 
@@ -32,7 +32,7 @@ class gMemberFields extends gPluginModuleCore
 
 	public function edit_user_profile_update( $user_id )
 	{
-		add_action ( 'user_profile_update_errors', array( &$this, 'user_profile_update_errors' ), 10, 3 );
+		add_action ( 'user_profile_update_errors', array( $this, 'user_profile_update_errors' ), 10, 3 );
 	}
 
 
@@ -51,18 +51,18 @@ class gMemberFields extends gPluginModuleCore
 		if ( is_multisite() ) {
 			$gMemberNetwork = gMemberNetwork::getInstance();
 			if ( $gMemberNetwork->get_option( 'signup_extra', false ) ) {
-				add_action( 'signup_extra_fields', array( &$this, 'signup_extra_fields' ), 10 , 2 );
-				add_action( 'wpmu_validate_user_signup', array( &$this, 'wpmu_validate_user_signup' ), 10 );
-				add_action( 'add_signup_meta', array( &$this, 'add_signup_meta' ), 10 );
-				add_action( 'wpmu_activate_user', array( &$this, 'wpmu_activate_user' ), 10, 3 );
+				add_action( 'signup_extra_fields', array( $this, 'signup_extra_fields' ), 10 , 2 );
+				add_action( 'wpmu_validate_user_signup', array( $this, 'wpmu_validate_user_signup' ), 10 );
+				add_action( 'add_signup_meta', array( $this, 'add_signup_meta' ), 10 );
+				add_action( 'wpmu_activate_user', array( $this, 'wpmu_activate_user' ), 10, 3 );
 			}
 		}
 	}
 
 	function admin_init_OLD()
 	{
-		// add_action( 'admin_print_styles', array( &$this, 'admin_print_styles' ) );
-		// add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+		// add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
+		// add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 	}
 
 	function admin_print_styles()
@@ -172,7 +172,7 @@ class gMemberFields extends gPluginModuleCore
 
 		if ( ! in_array( 'gmember_password_nag', $dismissed ) ) {
 			$enqueue = true;
-			add_action( 'admin_print_footer_scripts', array( &$this, 'pointer_admin_print_footer_scripts' ) );
+			add_action( 'admin_print_footer_scripts', array( $this, 'pointer_admin_print_footer_scripts' ) );
 		}
 
 		if ( $enqueue ) {

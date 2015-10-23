@@ -5,9 +5,9 @@ class gMemberCleanUp extends gPluginModuleCore
 
 	public function setup_actions()
 	{
-		add_filter( 'get_user_metadata', array( &$this, 'get_user_metadata' ), 12, 4 );
-		add_filter( 'update_user_metadata', array( &$this, 'update_user_metadata' ), 12, 5 );
-		add_filter( 'insert_user_meta', array( &$this, 'insert_user_meta' ), 12, 2 ); // since WP4.4
+		add_filter( 'get_user_metadata', array( $this, 'get_user_metadata' ), 12, 4 );
+		add_filter( 'update_user_metadata', array( $this, 'update_user_metadata' ), 12, 5 );
+		add_filter( 'insert_user_meta', array( $this, 'insert_user_meta' ), 12, 2 ); // since WP4.4
 	}
 
 	public function get_user_metadata( $null, $object_id, $meta_key, $single )

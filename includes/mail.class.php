@@ -5,7 +5,7 @@ class gMemberMail extends gPluginModuleCore
 
 	public function setup_actions()
 	{
-		add_filter( 'wp_mail', array( &$this, 'wp_mail' ) );
+		add_filter( 'wp_mail', array( $this, 'wp_mail' ) );
 
 		add_filter( 'wp_mail_content_type', function( $content_type ){
 			return 'text/html';
