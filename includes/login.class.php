@@ -5,13 +5,13 @@
 class gMemberLogin extends gPluginModuleCore
 {
 
-	var $_main_site_id = 0;
+	protected $main_site_id = 0;
 
 	public function setup_actions()
 	{
 		parent::setup_actions();
 
-		$this->_main_site_id = gPluginWPHelper::get_current_site_blog_id();
+		$this->main_site_id = gPluginWPHelper::get_current_site_blog_id();
 
 		remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
 		add_filter( 'authenticate', array( $this, 'authenticate' ), 20, 3 );
@@ -240,7 +240,7 @@ class gMemberLogin extends gPluginModuleCore
 	{
 		if ( ! is_user_logged_in() ) {
 			if ( FALSE !== strpos( $_SERVER['SCRIPT_NAME'], 'wp-login.php' ) ) {
-				if (  $this->_main_site_id != get_current_blog_id() ) {
+				if (  $this->main_site_id != get_current_blog_id() ) {
 
 					$login_url = $this->get_main_site_login();
 					$redirect = empty( $_REQUEST['redirect_to'] ) ? FALSE : $_REQUEST['redirect_to'];
@@ -278,7 +278,7 @@ class gMemberLogin extends gPluginModuleCore
 
 	public function login_url( $login_url, $redirect )
 	{
-		if ( is_user_logged_in() || $this->_main_site_id == get_current_blog_id() )
+		if ( is_user_logged_in() || $this->main_site_id == get_current_blog_id() )
 			return $login_url;
 
 		if ( ! empty( $redirect ) )
@@ -290,6 +290,6 @@ class gMemberLogin extends gPluginModuleCore
 	// Originally from : https://github.com/boonebgorges/login-on-main-site
 	public function get_main_site_login()
 	{
-		return get_blog_option( $this->_main_site_id, 'siteurl' ).'/wp-login.php';
+		return get_blog_option( $this->main_site_id, 'siteurl' ).'/wp-login.php';
 	}
 }

@@ -3,8 +3,8 @@
 class gMemberSignUp extends gPluginModuleCore
 {
 
-	var $_init_priority    = 5;
-	var $_signup_form_page = FALSE;
+	protected $priority_init    = 5;
+	protected $signup_form_page = FALSE;
 
 	public function setup_actions()
 	{
@@ -32,7 +32,7 @@ class gMemberSignUp extends gPluginModuleCore
 			add_filter( 'bp_get_activation_page', array( $this, 'wp_signup_location' ), 15 ); // for BuddyPress, probably no need!
 		}
 
-		// WORKING BUT DISABLED UNTIL COMPELETE REWRITE
+		// FIXME: WORKING BUT DISABLED UNTIL COMPELETE REWRITE
 		// add_shortcode( 'signup-form', array( $this, 'signup_form_shortcode' ) );
 	}
 
@@ -44,7 +44,7 @@ class gMemberSignUp extends gPluginModuleCore
 
 		$action = ! empty( $_GET['action'] ) ? $_GET['action'] : '';
 
-		// Not at the WP core signup page and action is not register
+		// not at the WP core signup page and action is not register
 		if ( ! empty( $_SERVER['SCRIPT_NAME'] )
 			&& FALSE === strpos( $_SERVER['SCRIPT_NAME'], 'wp-signup.php' )
 			&& ( 'register' != $action ) )
@@ -76,24 +76,24 @@ class gMemberSignUp extends gPluginModuleCore
 	// we use this to modify the activation url sent by the activation email
 	public function site_url( $url, $path, $scheme, $blog_id )
 	{
-		if ( ! $this->_signup_form_page || empty( $path )
+		if ( ! $this->signup_form_page || empty( $path )
 			|| FALSE === strpos( $path, 'wp-activate.php?key=' ) )
 				return $url;
 
 		return add_query_arg( 'key',
 			str_replace( 'wp-activate.php?key=', '', $path ),
-			$this->_signup_form_page
+			$this->signup_form_page
 		);
 	}
 
-	// must dep
+	// FIXME: MUST DEP
 	public function wpmu_signup_user_notification_email( $email, $user, $user_email, $key, $meta )
 	{
-		if ( ! $this->_signup_form_page )
+		if ( ! $this->signup_form_page )
 			return $email;
 
 		return sprintf ( __( "To activate your user, please click the following link:\n\n%s\n\nAfter you activate, you will receive *another email* with your login." ),
-			add_query_arg( 'key', $key, $this->_signup_form_page )
+			add_query_arg( 'key', $key, $this->signup_form_page )
 		);
 	}
 
@@ -105,7 +105,7 @@ class gMemberSignUp extends gPluginModuleCore
 			return $content;
 
 		if ( is_page() ) {
-			$this->_signup_form_page = get_page_link();
+			$this->signup_form_page = get_page_link();
 			// add_filter( 'wpmu_signup_user_notification_email', array( $this, 'wpmu_signup_user_notification_email' ), 10, 5 );
 			add_filter( 'site_url', array( $this, 'site_url' ), 10, 4 );
 		}
