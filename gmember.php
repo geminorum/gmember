@@ -76,7 +76,6 @@ function gmember_init(){
 		'domain'    => 'gmember',
 		'title'     => __( 'gMember', GMEMBER_TEXTDOMAIN ),
 		'network'   => TRUE,
-		'term_meta' => TRUE,
 
 		'logger_args' => array(
 			'name'        => __( 'Logs', GMEMBER_TEXTDOMAIN ),

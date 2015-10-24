@@ -21,9 +21,7 @@ $GLOBALS['_gplugin'] = array( 17, __FILE__, array(
 	'gPluginLoggerCore',
 	'gPluginImportCore',
 
-	'gPluginTermMeta',
 	'gPluginSession',
-
 
 	'gPluginWPHelper',
 	'gPluginTaxonomyHelper',
