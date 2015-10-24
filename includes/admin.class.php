@@ -6,14 +6,18 @@ class gMemberAdmin extends gPluginModuleCore
 	public function setup_actions()
 	{
 		if ( is_network_admin() ) {
+
 			add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 			add_action( 'wp_network_dashboard_setup', array( $this, 'wp_network_dashboard_setup' ) );
+
+			add_filter( 'views_users-network', array( $this, 'views_users_network' ) );
+			add_filter( 'users_list_table_query_args', array( $this, 'users_list_table_query_args' ) );
+
 			add_filter( 'wpmu_users_columns', array( $this, 'wpmu_users_columns' ) );
 			add_filter( 'manage_users_custom_column', array( $this, 'manage_users_custom_column' ), 10, 3 );
 
-			// FIXME: WTF: network users table does not have sort the filter!
-			// add_filter( 'manage_users_sortable_columns', array( $this ,'manage_users_sortable_columns') );
-			// add_filter( 'request', array( $this ,'manage_users_request') );
+			add_filter( 'manage_users-network_sortable_columns', array( $this, 'manage_users_network_sortable_columns' ) );
+			add_filter( 'request', array( $this ,'manage_users_request') );
 		}
 	}
 
@@ -91,6 +95,33 @@ class gMemberAdmin extends gPluginModuleCore
 		}
 	}
 
+	public function users_list_table_query_args( $args )
+	{
+		if ( isset( $_GET['spam'] ) )
+			add_action( 'pre_user_query', array( $this, 'pre_user_query' ) );
+
+		return $args;
+	}
+
+	public function pre_user_query( &$user_query )
+	{
+		global $wpdb;
+
+		$user_query->query_where .= " AND $wpdb->users.spam = '1'";
+	}
+
+	public function views_users_network( $views )
+	{
+		// FIXME: remove current class from other views
+		$class = isset( $_GET['spam'] ) ? ' class="current"' : '';
+
+		// FIXME: helper for counting spam users
+		// $views['spam'] = "<a href='".network_admin_url('users.php?spam')."'$class>".sprintf( _n( 'Marked as Spam <span class="count">(%s)</span>', 'Marked as Spam <span class="count">(%s)</span>', 12 ), number_format_i18n( 12 ) ) . '</a>';
+
+		$views['spam'] = '<a href="'.network_admin_url( 'users.php?spam' ).'"'.$class.'>'.__( 'Marked as Spam', GMEMBER_TEXTDOMAIN ).'</a>';
+		return $views;
+	}
+
 	// defaults: 'cb', 'username', 'name', 'email', 'registered', 'blogs'
 	public function wpmu_users_columns( $users_columns )
 	{
@@ -131,10 +162,10 @@ class gMemberAdmin extends gPluginModuleCore
 		echo $html;
 	}
 
-	public function manage_users_sortable_columns( $columns )
+	public function manage_users_network_sortable_columns( $sortable_columns )
 	{
-		$columns['timestamps'] = 'timestamps';
-		return $columns;
+		$sortable_columns['timestamps'] = 'timestamps';
+		return $sortable_columns;
 	}
 
 	public function manage_users_request( $vars )
