@@ -34,6 +34,7 @@ GitHub Branch: master
 
 define( 'GMEMBER_VERSION', '0.2.4' );
 define( 'GMEMBER_VERSION_DB', '0.1' );
+define( 'GMEMBER_VERSION_GPLUGIN', 28 );
 define( 'GMEMBER_FILE', __FILE__ );
 define( 'GMEMBER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GMEMBER_URL', plugin_dir_url( __FILE__ ) );
@@ -43,7 +44,12 @@ if ( file_exists( WP_PLUGIN_DIR.'/gmember-custom.php' ) )
 
 defined( 'GMEMBER_TEXTDOMAIN' ) or define( 'GMEMBER_TEXTDOMAIN', 'gmember' );
 
-function gmember_init(){
+function gmember_init( $gplugin_version = NULL ){
+
+	// TODO: bail if no gPlugin version
+	if ( $gplugin_version && ! version_compare( $gplugin_version, GMEMBER_VERSION_GPLUGIN, '>=' ) )
+		return;
+
 	global $gMemberNetwork;
 
 	$includes = array(

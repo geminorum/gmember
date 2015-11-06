@@ -1,43 +1,6 @@
 <?php
 
-$GLOBALS['_gplugin'] = array( 17, __FILE__, array(
-	'gPluginFactory',
-	'gPluginClassCore',
-
-	'gPluginPluginCore',
-	'gPluginModuleCore',
-
-	'gPluginNetworkCore',
-	'gPluginComponentCore',
-
-	'gPluginSettingsCore',
-	'gPluginFilteredCore',
-
-	'gPluginAdminCore',
-	'gPluginMetaCore',
-
-	'gPluginTemplateCore',
-	'gPluginListTableCore',
-	'gPluginLoggerCore',
-	'gPluginImportCore',
-
-	'gPluginSession',
-
-	'gPluginWPHelper',
-	'gPluginTaxonomyHelper',
-	'gPluginCacheHelper',
-
-	'gPluginPersianHelper',
-
-	'gPluginFormHelper',
-	'gPluginTextHelper',
-	'gPluginFileHelper',
-	'gPluginLocationHelper',
-	'gPluginDateTimeHelper',
-
-	'gPluginUtils',
-	'gPluginHashed',
-) );
+$GLOBALS['_gplugin'] = array( 27, __FILE__, array() );
 
 // modified version of scb by scribu : http://wordpress.org/extend/plugins/scb-framework/
 if ( ! class_exists( 'gPlugin' ) ) : class gPlugin {
@@ -74,7 +37,7 @@ if ( ! class_exists( 'gPlugin' ) ) : class gPlugin {
 
 		foreach ( self::$callbacks as $file => $callback ) {
 			if ( dirname( dirname( plugin_basename( $file ) ) ) == $plugin_dir ) {
-				self::load( false );
+				self::load( FALSE );
 				call_user_func( $callback );
 				do_action( 'gplugin_activation_'.$plugin );
 				break;
@@ -82,9 +45,10 @@ if ( ! class_exists( 'gPlugin' ) ) : class gPlugin {
 		}
 	}
 
-	static function load( $do_callbacks = true )
+	static function load( $do_callbacks = TRUE )
 	{
 		arsort( self::$candidates );
+		$rev  = current( self::$candidates );
 		$file = key( self::$candidates );
 		$path = dirname( $file ).'/';
 
@@ -101,7 +65,7 @@ if ( ! class_exists( 'gPlugin' ) ) : class gPlugin {
 
 		if ( $do_callbacks )
 			foreach ( self::$callbacks as $callback )
-				call_user_func( $callback );
+				call_user_func_array( $callback, array( $rev ) );
 	}
 
 	static function get_info()
