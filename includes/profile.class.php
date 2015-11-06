@@ -8,6 +8,7 @@ class gMemberProfile extends gPluginModuleCore
 		add_action( 'set_current_user', array( $this, 'set_current_user' ), 15 );
 		add_filter( 'the_author', array( $this, 'the_author' ), 12 );
 		add_filter( 'get_the_author_display_name', array( $this, 'get_the_author_display_name' ), 12, 2 );
+		add_filter( 'get_comment_author', array( $this, 'get_comment_author' ), 12, 3 );
 		add_filter( 'p2_get_user_display_name', array( $this, 'p2_get_user_display_name' ), 12 );
 		add_filter( 'p2_get_archive_author', array( $this, 'p2_get_archive_author' ), 12 );
 	}
@@ -75,6 +76,14 @@ class gMemberProfile extends gPluginModuleCore
 			return $display_name[$this->current_blog];
 
 		return $current_display_name;
+	}
+
+	public function get_comment_author( $author, $comment_ID, $comment )
+	{
+		if ( isset( $comment->user_id ) && $comment->user_id )
+			$author = $this->get_display_name( $comment->user_id, $author );
+
+		return $author;
 	}
 
 	public function p2_get_user_display_name( $current_display_name )
