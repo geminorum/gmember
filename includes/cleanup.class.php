@@ -6,8 +6,7 @@ class gMemberCleanUp extends gPluginModuleCore
 	public function setup_actions()
 	{
 		add_filter( 'get_user_metadata', array( $this, 'get_user_metadata' ), 12, 4 );
-		add_filter( 'update_user_metadata', array( $this, 'update_user_metadata' ), 12, 5 );
-		add_filter( 'insert_user_meta', array( $this, 'insert_user_meta' ), 12, 2 ); // since WP4.4
+		add_filter( 'insert_user_meta', array( $this, 'insert_user_meta' ), 12, 3 );
 	}
 
 	public function get_user_metadata( $null, $object_id, $meta_key, $single )
@@ -18,52 +17,34 @@ class gMemberCleanUp extends gPluginModuleCore
 		return $null;
 	}
 
-	public function update_user_metadata( $null, $object_id, $meta_key, $meta_value, $prev_value )
+	// TODO: add bulk actions to remove existing empty default user metas
+	public function insert_user_meta( $meta, $user, $update )
 	{
-		$skip = array(
-			'show_welcome_panel',
-			'comment_shortcuts',
-			'rich_editing',
-			'admin_color',
-			'use_ssl',
-			'show_admin_bar_front',
-		);
-
-		if ( in_array( $meta_key, $skip ) )
-			return TRUE;
-
-		// FIXME: what if deleting?!
-		// if ( 'description' == $meta_key && empty( $meta_value ) )
-		// 	return TRUE;
-
-		return $null;
-	}
-
-	public function insert_user_meta( $meta, $user )
-	{
-		if ( isset( $meta['nickname'] ) && $meta['nickname'] == $user->user_login ) {
-			// TODO: get default from gmember options
+		if ( ! $update && isset( $meta['nickname'] ) && $user->user_login == $meta['nickname'] ) {
+			// TODO: get default from plugin options
 			if ( isset( $meta['last_name'] ) && $meta['last_name'] )
 				$meta['nickname'] = $meta['last_name'];
 		}
 
-		// if ( isset( $meta['comment_shortcuts'] ) && ! $meta['comment_shortcuts'] )
-		// 	unset( $meta['comment_shortcuts'] );
+		$defaults = array(
+            'nickname'             => '',
+            'first_name'           => '',
+            'last_name'            => '',
+            'description'          => '',
+            'rich_editing'         => 'true',
+            'comment_shortcuts'    => 'false',
+            'admin_color'          => 'fresh',
+            'use_ssl'              => 0,
+            'show_admin_bar_front' => 'true',
+		);
 
-		if ( isset( $meta['admin_color'] ) && 'fresh' == $meta['admin_color'] )
-			unset( $meta['admin_color'] );
-
-		if ( isset( $meta['show_admin_bar_front'] ) && $meta['show_admin_bar_front'] )
-			unset( $meta['show_admin_bar_front'] );
-
-		foreach ( $meta as $meta_key => $meta_val )
-			if ( empty( $meta_val ) )
-				unset( $meta[$meta_key] );
-
-		// gPluginWPHelper::log( 'INSERT USER META', array(
-		// 	'user'     => $user, //$user->user_login,
-		// 	'meta'     => $meta,
-		// ) );
+		foreach ( $defaults as $key => $value ) {
+			if ( isset( $meta[$key] ) && $value == $meta[$key] ) {
+				unset( $meta[$key] );
+				if ( $update )
+					delete_user_meta( $user->ID, $key );
+			}
+		}
 
 		return $meta;
 	}
