@@ -1,3 +1,6 @@
+### 0.2.6
+* cleanup: utilizing the new `insert_user_meta` filter to avoid storing default user meta, see [#31549](https://core.trac.wordpress.org/ticket/31549)
+
 ### 0.2.5
 * check for min gplugin version
 * admin: spam view for network admin users list table
