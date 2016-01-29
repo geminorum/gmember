@@ -1,3 +1,8 @@
+### 0.2.7
+* admin: sort by register date
+* admin: table styling
+* cleanup: default user options for skipped meta
+
 ### 0.2.6
 * cleanup: utilizing the new `insert_user_meta` filter to avoid storing default user meta, see [#31549](https://core.trac.wordpress.org/ticket/31549)
 
