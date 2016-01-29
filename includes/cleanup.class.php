@@ -7,6 +7,8 @@ class gMemberCleanUp extends gPluginModuleCore
 	{
 		add_filter( 'get_user_metadata', array( $this, 'get_user_metadata' ), 12, 4 );
 		add_filter( 'insert_user_meta', array( $this, 'insert_user_meta' ), 12, 3 );
+		add_filter( 'get_user_option_rich_editing', array( $this, 'get_user_option_option' ), 8, 3 );
+		add_filter( 'get_user_option_comment_shortcuts', array( $this, 'get_user_option_option' ), 8, 3 );
 	}
 
 	public function get_user_metadata( $null, $object_id, $meta_key, $single )
@@ -18,6 +20,7 @@ class gMemberCleanUp extends gPluginModuleCore
 	}
 
 	// TODO: add bulk actions to remove existing empty default user metas
+	// @REF: https://core.trac.wordpress.org/ticket/31195
 	public function insert_user_meta( $meta, $user, $update )
 	{
 		if ( ! $update && isset( $meta['nickname'] ) && $user->user_login == $meta['nickname'] ) {
@@ -26,7 +29,20 @@ class gMemberCleanUp extends gPluginModuleCore
 				$meta['nickname'] = $meta['last_name'];
 		}
 
-		$defaults = array(
+		foreach ( $this->get_default_user_meta() as $key => $value ) {
+			if ( isset( $meta[$key] ) && $value == $meta[$key] ) {
+				unset( $meta[$key] );
+				if ( $update )
+					delete_user_meta( $user->ID, $key );
+			}
+		}
+
+		return $meta;
+	}
+
+	private function get_default_user_meta()
+	{
+		return array(
             'nickname'             => '',
             'first_name'           => '',
             'last_name'            => '',
@@ -37,16 +53,17 @@ class gMemberCleanUp extends gPluginModuleCore
             'use_ssl'              => 0,
             'show_admin_bar_front' => 'true',
 		);
+	}
 
-		foreach ( $defaults as $key => $value ) {
-			if ( isset( $meta[$key] ) && $value == $meta[$key] ) {
-				unset( $meta[$key] );
-				if ( $update )
-					delete_user_meta( $user->ID, $key );
-			}
+	public function get_user_option_option( $result, $option, $user )
+	{
+		if ( FALSE === $result ) {
+			$defaults = $this->get_default_user_meta();
+			if ( isset( $defaults[$option] ) )
+				return $defaults[$option];
 		}
 
-		return $meta;
+		return $result;
 	}
 
 	// FIXME: UNFINISHED
