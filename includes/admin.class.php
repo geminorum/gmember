@@ -17,7 +17,6 @@ class gMemberAdmin extends gPluginModuleCore
 			add_filter( 'manage_users_custom_column', array( $this, 'manage_users_custom_column' ), 10, 3 );
 
 			add_filter( 'manage_users-network_sortable_columns', array( $this, 'manage_users_network_sortable_columns' ) );
-			add_filter( 'request', array( $this ,'manage_users_request') );
 		}
 	}
 
@@ -164,20 +163,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function manage_users_network_sortable_columns( $sortable_columns )
 	{
-		$sortable_columns['timestamps'] = 'timestamps';
+		$sortable_columns['timestamps'] = 'id'; // order by id (registerdate)
 		return $sortable_columns;
-	}
-
-	public function manage_users_request( $vars )
-	{
-		if ( isset( $vars['orderby'] )
-			&& 'timestamps' == $vars['orderby'] )
-
-				$vars = array_merge( $vars, array(
-					'meta_key' => 'registerdate',
-					'orderby'  => 'meta_value'
-				) );
-
-		return $vars;
 	}
 }
