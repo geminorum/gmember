@@ -145,16 +145,23 @@ class gMemberAdmin extends gPluginModuleCore
 			.mysql2date( 'g:i:s a', $user->user_registered ).'">'
 			.mysql2date( 'Y/m/d', $user->user_registered ).'</code></td></tr>';
 
-		$html .= '<tr><td>'.__( 'Register IP', GMEMBER_TEXTDOMAIN ).'</td><td><code>'
-			.( $register_ip ? $register_ip : __( 'N/A', GMEMBER_TEXTDOMAIN ) ).'</code></td></tr>';
-
 		$html .= '<tr><td>'.__( 'Last Login', GMEMBER_TEXTDOMAIN ).'</td><td>'
 			.( $lastlogin ? '<code title="'.mysql2date( 'g:i:s a', $lastlogin ).'">'
 				.mysql2date( 'Y/m/d', $lastlogin ).'</code>'
 			: __( 'Never', GMEMBER_TEXTDOMAIN ) ).'</td></tr>';
 
-		if ( function_exists( 'bp_get_last_activity' ) )
-			$html .= '<tr><td colspan="2">'.bp_get_last_activity( $user_id ).'</td></tr>';
+		if ( function_exists( 'bp_get_user_last_activity' ) ) {
+			$lastactivity = bp_get_user_last_activity( $user_id );
+			$html .= '<tr><td>'.__( 'Last Activity', GMEMBER_TEXTDOMAIN ).'</td><td>'
+				.( $lastactivity
+					? '<code title="'.bp_core_time_since( $lastactivity ).'">'
+						.mysql2date( 'Y/m/d', $lastactivity )
+					: '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ) )
+				.'</code></td></tr>';
+		}
+
+		$html .= '<tr><td>'.__( 'Register IP', GMEMBER_TEXTDOMAIN ).'</td><td><code>'
+			.( $register_ip ? $register_ip : __( 'N/A', GMEMBER_TEXTDOMAIN ) ).'</code></td></tr>';
 
 		$html .= '</tbody></table>';
 

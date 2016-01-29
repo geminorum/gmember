@@ -6,11 +6,23 @@
 
 body.network-admin.users-php {
 
-	th#email {
-		width: 12%;
-	}
-	
-	th#timestamps {
-		width: 15%;
+	table.users-network {
+
+		td.timestamps {
+			table td {
+				padding: 0 0 2px;
+				code {
+					cursor: pointer;
+				}
+			}
+		}
+
+		th.column-email {
+			width: 14%;
+		}
+
+		th.column-timestamps {
+			width: 200px;
+		}
 	}
 }
