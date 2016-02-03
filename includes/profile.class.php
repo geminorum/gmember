@@ -22,17 +22,25 @@ class gMemberProfile extends gPluginModuleCore
 			// if ( $gMemberNetwork->settings->get( 'search_authors', FALSE ) )
 			// 	add_filter( 'posts_search', array( $this, 'posts_search' ) );
 		}
-
 	}
 
 	public function admin_init()
 	{
-		remove_all_actions( 'admin_color_scheme_picker' );
-
-		add_filter( 'user_contactmethods', array( $this, 'user_contactmethods' ), 10, 2 );
+		add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 		add_action( 'personal_options', array( $this, 'personal_options' ), 12, 1 );
 		add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 		add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
+
+		add_filter( 'user_contactmethods', array( $this, 'user_contactmethods' ), 10, 2 );
+
+		// FIXME: add option
+		remove_all_actions( 'admin_color_scheme_picker' );
+	}
+
+	public function admin_print_styles()
+	{
+		if ( in_array( get_current_screen()->base, array( 'profile', 'user-edit' ) ) )
+			gPluginFormHelper::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.profile.css', GMEMBER_VERSION );
 	}
 
 	public function set_current_user()
