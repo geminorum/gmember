@@ -95,11 +95,42 @@ class gMemberLogin extends gPluginModuleCore
 		$edit_users      = current_user_can( 'edit_users' );
 		$date_format     = _x( 'M j, Y @ G:i', 'Registered/Last Login date format', GMEMBER_TEXTDOMAIN );
 
+		if ( ! IS_PROFILE_PAGE && $edit_users ) {
+			echo '<tr><th>'.__( 'Account Login', GMEMBER_TEXTDOMAIN )
+				.'</th><td><label for="gmember_disable_user">'
+				.'<input type="checkbox" name="gmember_disable_user" id="gmember_disable_user" value="1"';
+					checked( 1, get_the_author_meta( $this->constants['meta_disable_user'], $profileuser->ID ) );
+			echo ' /> '.__( 'Disable user login with this account' , GMEMBER_TEXTDOMAIN )
+				.'</label></td></tr>';
+
+			echo '<tr><th>'.__( 'Password Reset', GMEMBER_TEXTDOMAIN )
+				.'</th><td><label for="gmember_password_reset">'
+				.'<input type="checkbox" name="gmember_password_reset" id="gmember_password_reset" value="1"';
+					checked( 1, get_the_author_meta( $this->constants['meta_disable_password_reset'], $profileuser->ID ) );
+			echo ' /> '.__( 'Disable this account password reset via wp-login.php' , GMEMBER_TEXTDOMAIN )
+				.'</label></td></tr>';
+		}
+
+		echo '<tr><th><br /></th><td><br /></td></tr>';
+
+		if ( $edit_users && isset( $profileuser->{$this->constants['meta_register_ip']} ) )
+			echo '<tr class="register_ip"><th>'
+					.__( 'Registration IP', GMEMBER_TEXTDOMAIN )
+				.'</th><td><code>'
+					.$profileuser->{$this->constants['meta_register_ip']}
+				.'</code></td></tr>';
+
 		$register_date = strtotime( $profileuser->user_registered );
 		$register_on = date_i18n( $date_format, $register_date ).
 			' <small><small><span class="description">('.
 			sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $register_date ) ) ).
 			')</span></small></small>';
+
+		echo '<tr class="register_date"><th>'
+				.__( 'Registration on', GMEMBER_TEXTDOMAIN )
+			.'</th><td>'
+				.$register_on
+			.'</td></tr>';
 
 		if ( $store_lastlogin || $edit_users ) {
 			if ( isset( $profileuser->{$this->constants['meta_lastlogin']} ) && '' != $profileuser->{$this->constants['meta_lastlogin']} ) {
@@ -113,25 +144,6 @@ class gMemberLogin extends gPluginModuleCore
 			}
 		}
 
-		$nicename = $profileuser->user_login == $profileuser->user_nicename
-			? $this->sanitize_slug( $profileuser->display_name )
-			: $profileuser->user_nicename;
-
-		echo '<tr><th><br /></th><td><br /></td></tr>';
-
-		if ( $edit_users && isset( $profileuser->{$this->constants['meta_register_ip']} ) )
-			echo '<tr class="register_ip"><th>'
-					.__( 'Registration IP', GMEMBER_TEXTDOMAIN )
-				.'</th><td><code>'
-					.$profileuser->{$this->constants['meta_register_ip']}
-				.'</code></td></tr>';
-
-		echo '<tr class="register_date"><th>'
-				.__( 'Registration on', GMEMBER_TEXTDOMAIN )
-			.'</th><td>'
-				.$register_on
-			.'</td></tr>';
-
 		if ( $store_lastlogin || $edit_users )
 			echo '<tr class="last_login'.( $store_lastlogin ? '' : ' error' ).'"><th>'
 					.__( 'Last Login', GMEMBER_TEXTDOMAIN )
@@ -140,28 +152,17 @@ class gMemberLogin extends gPluginModuleCore
 					.( $store_lastlogin ? '' : ' &mdash; <strong>'.__( 'Last Logins are Disabled', GMEMBER_TEXTDOMAIN ).'</strong>' )
 				.'</td></tr>';
 
-		if ( ! IS_PROFILE_PAGE && current_user_can( 'edit_users' ) ) {
-			?><tr><th><label for="gmember_disable_user"><?php
-				_e( ' Disable User Account', GMEMBER_TEXTDOMAIN );
-				?></label></th><td>
-				<input type="checkbox" name="gmember_disable_user" id="gmember_disable_user" value="1" <?php checked( 1, get_the_author_meta( $this->constants['meta_disable_user'], $profileuser->ID ) ); ?> />
-				<span class="description"><?php _e( 'If checked, the user cannot login with this account.' , GMEMBER_TEXTDOMAIN ); ?></span>
-			</td></tr><?php
+		$nicename = $profileuser->user_login == $profileuser->user_nicename
+			? $this->sanitize_slug( $profileuser->display_name )
+			: $profileuser->user_nicename;
 
-			?><tr><th><label for="gmember_password_reset"><?php
-				_e( ' Disable Password Reset', GMEMBER_TEXTDOMAIN );
-				?></label></th><td>
-				<input type="checkbox" name="gmember_password_reset" id="gmember_password_reset" value="1" <?php checked( 1, get_the_author_meta( $this->constants['meta_disable_password_reset'], $profileuser->ID ) ); ?> />
-				<span class="description"><?php _e( 'If checked, the user cannot reset his password via wp-login.php' , GMEMBER_TEXTDOMAIN ); ?></span>
-			</td></tr><?php
-		}
-
-		?><tr><th><br /></th><td><br /></td></tr>
-		<tr>
-			<th><label for="gmember-slug"><?php _e( 'Slug', GMEMBER_TEXTDOMAIN ); ?></label></th>
-			<td><input type="text" name="gmember_slug" id="gmember_slug" value="<?php echo esc_attr( $nicename ); ?>" class="regular-text" dir="ltr" <?php if ( ! $edit_users ) echo 'readonly="readonly"'; ?>/>
-			<p class="description"><?php _e( 'This will be used in the URL of the user\'s page', GMEMBER_TEXTDOMAIN ); ?></p></td>
-		</tr><?php
+		echo '<tr><th><label for="gmember-slug">'.__( 'Slug', GMEMBER_TEXTDOMAIN )
+			.'</label></th><td><input type="text" name="gmember_slug" id="gmember_slug" value="'
+			.esc_attr( $nicename ).'" class="regular-text" dir="ltr"'
+			.( $edit_users ? '' : ' readonly="readonly" disabled="disabled"' )
+			.' /><p class="description">'.
+				__( 'This will be used in the URL of the user\'s page', GMEMBER_TEXTDOMAIN )
+			.'</p></td></tr>';
 	}
 
 	public function edit_user_profile_update( $user_id )
