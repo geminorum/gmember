@@ -89,8 +89,11 @@ class gMemberLogin extends gPluginModuleCore
 
 	public function personal_options( $profileuser )
 	{
-		$edit_users = current_user_can( 'edit_users' );
-		$date_format = _x( 'M j, Y @ G:i', 'Registered/Last Login date format', GMEMBER_TEXTDOMAIN );
+		global $gMemberNetwork;
+
+		$store_lastlogin = $gMemberNetwork->settings->get( 'store_lastlogin', TRUE );
+		$edit_users      = current_user_can( 'edit_users' );
+		$date_format     = _x( 'M j, Y @ G:i', 'Registered/Last Login date format', GMEMBER_TEXTDOMAIN );
 
 		$register_date = strtotime( $profileuser->user_registered );
 		$register_on = date_i18n( $date_format, $register_date ).
@@ -98,34 +101,44 @@ class gMemberLogin extends gPluginModuleCore
 			sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $register_date ) ) ).
 			')</span></small></small>';
 
-		if ( isset( $profileuser->{$this->constants['meta_lastlogin']} ) && '' != $profileuser->{$this->constants['meta_lastlogin']} ) {
-			$lastlogin_date = strtotime( $profileuser->{$this->constants['meta_lastlogin']} );
-			$lastlogin = date_i18n( $date_format, $lastlogin_date ).
-				' <small><small><span class="description">('.
-				sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date ) ) ).
-				')</span></small></small>';
-		} else {
-			$lastlogin = __( 'No Data Available', GMEMBER_TEXTDOMAIN );
+		if ( $store_lastlogin || $edit_users ) {
+			if ( isset( $profileuser->{$this->constants['meta_lastlogin']} ) && '' != $profileuser->{$this->constants['meta_lastlogin']} ) {
+				$lastlogin_date = strtotime( $profileuser->{$this->constants['meta_lastlogin']} );
+				$lastlogin = date_i18n( $date_format, $lastlogin_date ).
+					' <small><small><span class="description">('.
+					sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date ) ) ).
+					')</span></small></small>';
+			} else {
+				$lastlogin = __( 'No Data Available', GMEMBER_TEXTDOMAIN );
+			}
 		}
 
 		$nicename = $profileuser->user_login == $profileuser->user_nicename
 			? $this->sanitize_slug( $profileuser->display_name )
 			: $profileuser->user_nicename;
 
-		?><tr><th><br /></th><td><br /></td></tr><?php
-		if ( $edit_users && isset( $profileuser->{$this->constants['meta_register_ip']} ) ) {
-			?><tr class="register_ip">
-				<th><?php _e( 'Registration IP', GMEMBER_TEXTDOMAIN ); ?></th>
-				<td><code><?php echo $profileuser->{$this->constants['meta_register_ip']}; ?></code></td>
-			</tr><?php }
-		?><tr class="register_date">
-			<th><?php _e( 'Registration on', GMEMBER_TEXTDOMAIN ); ?></th>
-			<td><?php echo $register_on; ?></td>
-		</tr>
-		<tr class="last_login">
-			<th><?php _e( 'Last Login', GMEMBER_TEXTDOMAIN ); ?></th>
-			<td><?php echo $lastlogin; ?></td>
-		</tr><?php
+		echo '<tr><th><br /></th><td><br /></td></tr>';
+
+		if ( $edit_users && isset( $profileuser->{$this->constants['meta_register_ip']} ) )
+			echo '<tr class="register_ip"><th>'
+					.__( 'Registration IP', GMEMBER_TEXTDOMAIN )
+				.'</th><td><code>'
+					.$profileuser->{$this->constants['meta_register_ip']}
+				.'</code></td></tr>';
+
+		echo '<tr class="register_date"><th>'
+				.__( 'Registration on', GMEMBER_TEXTDOMAIN )
+			.'</th><td>'
+				.$register_on
+			.'</td></tr>';
+
+		if ( $store_lastlogin || $edit_users )
+			echo '<tr class="last_login'.( $store_lastlogin ? '' : ' error' ).'"><th>'
+					.__( 'Last Login', GMEMBER_TEXTDOMAIN )
+				.'</th><td>'
+					.$lastlogin
+					.( $store_lastlogin ? '' : ' &mdash; <strong>'.__( 'Last Logins are Disabled', GMEMBER_TEXTDOMAIN ).'</strong>' )
+				.'</td></tr>';
 
 		if ( ! IS_PROFILE_PAGE && current_user_can( 'edit_users' ) ) {
 			?><tr><th><label for="gmember_disable_user"><?php
