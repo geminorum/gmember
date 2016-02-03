@@ -27,7 +27,7 @@ class gMemberProfile extends gPluginModuleCore
 	public function admin_init()
 	{
 		add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
-		add_action( 'personal_options', array( $this, 'personal_options' ), 12, 1 );
+		add_action( 'personal_options', array( $this, 'personal_options_late' ), 99, 1 );
 		add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 		add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 
@@ -116,12 +116,22 @@ class gMemberProfile extends gPluginModuleCore
 		), $user, $contactmethods );
 	}
 
-	public function personal_options( $profileuser )
+	public function personal_options_late( $profileuser )
 	{
 		if ( is_multisite() && ! is_network_admin() ) {
-			?><tr><th><label for="gmember_display_name"><?php _e( 'Nickname for this site', GMEMBER_TEXTDOMAIN ); ?></label></th>
-				<td><input type="text" name="gmember_display_name" id="gmember_display_name" value="<?php echo esc_attr( isset( $profileuser->gmember_display_name[$this->current_blog] ) ? $profileuser->gmember_display_name[$this->current_blog] : '' ); ?>" class="regular-text" />
-				<p class="description"><?php _e( 'This will be displayed as your name in this site only', GMEMBER_TEXTDOMAIN ); ?></p></td></tr><?php
+
+			echo '</table><h2>'.__( 'Blog Options' ).'</h2>';
+			echo '<table class="form-table">';
+
+			echo '<tr><th><label for="gmember_display_name">'
+				.__( 'Nickname for this site', GMEMBER_TEXTDOMAIN )
+				.'</label></th><td><input type="text" name="gmember_display_name" id="gmember_display_name" value="'
+				.esc_attr( isset( $profileuser->gmember_display_name[$this->current_blog] ) ? $profileuser->gmember_display_name[$this->current_blog] : '' )
+				.'" class="regular-text" /><p class="description">'
+					.__( 'This will be displayed as your name in this site only', GMEMBER_TEXTDOMAIN )
+				.'</p></td></tr>';
+
+			echo '</table><table class="form-table">';
 		}
 	}
 
