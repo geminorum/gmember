@@ -3,6 +3,8 @@
 class gMemberProfile extends gPluginModuleCore
 {
 
+	private $display_name = NULL;
+
 	public function plugins_loaded()
 	{
 		add_action( 'set_current_user', array( $this, 'set_current_user' ), 15 );
@@ -78,10 +80,11 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function get_display_name( $user_id, $current_display_name = '' )
 	{
-		$display_name = get_user_meta( $user_id, 'gmember_display_name', TRUE );
+		if ( is_null( $this->display_name ) )
+			$this->display_name = get_user_meta( $user_id, 'gmember_display_name', TRUE );
 
-		if ( isset( $display_name[$this->current_blog] ) && '' != $display_name[$this->current_blog] )
-			return $display_name[$this->current_blog];
+		if ( isset( $this->display_name[$this->current_blog] ) && $this->display_name[$this->current_blog] )
+			return $this->display_name[$this->current_blog];
 
 		return $current_display_name;
 	}
