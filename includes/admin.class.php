@@ -29,7 +29,7 @@ class gMemberAdmin extends gPluginModuleCore
 	public function wp_network_dashboard_setup()
 	{
 		wp_add_dashboard_widget( 'gmember-signups',
-			__( 'Latest Signups', GMEMBER_TEXTDOMAIN ),
+			_x( 'Latest Signups', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ),
 			array( $this, 'dashboard_signups' )
 		);
 	}
@@ -53,14 +53,14 @@ class gMemberAdmin extends gPluginModuleCore
 
 		if ( empty( $query->results ) ) {
 
-			_e( 'No User?!', GMEMBER_TEXTDOMAIN );
+			_ex( 'No User?!', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN );
 
 		} else {
 
 			echo '<table class="widefat" width="100%;"><thead><tr>';
-			echo '<th>'.__( 'Registered', GMEMBER_TEXTDOMAIN ).'</th>';
-			echo '<th>'.__( 'Name', GMEMBER_TEXTDOMAIN ).'</th>';
-			echo '<th>'.__( 'E-mail', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '<th>'._x( 'On', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '<th>'._x( 'Name', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '<th>'._x( 'E-mail', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '</tr></thead>';
 
 			$last = FALSE;
@@ -88,8 +88,8 @@ class gMemberAdmin extends gPluginModuleCore
 			}
 
 			echo '</table><ul>';
-				echo '<li>'.sprintf( __( 'Last Registered: %s ago', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
-				echo '<li>'.sprintf( __( 'Total Users: %s', GMEMBER_TEXTDOMAIN ), number_format_i18n( $query->get_total() ) ).'</li>';
+				echo '<li>'.sprintf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
+				echo '<li>'.sprintf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $query->get_total() ) ).'</li>';
 			echo '</ul>';
 		}
 	}
