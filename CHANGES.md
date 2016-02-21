@@ -1,3 +1,9 @@
+### 0.2.8
+* login: hide last login if disabled
+* login: reordering fields
+* profile: style for the admin page
+* profile: fewer meta queries
+
 ### 0.2.7
 * admin: sort by register date
 * admin: table styling
