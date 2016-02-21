@@ -3,7 +3,7 @@
 class gMemberProfile extends gPluginModuleCore
 {
 
-	private $display_name = NULL;
+	private $display_name = array();
 
 	public function plugins_loaded()
 	{
@@ -80,11 +80,12 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function get_display_name( $user_id, $current_display_name = '' )
 	{
-		if ( is_null( $this->display_name ) )
-			$this->display_name = get_user_meta( $user_id, 'gmember_display_name', TRUE );
+		if ( ! isset( $this->display_name[$user_id] ) )
+			$this->display_name[$user_id] = get_user_meta( $user_id, 'gmember_display_name', TRUE );
 
-		if ( isset( $this->display_name[$this->current_blog] ) && $this->display_name[$this->current_blog] )
-			return $this->display_name[$this->current_blog];
+		if ( isset( $this->display_name[$user_id][$this->current_blog] )
+			&& $this->display_name[$user_id][$this->current_blog] )
+				return $this->display_name[$user_id][$this->current_blog];
 
 		return $current_display_name;
 	}
