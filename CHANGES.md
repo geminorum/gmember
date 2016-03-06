@@ -1,3 +1,8 @@
+### 0.2.9
+* bumped min php/wp/gplugin ver
+* profile: fixed possible override
+* login: disable email login for WP4.5
+
 ### 0.2.8
 * login: hide last login if disabled
 * login: reordering fields
