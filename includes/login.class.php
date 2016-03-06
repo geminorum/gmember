@@ -13,11 +13,15 @@ class gMemberLogin extends gPluginModuleCore
 
 		$this->main_site_id = gPluginWPHelper::get_current_site_blog_id();
 
-		remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
-		add_filter( 'authenticate', array( $this, 'authenticate' ), 20, 3 );
+		// FIXME: DROP THIS
+		if ( ! gPluginWPHelper::isMinWPv( '4.5' ) ) {
 
-		add_action( 'login_form', array( $this, 'login_form' ) );
-		add_filter( 'wp_login_errors', array( $this, 'wp_login_errors' ), 20, 2 );
+			remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
+			add_filter( 'authenticate', array( $this, 'authenticate' ), 20, 3 );
+
+			add_action( 'login_form', array( $this, 'login_form' ) );
+			add_filter( 'wp_login_errors', array( $this, 'wp_login_errors' ), 20, 2 );
+		}
 
 		// WORKING : add settings
 		// allow only one session per user
