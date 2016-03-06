@@ -12,6 +12,8 @@ TextDomain: gmember
 DomainPath : /languages
 GitHub Plugin URI: https://github.com/geminorum/gmember
 GitHub Branch: master
+Requires WP: 4.4
+Requires PHP: 5.3
 */
 
 /*
@@ -34,7 +36,7 @@ GitHub Branch: master
 
 define( 'GMEMBER_VERSION', '0.2.8' );
 define( 'GMEMBER_VERSION_DB', '0.1' );
-define( 'GMEMBER_VERSION_GPLUGIN', 28 );
+define( 'GMEMBER_VERSION_GPLUGIN', 31 );
 define( 'GMEMBER_FILE', __FILE__ );
 define( 'GMEMBER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GMEMBER_URL', plugin_dir_url( __FILE__ ) );
