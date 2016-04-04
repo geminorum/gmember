@@ -36,7 +36,7 @@ Requires PHP: 5.3
 
 define( 'GMEMBER_VERSION', '0.2.9' );
 define( 'GMEMBER_VERSION_DB', '0.1' );
-define( 'GMEMBER_VERSION_GPLUGIN', 31 );
+define( 'GMEMBER_VERSION_GPLUGIN', 32 );
 define( 'GMEMBER_FILE', __FILE__ );
 define( 'GMEMBER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GMEMBER_URL', plugin_dir_url( __FILE__ ) );
@@ -46,32 +46,23 @@ if ( file_exists( WP_PLUGIN_DIR.'/gmember-custom.php' ) )
 
 defined( 'GMEMBER_TEXTDOMAIN' ) or define( 'GMEMBER_TEXTDOMAIN', 'gmember' );
 
-function gmember_init( $gplugin_version = NULL ){
-
-	// TODO: bail if no gPlugin version
-	if ( $gplugin_version && ! version_compare( $gplugin_version, GMEMBER_VERSION_GPLUGIN, '>=' ) )
-		return;
+function gmember_init( $gplugin_version = NULL ) {
 
 	global $gMemberNetwork;
+
+	if ( ! $gplugin_version || ! version_compare( $gplugin_version, GMEMBER_VERSION_GPLUGIN, '>=' ) )
+		return;
 
 	$includes = array(
 		'network',
 		'filtered',
-		// 'session',
 
 		'signup',
-		// 'mail',
 		'login',
 		'profile',
-		// 'fields',
-		// 'groups',
 		'widgets',
-		// 'online',
-		// 'spam',
 		'admin',
-		// 'avatar',
-		// 'social',
-		// 'import',
+		'social',
 		'cleanup',
 		'buddypress',
 	);
@@ -81,9 +72,9 @@ function gmember_init( $gplugin_version = NULL ){
 			require_once( GMEMBER_DIR.'includes/'.$file.'.class.php' );
 
 	$args = array(
-		'domain'    => 'gmember',
-		'title'     => __( 'gMember', GMEMBER_TEXTDOMAIN ),
-		'network'   => TRUE,
+		'domain'  => 'gmember',
+		'title'   => __( 'gMember', GMEMBER_TEXTDOMAIN ),
+		'network' => TRUE,
 
 		'logger_args' => array(
 			'name'        => __( 'Logs', GMEMBER_TEXTDOMAIN ),
@@ -102,19 +93,11 @@ function gmember_init( $gplugin_version = NULL ){
 		'plugin_vdb' => GMEMBER_VERSION_DB,
 
 		'class_filters'          => 'gMemberFiltered',
-		//'class_mustache' => 'gMemberMustache',
 		'theme_templates_dir'    => 'gmember-templates',
 		'class_network_settings' => 'gMemberNetworkSettings',
-		//'class_component_settings' => 'gMemberComponentSettings',
-		//'class_module_settings' => 'gMemberModuleSettings',
-
-		'product_cpt'      => 'product',
-		'product_archives' => 'products',
 
 		'group_tax'  => 'user_group',
 		'group_slug' => 'group',
-
-		'shortcode_purchase' => 'gmember_purchase',
 
 		'meta_key'        => '_gmember',
 		'term_meta_key'   => '_gmember',
@@ -126,11 +109,10 @@ function gmember_init( $gplugin_version = NULL ){
 		'meta_disable_user'           => 'disable_user',
 		'meta_disable_password_reset' => 'disable_password_reset',
 		'meta_approved_user'          => 'approved_user',
-
 	);
 
-	if ( function_exists( 'gPluginFactory' ) )
-		$gMemberNetwork = gPluginFactory( 'gMemberNetwork', $constants, $args );
+	if ( class_exists( 'gPluginFactory' ) )
+		$gMemberNetwork = gPluginFactory::get( 'gMemberNetwork', $constants, $args );
 }
 
 require( GMEMBER_DIR.'gplugin/load.php' );

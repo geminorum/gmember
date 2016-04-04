@@ -27,15 +27,20 @@ class gMemberNetwork extends gPluginNetworkCore
 			$modules['admin'] = 'gMemberAdmin';
 		}
 
-		foreach ( $modules as $module => $class )
-			$this->{$module} = gPluginFactory( $class, $this->constants, $this->args );
+		foreach ( $modules as $module => $class ) {
+
+			$this->{$module} = gPluginFactory::get( $class, $this->constants, $this->args );
+
+			if ( FALSE === $this->{$module} )
+				unset( $this->{$module} );
+		}
 
 		add_action( 'bp_include', array( $this, 'bp_include' ) );
 	}
 
 	public function bp_include()
 	{
-		$this->buddypress = gPluginFactory( 'gMemberBuddyPress', $this->constants, $this->args );
+		$this->buddypress = gPluginFactory::get( 'gMemberBuddyPress', $this->constants, $this->args );
 	}
 
 	public function load_textdomain()
