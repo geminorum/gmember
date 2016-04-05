@@ -1,3 +1,8 @@
+### 2.10
+* moved to [Semantic Versioning](http://semver.org/)
+* shipping gplugin!
+* drop supporting the old versions of gPlugin
+
 ### 0.2.9
 * bumped min php/wp/gplugin ver
 * profile: fixed possible override
