@@ -13,16 +13,6 @@ class gMemberLogin extends gPluginModuleCore
 
 		$this->main_site_id = gPluginWPHelper::get_current_site_blog_id();
 
-		// FIXME: DROP THIS
-		if ( ! gPluginWPHelper::isMinWPv( '4.5' ) ) {
-
-			remove_filter( 'authenticate', 'wp_authenticate_username_password', 20, 3 );
-			add_filter( 'authenticate', array( $this, 'authenticate' ), 20, 3 );
-
-			add_action( 'login_form', array( $this, 'login_form' ) );
-			add_filter( 'wp_login_errors', array( $this, 'wp_login_errors' ), 20, 2 );
-		}
-
 		// WORKING : add settings
 		// allow only one session per user
 		// add_action( 'wp_login', 'wp_destroy_other_sessions' );
@@ -47,48 +37,6 @@ class gMemberLogin extends gPluginModuleCore
 		add_action( 'user_edit_form_tag', array( $this, 'user_edit_form_tag' ), 99 );
 		add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 		add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
-	}
-
-	// originally from : http://wordpress.org/extend/plugins/wp-email-login/ v4.6.4
-	public function authenticate( $user, $username, $password )
-	{
-		if ( is_a( $user, 'WP_User' ) )
-			return $user;
-
-		if ( ! empty( $username ) ) {
-			$username = str_replace( '&', '&amp;', stripslashes( $username ) );
-			$user = get_user_by( 'email', $username );
-			if ( isset( $user, $user->user_login, $user->user_status ) && 0 == (int) $user->user_status )
-				$username = $user->user_login;
-		}
-
-		return wp_authenticate_username_password( NULL, $username, $password );
-	}
-
-	// originally from : http://wordpress.org/extend/plugins/wp-email-login/ v4.6.4
-	public function login_form()
-	{
-?><script type="text/javascript">
-/* <![CDATA[ */
-	if ( document.getElementById('loginform') )
-		document.getElementById('loginform').childNodes[1].childNodes[1].childNodes[0].nodeValue = '<?php echo esc_js( __( 'Username or Email', GMEMBER_TEXTDOMAIN ) ); ?>';
-
-	if ( document.getElementById('login_error') )
-		document.getElementById('login_error').innerHTML = document.getElementById('login_error').innerHTML.replace( '<?php echo esc_js( __( 'username' ) ); ?>', '<?php echo esc_js( __( 'Username or Email' , GMEMBER_TEXTDOMAIN ) ); ?>' );
-/* ]]> */
-</script><?php
-	}
-
-	// https://gist.github.com/norcross/ba1dd4e89223b10c1f2d#comment-1241696
-	public function wp_login_errors( $errors, $redirect_to )
-	{
-		if ( isset( $errors->errors['invalid_username'] ) )
-			@$errors->errors['invalid_username'][0] = sprintf( __( '<strong>ERROR</strong>: Invalid Username or Email. <a href="%s" title="Password Lost and Found">Lost your password</a>?', GMEMBER_TEXTDOMAIN ), wp_lostpassword_url() );
-
-		if ( isset( $errors->errors['empty_username'] ) )
-			@$errors->errors['empty_username'][0] = __( '<strong>ERROR</strong>: The username/Email field is empty.', GMEMBER_TEXTDOMAIN );
-
-		return $errors;
 	}
 
 	public function user_edit_form_tag()

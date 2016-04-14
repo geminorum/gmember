@@ -12,7 +12,7 @@ TextDomain: gmember
 DomainPath : /languages
 GitHub Plugin URI: https://github.com/geminorum/gmember
 GitHub Branch: master
-Requires WP: 4.4
+Requires WP: 4.5
 Requires PHP: 5.3
 */
 
