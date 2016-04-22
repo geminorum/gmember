@@ -1,4 +1,4 @@
-### 2.10
+### 2.10.0
 * moved to [Semantic Versioning](http://semver.org/)
 * shipping gplugin!
 * drop supporting the old versions of gPlugin
