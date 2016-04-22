@@ -75,7 +75,7 @@ class gMemberCleanUp extends gPluginModuleCore
 
 			// $gMemberNetwork->spam->user_form( $gMemberNetwork->spam->user_list() );
 
-			submit_button( __( 'Submit Changes',  GMEMBER_TEXTDOMAIN ) );
+			submit_button( __( 'Submit Changes', GMEMBER_TEXTDOMAIN ) );
 		echo '</form>';
 	}
 }

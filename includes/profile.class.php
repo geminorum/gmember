@@ -124,7 +124,7 @@ class gMemberProfile extends gPluginModuleCore
 	{
 		if ( is_multisite() && ! is_network_admin() && ! is_user_admin() ) {
 
-			echo '</table><h2>'.__( 'Blog Options' ).'</h2>';
+			echo '</table><h2>'.__( 'Blog Options', GMEMBER_TEXTDOMAIN ).'</h2>';
 			echo '<table class="form-table">';
 
 			echo '<tr><th><label for="gmember_display_name">'
