@@ -122,7 +122,7 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function personal_options_late( $profileuser )
 	{
-		if ( is_multisite() && ! is_network_admin() ) {
+		if ( is_multisite() && ! is_network_admin() && ! is_user_admin() ) {
 
 			echo '</table><h2>'.__( 'Blog Options' ).'</h2>';
 			echo '<table class="form-table">';
