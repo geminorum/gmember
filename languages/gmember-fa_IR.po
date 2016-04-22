@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: gMember v0.2.3\n"
+"Project-Id-Version: gMember v2.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-09-17 11:21+0430\n"
+"PO-Revision-Date: 2016-04-22 19:35+0430\n"
 "Last-Translator: geminorum <contact@geminorum.ir>\n"
 "Language-Team: geminorum <contact@geminorum.ir>\n"
 "Language: fa_IR\n"
@@ -11,61 +11,89 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.8.2\n"
+"X-Generator: Poedit 1.8.7\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Textdomain-Support: yes\n"
-"X-Poedit-Basepath: .\n"
-"X-Poedit-SearchPath-0: .\n"
 
 # @ gmember
-#: gmember.php:79
+#: gmember.php:76
 msgid "gMember"
 msgstr ""
 
 # @ gmember
-#: gmember.php:84
+#: gmember.php:80
 msgid "Logs"
 msgstr ""
 
-#: includes/admin.class.php:14
+#: includes/admin.class.php:34
+msgctxt "Signup Admin Widget"
 msgid "Latest Signups"
 msgstr ""
 
-#: includes/admin.class.php:38
+#: includes/admin.class.php:58
+msgctxt "Signup Admin Widget"
 msgid "No User?!"
 msgstr ""
 
-#: includes/admin.class.php:43 includes/profile.class.php:53
-msgid "Registered"
+#: includes/admin.class.php:63
+msgctxt "Signup Admin Widget"
+msgid "On"
 msgstr ""
 
-#: includes/admin.class.php:44
+#: includes/admin.class.php:64
+msgctxt "Signup Admin Widget"
 msgid "Name"
 msgstr ""
 
-#: includes/admin.class.php:45
+#: includes/admin.class.php:65
+msgctxt "Signup Admin Widget"
 msgid "E-mail"
 msgstr ""
 
-#: includes/admin.class.php:60
-msgid "j/m"
-msgstr ""
-
-#: includes/admin.class.php:61
-msgid "j/m/Y"
-msgstr ""
-
-#: includes/admin.class.php:73
+#: includes/admin.class.php:93
+msgctxt "Signup Admin Widget"
 msgid "Last Registered: %s ago"
 msgstr ""
 
-#: includes/admin.class.php:74
+#: includes/admin.class.php:94
+msgctxt "Signup Admin Widget"
 msgid "Total Users: %s"
 msgstr ""
 
-#: includes/cleanup.class.php:71 includes/spam.class.php:12
+#: includes/admin.class.php:122
+msgid "Marked as Spam"
+msgstr ""
+
+#: includes/admin.class.php:130
+msgid "Timestamps"
+msgstr ""
+
+#: includes/admin.class.php:146
+msgid "Registered"
+msgstr ""
+
+# @ gmember
+#: includes/admin.class.php:150, includes/login.class.php:86
+msgid "Last Login"
+msgstr "آخرین ورود"
+
+#: includes/admin.class.php:153
+msgid "Never"
+msgstr "هیچ‌وقت"
+
+#: includes/admin.class.php:157
+msgid "Last Activity"
+msgstr ""
+
+#: includes/admin.class.php:161, includes/admin.class.php:166
+msgid "N/A"
+msgstr ""
+
+#: includes/admin.class.php:165
+msgid "Register IP"
+msgstr "آی‌پی نام‌نویسی"
+
+#: includes/cleanup.class.php:78, includes/spam.class.php:12
 msgid "Submit Changes"
 msgstr ""
 
@@ -157,7 +185,7 @@ msgstr ""
 msgid "Settings successfully updated."
 msgstr ""
 
-#: includes/filtered.class.php:116 includes/filtered.class.php:117
+#: includes/filtered.class.php:116, includes/filtered.class.php:117
 msgid "gMember Settings"
 msgstr ""
 
@@ -181,6 +209,14 @@ msgstr ""
 
 #: includes/filtered.class.php:128
 msgid "CleanUp"
+msgstr ""
+
+#: includes/filtered.class.php:129
+msgid "Spam Fight"
+msgstr ""
+
+#: includes/filtered.class.php:130
+msgid "Import Users"
 msgstr ""
 
 #: includes/filtered.class.php:137
@@ -291,272 +327,94 @@ msgstr ""
 msgid "There are no groups available."
 msgstr ""
 
-# @ gmember
-#: includes/login.class.php:72 includes/login.class.php:75
-msgid "Username or Email"
-msgstr "نام کاربری یا نشانی ایمیل"
-
-# @ default
-#: includes/login.class.php:75
-msgid "username"
-msgstr "نام کاربری"
-
-# @ gmember
-#: includes/login.class.php:83
-msgid ""
-"<strong>ERROR</strong>: Invalid Username or Email. <a href=\"%s\" title="
-"\"Password Lost and Found\">Lost your password</a>?"
+#: includes/login.class.php:47
+msgctxt "Registered/Last Login date format"
+msgid "M j, Y @ G:i"
 msgstr ""
 
 # @ gmember
-#: includes/login.class.php:86
-msgid "<strong>ERROR</strong>: The username/Email field is empty."
-msgstr ""
-
-# @ default
-#: includes/login.class.php:98 includes/login.class.php:105
-msgid "%s ago"
-msgstr "%s قبل"
-
-# @ gmember
-#: includes/login.class.php:108
+#: includes/login.class.php:56, includes/login.class.php:82
 msgid "No Data Available"
 msgstr ""
 
 # @ gmember
-#: includes/login.class.php:116
+#: includes/login.class.php:58
 msgid "Registration IP"
 msgstr ""
 
+# @ default
+#: includes/login.class.php:64, includes/login.class.php:79
+msgid "%s ago"
+msgstr "%s قبل"
+
 # @ gmember
-#: includes/login.class.php:120
+#: includes/login.class.php:68
 msgid "Registration on"
 msgstr "نام‌نویسی در"
 
-# @ gmember
-#: includes/login.class.php:124 includes/profile.class.php:55
-msgid "Last Login"
-msgstr "آخرین ورود"
+#: includes/login.class.php:89
+msgid "Last Logins are Disabled"
+msgstr ""
 
 # @ gmember
-#: includes/login.class.php:130
-msgid " Disable User Account"
-msgstr "بستن حساب کاربری"
-
-# @ gmember
-#: includes/login.class.php:133
-msgid "If checked, the user cannot login with this account."
-msgstr "در صورت انتخاب، این کاربر دیگر قادر به ورود به سایت نخواهد بود."
-
-#: includes/login.class.php:137
-msgid " Disable Password Reset"
-msgstr "بستن تغییر رمز"
-
-#: includes/login.class.php:140
-msgid "If checked, the user cannot reset his password via wp-login.php"
-msgstr "در صورت انتخاب، این کاربر دیگر قادر به تغییر رمز خود نخواهد بود."
-
-# @ gmember
-#: includes/login.class.php:146
+#: includes/login.class.php:102
 msgid "Slug"
 msgstr "نامک"
 
 # @ gmember
-#: includes/login.class.php:148
+#: includes/login.class.php:107
 msgid "This will be used in the URL of the user's page"
 msgstr "نامک نسخه لاتین واژه است که در نشانی (URL)‌ها استفاده می‌شود."
 
+#: includes/login.class.php:110
+msgid "Account Login"
+msgstr ""
+
+#: includes/login.class.php:114
+msgid "Disable user login with this account"
+msgstr ""
+
+#: includes/login.class.php:117
+msgid "Password Reset"
+msgstr ""
+
+#: includes/login.class.php:121
+msgid "Disable this account password reset via wp-login.php"
+msgstr ""
+
 # @ gmember
-#: includes/login.class.php:230
+#: includes/login.class.php:208
 msgid "Account disabled"
 msgstr "حساب کاربری غیر فعال است."
 
-#: includes/profile.class.php:54
-msgid "Register IP"
-msgstr "آی‌پی نام‌نویسی"
-
-#: includes/profile.class.php:54
-msgid "N/A"
-msgstr ""
-
-#: includes/profile.class.php:55 includes/profile.class.php:58
-msgid "Never"
-msgstr "هیچ‌وقت"
-
-#: includes/profile.class.php:58
-msgid "Last Active"
-msgstr "آخرین فعالیت"
-
-#: includes/profile.class.php:67
-msgid "Timestamps"
-msgstr ""
-
 # @ gmember
-#: includes/profile.class.php:131
+#: includes/profile.class.php:117
 msgid "Google+ Profile"
 msgstr "گوگل +"
 
 # @ gmember
-#: includes/profile.class.php:132
+#: includes/profile.class.php:118
 msgid "Twitter"
 msgstr "توییتر"
 
 # @ gmember
-#: includes/profile.class.php:133
+#: includes/profile.class.php:119
 msgid "Mobile Phone"
 msgstr "تلفن همراه"
 
+#: includes/profile.class.php:127
+msgid "Blog Options"
+msgstr "تنظیمات سایت"
+
 # @ gmember
-#: includes/profile.class.php:140
+#: includes/profile.class.php:131
 msgid "Nickname for this site"
 msgstr "عنوان برای این سایت"
 
 # @ gmember
-#: includes/profile.class.php:142
+#: includes/profile.class.php:135
 msgid "This will be displayed as your name in this site only"
 msgstr "فقط در این سایت، به عنوان نام شما استفاده خواهد شد."
-
-# @ default
-#: includes/signup.class.php:95
-msgid ""
-"To activate your user, please click the following link:\n"
-"\n"
-"%s\n"
-"\n"
-"After you activate, you will receive *another email* with your login."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:115
-msgid "Get your own %s account in seconds"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:120
-msgid "You are logged in already. No need to register again!"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:122
-msgid "Registration has been disabled."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:126
-msgid "Username:"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:127
-msgid "Email&nbsp;Address:"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:128
-msgid "Password:"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:129
-msgid "Submit"
-msgstr "ارسال"
-
-# @ default
-#: includes/signup.class.php:133
-msgid "(Must be at least 4 characters, letters and numbers only.)"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:134
-msgid ""
-"We send your registration email to this address. (Double-check your email "
-"address before continuing.)"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:146 includes/signup.class.php:182
-msgid "Your account is now active!"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:151
-msgid ""
-"Your account has been activated. You may now <a href=\"%1$s\">log in</a> to "
-"the site using your chosen username of &#8220;%2$s&#8221;. Please check your "
-"email inbox at %3$s for your password and login instructions. If you do not "
-"receive an email, please check your junk or spam folder. If you still do not "
-"receive an email within an hour, you can <a href=\"%4$s\">reset your "
-"password</a>."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:152
-msgid ""
-"Your site at <a href=\"%1$s\">%2$s</a> is active. You may now log in to your "
-"site using your chosen username of &#8220;%3$s&#8221;. Please check your "
-"email inbox at %4$s for your password and login instructions. If you do not "
-"receive an email, please check your junk or spam folder. If you still do not "
-"receive an email within an hour, you can <a href=\"%5$s\">reset your "
-"password</a>."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:163
-msgid "An error occurred during the activation"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:204
-msgid ""
-"Your account is now activated. <a href=\"%1$s\">View your site</a> or <a "
-"href=\"%2$s\">Log in</a>"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:205
-msgid ""
-"Your account is now activated. <a href=\"%1$s\">Log in</a> or go back to the "
-"<a href=\"%2$s\">homepage</a>."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:256
-msgid "Please try again."
-msgstr "لطفا دوباره تلاش کنید."
-
-# @ default
-#: includes/signup.class.php:271
-msgid "%s is your new username"
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:273
-msgid ""
-"But, before you can start using your new username, <strong>you must activate "
-"it</strong>."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:274
-msgid "Check your inbox at <strong>%s</strong> and click the link given."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:275
-msgid ""
-"If you do not activate your username within two days, you will have to sign "
-"up again."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:442
-msgid "Only lowercase letters (a-z) and numbers are allowed."
-msgstr ""
-
-# @ default
-#: includes/signup.class.php:443
-msgid "Sorry, usernames may not contain the character &#8220;_&#8221;!"
-msgstr ""
 
 #: includes/widgets.class.php:28
 msgid "gMember: Online Users"
@@ -591,36 +449,34 @@ msgid "Log In"
 msgstr ""
 
 # @ gmember
-#: includes/widgets.class.php:82
-msgid "Log Out"
-msgstr ""
+#~ msgid "Username or Email"
+#~ msgstr "نام کاربری یا نشانی ایمیل"
+
+# @ default
+#~ msgid "username"
+#~ msgstr "نام کاربری"
 
 # @ gmember
-#: includes/widgets.class.php:102
-msgid "Logged-out Title"
-msgstr ""
+#~ msgid " Disable User Account"
+#~ msgstr "بستن حساب کاربری"
 
 # @ gmember
-#: includes/widgets.class.php:105
-msgid "Username Label"
-msgstr ""
+#~ msgid "If checked, the user cannot login with this account."
+#~ msgstr "در صورت انتخاب، این کاربر دیگر قادر به ورود به سایت نخواهد بود."
 
-# @ gmember
-#: includes/widgets.class.php:108
-msgid "Password Label"
-msgstr ""
+#~ msgid " Disable Password Reset"
+#~ msgstr "بستن تغییر رمز"
 
-# @ gmember
-#: includes/widgets.class.php:111
-msgid "Log-In Button Text"
-msgstr ""
+#~ msgid "If checked, the user cannot reset his password via wp-login.php"
+#~ msgstr "در صورت انتخاب، این کاربر دیگر قادر به تغییر رمز خود نخواهد بود."
 
-# @ gmember
-#: includes/widgets.class.php:114
-msgid "Logged-in Title"
-msgstr ""
+#~ msgid "Last Active"
+#~ msgstr "آخرین فعالیت"
 
-# @ gmember
-#: includes/widgets.class.php:117
-msgid "Log-Out Button Text"
-msgstr ""
+# @ default
+#~ msgid "Submit"
+#~ msgstr "ارسال"
+
+# @ default
+#~ msgid "Please try again."
+#~ msgstr "لطفا دوباره تلاش کنید."
