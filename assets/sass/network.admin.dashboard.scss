@@ -8,27 +8,27 @@
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-body.profile-php,
-body.user-edit-php {
+.gmember-dashboard {
 
-	tr.register_ip {
+	&.-table-signup {
 
+		// width: 100%;
+
+		.-registered-date {
+			cursor: pointer;
+		}
+
+		.-edit-link {}
+		.-mail-link {}
 	}
 
-	tr.register_date {
+	&.-list-signup {
 
-	}
+		margin-left: .5em;
+		margin-bottom: 0;
 
-	tr.last_login {
-
-		&.error {
+		li {
 
 		}
-	}
-
-	input[type=text]#twitter,
-	input[type=text]#googleplus,
-	input[type=text]#mobile {
-		direction: ltr;
 	}
 }
