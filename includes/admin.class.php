@@ -77,8 +77,8 @@ class gMemberAdmin extends gPluginModuleCore
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
 					esc_html( gPluginTextHelper::truncateString( $user->user_email, 21 ) ),
-					esc_html( date_i18n( __( 'j/m' ), $registered ) ),
-					esc_attr( human_time_diff( $registered ).' &mdash; '.date_i18n( __( 'j/m/Y' ), $registered ) ),
+					esc_html( date_i18n( _x( 'j/m', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
+					esc_attr( human_time_diff( $registered ).' &mdash; '.date_i18n( _x( 'j/m/Y', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
 					$user->ID,
 					esc_attr( $user->user_email )
 				);
