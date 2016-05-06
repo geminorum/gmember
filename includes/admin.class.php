@@ -24,6 +24,8 @@ class gMemberAdmin extends gPluginModuleCore
 	{
 		if ( 'users-network' == get_current_screen()->base )
 			gPluginFormHelper::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.users.css', GMEMBER_VERSION );
+		else if ( 'dashboard-network' == get_current_screen()->base )
+			gPluginFormHelper::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.dashboard.css', GMEMBER_VERSION );
 	}
 
 	public function wp_network_dashboard_setup()
@@ -57,7 +59,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 		} else {
 
-			echo '<table class="widefat" width="100%;"><thead><tr>';
+			echo '<table class="widefat gmember-dashboard -table-signup"><thead><tr>';
 			echo '<th>'._x( 'On', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '<th>'._x( 'Name', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '<th>'._x( 'E-mail', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
@@ -71,7 +73,7 @@ class gMemberAdmin extends gPluginModuleCore
 				$registered = strtotime( $user->user_registered );
 
 				printf(
-					'<tr%1$s><td title="%5$s">%4$s</td><td><a href="user-edit.php?user_id=%6$s">%2$s</a></td><td><a href="mailto:%7$s" title="%7$s" target="_blank">%3$s</a></td></tr>',
+					'<tr%1$s><td title="%5$s" class="-registered-date">%4$s</td><td class="-edit-link"><a href="user-edit.php?user_id=%6$s">%2$s</a></td><td class="-mail-link"><a href="mailto:%7$s" title="%7$s" target="_blank">%3$s</a></td></tr>',
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
 					esc_html( gPluginTextHelper::truncateString( $user->user_email, 21 ) ),
@@ -87,7 +89,7 @@ class gMemberAdmin extends gPluginModuleCore
 					$last = $registered;
 			}
 
-			echo '</table><ul>';
+			echo '</table><ul class="gmember-dashboard -list-signup">';
 				echo '<li>'.sprintf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
 				echo '<li>'.sprintf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $query->get_total() ) ).'</li>';
 			echo '</ul>';
