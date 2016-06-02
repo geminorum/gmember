@@ -46,7 +46,7 @@ class gMemberLogin extends gPluginModuleCore
 		$store_lastlogin = $gMemberNetwork->settings->get( 'store_lastlogin', TRUE );
 		$date_format     = _x( 'M j, Y @ G:i', 'Registered/Last Login date format', GMEMBER_TEXTDOMAIN );
 
-		echo '><h2>'.__( 'Account Information' ).'</h2>';
+		echo '><h2>'.__( 'Account Information', GMEMBER_TEXTDOMAIN ).'</h2>';
 		echo '<table class="form-table">';
 
 		if ( isset( $profileuser->{$this->constants['meta_register_ip']} )
@@ -92,7 +92,7 @@ class gMemberLogin extends gPluginModuleCore
 
 		if ( ! IS_PROFILE_PAGE && current_user_can( 'edit_users' ) ) {
 
-			echo '</table><h2>'.__( 'Administrative Options' ).'</h2>';
+			echo '</table><h2>'.__( 'Administrative Options', GMEMBER_TEXTDOMAIN ).'</h2>';
 			echo '<table class="form-table">';
 
 			$nicename = $profileuser->user_login == $profileuser->user_nicename
@@ -111,14 +111,14 @@ class gMemberLogin extends gPluginModuleCore
 				.'</th><td><label for="gmember_disable_user">'
 				.'<input type="checkbox" name="gmember_disable_user" id="gmember_disable_user" value="1"';
 					checked( 1, get_the_author_meta( $this->constants['meta_disable_user'], $profileuser->ID ) );
-			echo ' /> '.__( 'Disable user login with this account' , GMEMBER_TEXTDOMAIN )
+			echo ' /> '.__( 'Disable user login with this account', GMEMBER_TEXTDOMAIN )
 				.'</label></td></tr>';
 
 			echo '<tr><th>'.__( 'Password Reset', GMEMBER_TEXTDOMAIN )
 				.'</th><td><label for="gmember_password_reset">'
 				.'<input type="checkbox" name="gmember_password_reset" id="gmember_password_reset" value="1"';
 					checked( 1, get_the_author_meta( $this->constants['meta_disable_password_reset'], $profileuser->ID ) );
-			echo ' /> '.__( 'Disable this account password reset via wp-login.php' , GMEMBER_TEXTDOMAIN )
+			echo ' /> '.__( 'Disable this account password reset via wp-login.php', GMEMBER_TEXTDOMAIN )
 				.'</label></td></tr>';
 		}
 
