@@ -36,7 +36,7 @@ Requires PHP: 5.3
 
 define( 'GMEMBER_VERSION', '2.10' );
 define( 'GMEMBER_VERSION_DB', '0.1' );
-define( 'GMEMBER_VERSION_GPLUGIN', 32 );
+define( 'GMEMBER_VERSION_GPLUGIN', 34 );
 define( 'GMEMBER_FILE', __FILE__ );
 define( 'GMEMBER_DIR', plugin_dir_path( __FILE__ ) );
 define( 'GMEMBER_URL', plugin_dir_url( __FILE__ ) );
