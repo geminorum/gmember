@@ -141,13 +141,17 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function edit_user_profile_update( $user_id )
 	{
-		if ( is_multisite() && isset( $_POST['gmember_display_name'] ) && strlen( $_POST['gmember_display_name'] ) > 0 ) {
-			$display_names = get_user_meta( $user_id, 'gmember_display_name', true );
+		if ( ! is_multisite() )
+			return;
 
-			if ( '' == $_POST['gmember_display_name'] && isset( $display_names[$this->current_blog] ) )
+		if ( isset( $_POST['gmember_display_name'] ) ) {
+
+			$display_names = get_user_meta( $user_id, 'gmember_display_name', TRUE );
+
+			if ( empty( $_POST['gmember_display_name'] ) )
 				unset( $display_names[$this->current_blog] );
 			else
-				$display_names[$this->current_blog] = $_POST['gmember_display_name'];
+				$display_names[$this->current_blog] = trim( $_POST['gmember_display_name'] );
 
 			update_user_meta( $user_id, 'gmember_display_name', $display_names );
 		}
