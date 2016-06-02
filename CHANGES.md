@@ -1,3 +1,11 @@
+### 2.11.0
+* login: drop login with email in favor of WP4.5, [see](https://core.trac.wordpress.org/ticket/9568)
+* profile: no display name per blog on user admin pages
+* profile: fixed not removing per site display name
+* profile: fixed dropped text domain
+* admin: style for signup widget
+* setting up gulp
+
 ### 2.10.0
 * moved to [Semantic Versioning](http://semver.org/)
 * shipping gplugin!
