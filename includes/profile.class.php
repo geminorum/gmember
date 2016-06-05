@@ -148,6 +148,9 @@ class gMemberProfile extends gPluginModuleCore
 
 			$display_names = get_user_meta( $user_id, 'gmember_display_name', TRUE );
 
+			if ( empty( $display_names ) )
+				$display_names = array();
+
 			if ( empty( $_POST['gmember_display_name'] ) )
 				unset( $display_names[$this->current_blog] );
 			else
