@@ -3,7 +3,7 @@
 Plugin Name: gMember
 Plugin URI: http://geminorum.ir/wordpress/gmember
 Description: Extra User Management. Depends on <a href="http://geminorum.ir/wordpress/gplugin/">gPlugin</a>
-Version: 2.11.0
+Version: 2.11.1
 License: GNU/GPL 2
 Author: geminorum
 Author URI: http://geminorum.ir/
@@ -34,7 +34,7 @@ Requires PHP: 5.3
 	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define( 'GMEMBER_VERSION', '2.11.0' );
+define( 'GMEMBER_VERSION', '2.11.1' );
 define( 'GMEMBER_VERSION_DB', '0.1' );
 define( 'GMEMBER_VERSION_GPLUGIN', 34 );
 define( 'GMEMBER_FILE', __FILE__ );

@@ -1,3 +1,6 @@
+### 2.11.1
+* profile: fixed fatal for new user edits
+
 ### 2.11.0
 * login: drop login with email in favor of WP4.5, [see](https://core.trac.wordpress.org/ticket/9568)
 * profile: no display name per blog on user admin pages
