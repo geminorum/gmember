@@ -455,16 +455,4 @@ class gMemberSignUp extends gPluginModuleCore
 		$result['errors'] = $new_errors;
 		return $result;
 	}
-
 }
-
-// http://wordpress.org/extend/plugins/recently-registered/
-//
-// use this, but disable register!
-// http://digwp.com/2010/12/login-register-password-code/
-
-// filter the URL WordPress redirects to after registration.
-// https://gist.github.com/chrisguitarguy/1850631
-
-// Don't allow people to view the default WordPress registration page
-// https://gist.github.com/chrisguitarguy/2012290

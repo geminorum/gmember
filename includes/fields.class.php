@@ -15,9 +15,6 @@ class gMemberFields extends gPluginModuleCore
 
 	public function edit_user_profile( $profileuser )
 	{
-		// gPluginUtils::dump( $profileuser );
-		// gPluginUtils::dump( $profileuser->{$this->_extra_meta} );
-
 		$fields = $this->getFilters( 'gmember_extra_meta' );
 		if ( isset( $profileuser->{$this->_extra_meta} ) )
 			$extra = gMemberHelper::generateMetaArray( $fields, $profileuser->{$this->_extra_meta} );
@@ -35,16 +32,13 @@ class gMemberFields extends gPluginModuleCore
 		add_action ( 'user_profile_update_errors', array( $this, 'user_profile_update_errors' ), 10, 3 );
 	}
 
-
-
-
-
-
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 
 	var $_option_group = 'gmember_profile_options';
 	var $_extra_meta = 'gmember_extra';
 	var $_signup_meta = false;
-
 
 	function init_OLD()
 	{

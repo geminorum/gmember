@@ -43,15 +43,15 @@ class gMemberCleanUp extends gPluginModuleCore
 	private function get_default_user_meta()
 	{
 		return array(
-            'nickname'             => '',
-            'first_name'           => '',
-            'last_name'            => '',
-            'description'          => '',
-            'rich_editing'         => 'true',
-            'comment_shortcuts'    => 'false',
-            'admin_color'          => 'fresh',
-            'use_ssl'              => 0,
-            'show_admin_bar_front' => 'true',
+			'nickname'             => '',
+			'first_name'           => '',
+			'last_name'            => '',
+			'description'          => '',
+			'rich_editing'         => 'true',
+			'comment_shortcuts'    => 'false',
+			'admin_color'          => 'fresh',
+			'use_ssl'              => 0,
+			'show_admin_bar_front' => 'true',
 		);
 	}
 

@@ -1,7 +1,5 @@
 <?php defined( 'ABSPATH' ) or die( 'Restricted access' );
 
-// http://en.bainternet.info/2012/wordpress-easy-login-url-with-no-htaccess
-
 class gMemberLogin extends gPluginModuleCore
 {
 

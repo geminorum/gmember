@@ -92,16 +92,6 @@ class gMemberFiltered extends gPluginFilteredCore
 		);
 	}
 
-	// protected function gmember_root_options_defaults()
-	// {
-	// 	return array();
-	// }
-
-	// protected function gmember_remote_options_defaults()
-	// {
-	// 	return array();
-	// }
-
 	protected function network_settings_messages()
 	{
 		return array(

@@ -120,6 +120,3 @@ class gMemberWidget_login extends WP_Widget
 		<?php
 	}
 }
-
-
-// http://natko.com/wordpress-ajax-login-without-a-plugin-the-right-way/

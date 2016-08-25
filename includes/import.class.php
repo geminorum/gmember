@@ -5,8 +5,6 @@ class gMemberImport extends gPluginImportCore
 
 	public function network_settings_html( $settings_uri, $sub )
 	{
-		// global $gMemberNetwork;
-
 		echo '<form method="post" action="">';
 
 			$attachment_id = self::selectAttachment( gPluginFileHelper::mime( 'csv' ) );

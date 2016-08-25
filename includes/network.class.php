@@ -102,10 +102,13 @@ class gMemberNetwork extends gPluginNetworkCore
 
 		if ( 'spam' == $sub )
 			add_action( 'gmember_network_settings_sub_spam', array( $gMemberNetwork->spam, 'network_settings_html' ), 10, 2 );
+
 		else if ( 'import' == $sub )
 			add_action( 'gmember_network_settings_sub_import', array( $gMemberNetwork->import, 'network_settings_html' ), 10, 2 );
+
 		else if ( 'cleanup' == $sub )
 			add_action( 'gmember_network_settings_sub_cleanup', array( $gMemberNetwork->cleanup, 'network_settings_html' ), 10, 2 );
+
 		else
 			add_action( 'gmember_network_settings_sub_'.$sub, array( $this, 'network_settings_html' ), 10, 2 );
 	}
