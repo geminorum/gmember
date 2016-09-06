@@ -1,4 +1,4 @@
 <?php defined( 'ABSPATH' ) or die( 'Restricted access' );
 
-if ( class_exists( 'gNetworkUtilities' ) )
-	gNetworkUtilities::githubREADME( 'geminorum/gmember' );
+if ( function_exists( 'gnetwork_github_readme' ) )
+	gnetwork_github_readme( 'geminorum/gmember' );
