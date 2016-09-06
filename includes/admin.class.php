@@ -38,7 +38,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function dashboard_signups()
 	{
-		$query = new WP_User_Query( array (
+		$query = new \WP_User_Query( array (
 			'blog_id' => 0,
 			'orderby' => 'registered',
 			'order'   => 'DESC',
@@ -68,20 +68,26 @@ class gMemberAdmin extends gPluginModuleCore
 			$last = FALSE;
 			$alt  = TRUE;
 
+			$template = '<tr%1$s>'
+							.'<td class="-registered-date" title="%5$s">%4$s</td>'
+							.'<td class="-edit-link"><a title="%8$s" href="%6$s" target="_blank">%2$s</a></td>'
+							.'<td class="-mail-link"><a title="%7$s" href="%7$s" target="_blank">%3$s</a></td>'
+						.'</tr>';
+
 			foreach ( $query->results as $user ) {
 
 				$registered = strtotime( $user->user_registered );
 
-				printf(
-					'<tr%1$s><td title="%5$s" class="-registered-date">%4$s</td><td class="-edit-link"><a href="user-edit.php?user_id=%6$s">%2$s</a></td><td class="-mail-link"><a href="mailto:%7$s" title="%7$s" target="_blank">%3$s</a></td></tr>',
+				vprintf( $template, array(
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
 					esc_html( gPluginTextHelper::truncateString( $user->user_email, 21 ) ),
 					esc_html( date_i18n( _x( 'j/m', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
 					esc_attr( human_time_diff( $registered ).' &mdash; '.date_i18n( _x( 'j/m/Y', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
-					$user->ID,
-					esc_attr( $user->user_email )
-				);
+					get_edit_user_link( $user->ID ),
+					'mailto:'.esc_attr( $user->user_email ),
+					$user->user_login,
+				) );
 
 				$alt = ! $alt;
 
