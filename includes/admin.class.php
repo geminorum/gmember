@@ -22,10 +22,13 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function admin_print_styles()
 	{
-		if ( 'users-network' == get_current_screen()->base )
-			gPluginFormHelper::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.users.css', GMEMBER_VERSION );
-		else if ( 'dashboard-network' == get_current_screen()->base )
-			gPluginFormHelper::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.dashboard.css', GMEMBER_VERSION );
+		$screen = get_current_screen();
+
+		if ( 'users-network' == $screen->base )
+			gPluginHTML::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.users.css', $this->constants['plugin_ver'] );
+
+		else if ( 'dashboard-network' == $screen->base )
+			gPluginHTML::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.dashboard.css', $this->constants['plugin_ver'] );
 	}
 
 	public function wp_network_dashboard_setup()

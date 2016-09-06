@@ -42,7 +42,7 @@ class gMemberProfile extends gPluginModuleCore
 	public function admin_print_styles()
 	{
 		if ( in_array( get_current_screen()->base, array( 'profile', 'user-edit' ) ) )
-			gPluginFormHelper::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.profile.css', GMEMBER_VERSION );
+			gPluginHTML::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.profile.css', $this->constants['plugin_ver'] );
 	}
 
 	public function set_current_user()
