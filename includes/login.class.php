@@ -227,17 +227,18 @@ class gMemberLogin extends gPluginModuleCore
 		}
 	}
 
-	// ALSO SEE : http://wp.tutsplus.com/tutorials/creative-coding/redirect-users-to-custom-pages-by-role/
-	// ALSO SEE : http://www.paulund.co.uk/redirect-login-wordpress
 	public function login_redirect( $redirect_to, $requested_redirect_to, $user )
 	{
-		if ( ! empty( $requested_redirect_to ) )
-			return $requested_redirect_to;
+		if ( defined( 'DOING_AJAX' ) )
+			return $redirect_to;
 
-		if ( ! is_wp_error( $user ) && $user->has_cap( 'edit_posts' ) )
-			return get_admin_url();
+		if ( is_wp_error( $user ) )
+			return $redirect_to;
 
-		return get_option( 'home' );
+		if ( empty( $requested_redirect_to ) )
+			return $user->has_cap( 'edit_posts' ) ? get_admin_url() : get_home_url();
+
+		return $redirect_to;
 	}
 
 	public function logout_redirect( $redirect_to, $requested_redirect_to, $user )
