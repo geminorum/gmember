@@ -10,9 +10,10 @@
 
 .gmember-dashboard {
 
+	&.-table-logins,
 	&.-table-signup {
 
-		// width: 100%;
+		.-lastlogin-ago {}
 
 		.-registered-date {
 			cursor: pointer;
@@ -22,6 +23,7 @@
 		.-mail-link {}
 	}
 
+	&.-list-logins,
 	&.-list-signup {
 
 		margin-left: .5em;
