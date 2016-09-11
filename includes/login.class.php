@@ -9,7 +9,7 @@ class gMemberLogin extends gPluginModuleCore
 	{
 		parent::setup_actions();
 
-		$this->main_site_id = gPluginWPHelper::get_current_site_blog_id();
+		$this->main_site_id = gPluginWPHelper::getCurrentSiteBlogID();
 
 		// WORKING : add settings
 		// allow only one session per user
