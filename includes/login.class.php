@@ -152,31 +152,45 @@ class gMemberLogin extends gPluginModuleCore
 	// use this on sanitize
 	public static function update_nicename()
 	{
-		$user_nicename_check = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM $wpdb->users WHERE user_nicename = %s AND user_login != %s LIMIT 1" , $user_nicename, $user_login));
+		$user_nicename_check = $wpdb->get_var( $wpdb->prepare( "
+			SELECT ID FROM $wpdb->users
+			WHERE user_nicename = %s
+			AND user_login != %s
+			LIMIT 1
+		" , $user_nicename, $user_login ) );
 
 		if ( $user_nicename_check ) {
+
 			$suffix = 2;
-			while ($user_nicename_check) {
-				$alt_user_nicename = $user_nicename . "-$suffix";
-				$user_nicename_check = $wpdb->get_var( $wpdb->prepare("SELECT ID FROM $wpdb->users WHERE user_nicename = %s AND user_login != %s LIMIT 1" , $alt_user_nicename, $user_login));
+
+			while ( $user_nicename_check ) {
+
+				$alt_user_nicename = $user_nicename."-$suffix";
+
+				$user_nicename_check = $wpdb->get_var( $wpdb->prepare( "
+					SELECT ID FROM $wpdb->users
+					WHERE user_nicename = %s
+					AND user_login != %s
+					LIMIT 1
+				" , $alt_user_nicename, $user_login ) );
+
 				$suffix++;
 			}
+
 			$user_nicename = $alt_user_nicename;
 		}
 	}
 
 	public function sanitize_slug( $string )
 	{
-		//TODO : more options like transliterate
+		// TODO: more options like transliterate
 		return sanitize_title( $string );
 	}
 
 	// filter whether to allow a password to be reset.
 	public function allow_password_reset( $allow, $user_id )
 	{
-		$allowed = get_user_meta( $user_id, $this->constants['meta_disable_password_reset'], TRUE );
-
-		if ( $allowed == '1' )
+		if ( '1' == get_user_meta( $user_id, $this->constants['meta_disable_password_reset'], TRUE ) )
 			return FALSE;
 
 		return $allow;
@@ -189,9 +203,8 @@ class gMemberLogin extends gPluginModuleCore
 		if ( $gMemberNetwork->settings->get( 'store_lastlogin', TRUE ) )
 			update_user_meta( $user->ID, $this->constants['meta_lastlogin'], current_time( 'mysql', TRUE ) );
 
-		// After login check to see if user account is disabled
-		$disabled = get_user_meta( $user->ID, $this->constants['meta_disable_user'], TRUE );
-		if ( $disabled == '1' ) {
+		// after login check to see if user account is disabled
+		if ( '1' == get_user_meta( $user->ID, $this->constants['meta_disable_user'], TRUE ) ) {
 			wp_clear_auth_cookie();
 			wp_redirect( add_query_arg( array( 'disabled' => '1' ), $this->get_main_site_login() ) );
 			exit;
@@ -200,7 +213,7 @@ class gMemberLogin extends gPluginModuleCore
 
 	public function login_message( $message )
 	{
-		// Show the error message if it seems to be a disabled user
+		// show the error message if it seems to be a disabled user
 		if ( isset( $_GET['disabled'] ) && $_GET['disabled'] == 1 )
 			$message = '<div id="login_error">'.apply_filters( 'gmember_disable_users_notice',
 				__( 'Account disabled', GMEMBER_TEXTDOMAIN ) ).'</div>';
