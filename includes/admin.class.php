@@ -37,6 +37,11 @@ class gMemberAdmin extends gPluginModuleCore
 			_x( 'Latest Signups', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ),
 			array( $this, 'dashboard_signups' )
 		);
+
+		wp_add_dashboard_widget( 'gmember-logins',
+			_x( 'Latest Logins', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ),
+			array( $this, 'dashboard_logins' )
+		);
 	}
 
 	public function dashboard_signups()
@@ -101,6 +106,73 @@ class gMemberAdmin extends gPluginModuleCore
 			echo '</table><ul class="gmember-dashboard -list-signup">';
 				echo '<li>'.sprintf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
 				echo '<li>'.sprintf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $query->get_total() ) ).'</li>';
+			echo '</ul>';
+		}
+	}
+
+	public function dashboard_logins()
+	{
+		$query = new \WP_User_Query( array (
+			'blog_id'    => 0,
+			'meta_key'   => $this->constants['meta_lastlogin'],
+			'meta_type'  => 'DATETIME',
+			'orderby'    => 'meta_value_datetime',
+			'order'      => 'DESC',
+			'number'     => 12,
+			'meta_query' => array( array(
+				'key'     => $this->constants['meta_lastlogin'],
+				'compare' => 'EXISTS',
+			) ),
+			'fields' => array(
+				'ID',
+				'display_name',
+				'user_email',
+				'user_login',
+			),
+		) );
+
+		if ( empty( $query->results ) ) {
+
+			echo '<code>'.__( 'No Data Available', GMEMBER_TEXTDOMAIN ).'</code>';
+
+		} else {
+
+			echo '<table class="widefat gmember-dashboard -table-logins"><thead><tr>';
+			echo '<th>'._x( 'Name', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '<th>'._x( 'On', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '</tr></thead>';
+
+			$last = FALSE;
+			$alt  = TRUE;
+
+			$template = '<tr%1$s>'
+							.'<td class="-edit-link"><a title="%5$s" href="%4$s" target="_blank">%2$s</a></td>'
+							.'<td class="-lastlogin-ago">%3$s</td>'
+						.'</tr>';
+
+			foreach ( $query->results as $user ) {
+
+				if ( $meta = get_user_meta( $user->ID, $this->constants['meta_lastlogin'], TRUE ) )
+					$lastlogin = strtotime( $meta );
+				else
+					continue;
+
+				vprintf( $template, array(
+					( $alt ? ' class="alternate"' : '' ),
+					esc_html( $user->display_name ),
+					esc_html( human_time_diff( $lastlogin ).' &mdash; '.date_i18n( _x( 'j/m/Y', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), $lastlogin ) ),
+					get_edit_user_link( $user->ID ),
+					$user->user_login,
+				) );
+
+				$alt = ! $alt;
+
+				if ( ! $last )
+					$last = $lastlogin;
+			}
+
+			echo '</table><ul class="gmember-dashboard -list-logins">';
+				echo '<li>'.sprintf( _x( 'Last Login: %s ago', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
 			echo '</ul>';
 		}
 	}
