@@ -1,3 +1,8 @@
+### 2.12.0
+* admin: last logins widget
+* login: correct redirect to home/admin
+* styles: re-organizing
+
 ### 2.11.1
 * profile: fixed fatal for new user edits
 
