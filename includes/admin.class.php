@@ -115,8 +115,7 @@ class gMemberAdmin extends gPluginModuleCore
 		$query = new \WP_User_Query( array (
 			'blog_id'    => 0,
 			'meta_key'   => $this->constants['meta_lastlogin'],
-			'meta_type'  => 'DATETIME',
-			'orderby'    => 'meta_value_datetime',
+			'orderby'    => 'meta_value',
 			'order'      => 'DESC',
 			'number'     => 12,
 			'meta_query' => array( array(
