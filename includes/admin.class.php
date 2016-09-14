@@ -77,7 +77,7 @@ class gMemberAdmin extends gPluginModuleCore
 			$alt  = TRUE;
 
 			$template = '<tr%1$s>'
-							.'<td class="-registered-date" title="%5$s">%4$s</td>'
+							.'<td class="-month-day" title="%5$s">%4$s</td>'
 							.'<td class="-edit-link"><a title="%8$s" href="%6$s" target="_blank">%2$s</a></td>'
 							.'<td class="-mail-link"><a title="%7$s" href="%7$s" target="_blank">%3$s</a></td>'
 						.'</tr>';
@@ -137,16 +137,18 @@ class gMemberAdmin extends gPluginModuleCore
 		} else {
 
 			echo '<table class="widefat gmember-dashboard -table-logins"><thead><tr>';
+			echo '<th>'._x( 'Ago', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '<th>'._x( 'Name', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
-			echo '<th>'._x( 'On', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '<th>'._x( 'Timestamp', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '</tr></thead>';
 
 			$last = FALSE;
 			$alt  = TRUE;
 
 			$template = '<tr%1$s>'
+							.'<td class="-time-ago">%3$s</td>'
 							.'<td class="-edit-link"><a title="%5$s" href="%4$s" target="_blank">%2$s</a></td>'
-							.'<td class="-lastlogin-ago">%3$s</td>'
+							.'<td class="-time-full">%6$s</td>'
 						.'</tr>';
 
 			foreach ( $query->results as $user ) {
@@ -159,9 +161,10 @@ class gMemberAdmin extends gPluginModuleCore
 				vprintf( $template, array(
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
-					esc_html( human_time_diff( $lastlogin ).' &mdash; '.date_i18n( _x( 'j/m/Y', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), $lastlogin ) ),
+					esc_html( human_time_diff( $lastlogin ) ),
 					get_edit_user_link( $user->ID ),
 					$user->user_login,
+					esc_html( date_i18n( _x( 'H:i:s - F j, Y', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), $lastlogin ) ),
 				) );
 
 				$alt = ! $alt;
