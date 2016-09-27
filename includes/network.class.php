@@ -12,7 +12,6 @@ class gMemberNetwork extends gPluginNetworkCore
 			// 'mail'    => 'gMemberMail',
 			'login'   => 'gMemberLogin',
 			'profile' => 'gMemberProfile',
-			// 'groups'  => 'gMemberGroups',
 			'widgets' => 'gMemberWidgets',
 			// 'online'  => 'gMemberOnline',
 			// 'spam'    => 'gMemberSPAM',

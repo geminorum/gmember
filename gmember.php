@@ -78,9 +78,6 @@ function gmember_init( $gplugin_version = NULL ) {
 		'theme_templates_dir'    => 'gmember-templates',
 		'class_network_settings' => 'gMemberNetworkSettings',
 
-		'group_tax'  => 'user_group',
-		'group_slug' => 'group',
-
 		'meta_key'        => '_gmember',
 		'term_meta_key'   => '_gmember',
 		'root_meta_key'   => '_gmember_root',

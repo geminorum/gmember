@@ -135,26 +135,4 @@ class gMemberFiltered extends gPluginFilteredCore
 			// 'import'     => __( 'Import Users', GMEMBER_TEXTDOMAIN ),
 		);
 	}
-
-	protected function group_tax_labels()
-	{
-		return array(
-			'name'                       => _x( 'User Groups', 'User Group Tax Name', GMEMBER_TEXTDOMAIN ),
-			'menu_name'                  => _x( 'User Groups', 'User Group Tax Menu Name', GMEMBER_TEXTDOMAIN ),
-			'singular_name'              => _x( 'User Group', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'all_items'                  => _x( 'All User Groups', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'parent_item'                => _x( 'Parent User Group', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'parent_item_colon'          => _x( 'Parent User Group:', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'search_items'               => _x( 'Search User Groups', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'edit_item'                  => _x( 'Edit User Group', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'update_item'                => _x( 'Update User Group', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'add_new_item'               => _x( 'Add New User Group', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'new_item_name'              => _x( 'New User Group', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'separate_items_with_commas' => _x( 'Separate user groups with commas', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'add_or_remove_items'        => _x( 'Add or remove user groups', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'choose_from_most_used'      => _x( 'Choose from most used user groups', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'not_found'                  => _x( 'No User Groups found.', 'User Group Tax Labels', GMEMBER_TEXTDOMAIN ),
-			'popular_items'              => NULL,
-		);
-	}
 }
