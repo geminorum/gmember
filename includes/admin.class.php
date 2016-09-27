@@ -203,14 +203,20 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function views_users_network( $views )
 	{
+		global $gMemberNetwork;
+
 		// FIXME: remove current class from other views
 		$class = isset( $_GET['spam'] ) ? ' class="current"' : '';
 
-		// FIXME: helper for counting spam users
-		// $views['spam'] = "<a href='".network_admin_url('users.php?spam')."'$class>".sprintf( _n( 'Marked as Spam <span class="count">(%s)</span>', 'Marked as Spam <span class="count">(%s)</span>', 12 ), number_format_i18n( 12 ) ) . '</a>';
+		$view = '<a href="'.network_admin_url( 'users.php?spam' ).'"'.$class.'>';
 
-		$views['spam'] = '<a href="'.network_admin_url( 'users.php?spam' ).'"'.$class.'>'.__( 'Marked as Spam', GMEMBER_TEXTDOMAIN ).'</a>';
-		return $views;
+		if ( $spams = $gMemberNetwork->get_spam_count() )
+			$view .= sprintf( _nx( 'Marked as Spam <span class="count">(%s)</span>', 'Marked as Spams <span class="count">(%s)</span>', $spams, 'Users List Table', GMEMBER_TEXTDOMAIN ),
+			 	number_format_i18n( $spams ) ).'</a>';
+		else
+			$view .= _x( 'Marked as Spam', 'Users List Table', GMEMBER_TEXTDOMAIN ).'</a>';
+
+		return array_merge( $views, array( 'spam' => $view ) );
 	}
 
 	// defaults: 'cb', 'username', 'name', 'email', 'registered', 'blogs'

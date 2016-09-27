@@ -35,11 +35,21 @@ class gMemberNetwork extends gPluginNetworkCore
 		}
 
 		add_action( 'bp_include', array( $this, 'bp_include' ) );
+		add_action( 'gmember_network_counts', array( $this, 'event_network_counts' ) );
 	}
 
 	public function bp_include()
 	{
 		$this->buddypress = gPluginFactory::get( 'gMemberBuddyPress', $this->constants, $this->args );
+	}
+
+	public function schedule_events()
+	{
+		if ( ! is_main_site() )
+			return;
+
+		if ( ! wp_next_scheduled( 'gmember_network_counts' ) && ! wp_installing() )
+			wp_schedule_event( time(), 'daily', 'gmember_network_counts' );
 	}
 
 	public function load_textdomain()
@@ -110,6 +120,25 @@ class gMemberNetwork extends gPluginNetworkCore
 
 		else
 			add_action( 'gmember_network_settings_sub_'.$sub, array( $this, 'network_settings_html' ), 10, 2 );
+	}
+
+	public function event_network_counts()
+	{
+		$this->update_spam_count();
+	}
+
+	private function update_spam_count()
+	{
+		global $wpdb;
+
+		return $wpdb->get_var( "SELECT COUNT(ID) as c FROM $wpdb->users WHERE spam = '1' AND deleted = '0'" );
+
+		update_site_option( 'gmember_user_spam_count', $count );
+	}
+
+	public function get_spam_count()
+	{
+		return get_site_option( 'gmember_user_spam_count' );
 	}
 
 	public function getIPLookup( $ip )
