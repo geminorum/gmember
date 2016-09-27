@@ -91,7 +91,7 @@ class gMemberAdmin extends gPluginModuleCore
 				vprintf( $template, array(
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
-					esc_html( gPluginTextHelper::truncateString( $user->user_email, 21 ) ),
+					esc_html( gPluginTextHelper::truncateString( $user->user_email, 32 ) ),
 					esc_html( date_i18n( _x( 'j/m', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
 					esc_attr( human_time_diff( $registered ).' &mdash; '.date_i18n( _x( 'j/m/Y', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
 					get_edit_user_link( $user->ID ),
@@ -176,7 +176,7 @@ class gMemberAdmin extends gPluginModuleCore
 					esc_html( human_time_diff( $lastlogin ) ),
 					get_edit_user_link( $user->ID ),
 					$user->user_login,
-					esc_html( date_i18n( _x( 'H:i:s - F j, Y', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), $lastlogin ) ),
+					esc_html( date_i18n( _x( 'H:i - F j, Y', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), $lastlogin ) ),
 				) );
 
 				$alt = ! $alt;
