@@ -23,13 +23,15 @@ class gMemberSignUp extends gPluginModuleCore
 	{
 		global $gMemberNetwork;
 
-		$this->url = $gMemberNetwork->settings->get( 'signup_url', '' );
+		if ( $this->url = $gMemberNetwork->settings->get( 'signup_url', '' ) ) {
 
-		if ( $this->url ) {
 			$this->check_wp_signup();
+
 			add_filter( 'wp_signup_location', array( $this, 'wp_signup_location' ), 15 ); // for WP
 			add_filter( 'bp_get_signup_page', array( $this, 'wp_signup_location' ), 15 ); // for BuddyPress
 			add_filter( 'bp_get_activation_page', array( $this, 'wp_signup_location' ), 15 ); // for BuddyPress, probably no need!
+
+			add_action( 'login_form_register', array( $this, 'login_form_register' ), 5 ); // for direct login page
 		}
 
 		// FIXME: WORKING BUT DISABLED UNTIL COMPELETE REWRITE
@@ -60,6 +62,12 @@ class gMemberSignUp extends gPluginModuleCore
 			return esc_url( trailingslashit( $this->url ) );
 
 		return $url;
+	}
+
+	public function login_form_register()
+	{
+		wp_redirect( $this->url );
+		exit();
 	}
 
 	public function user_register( $user_id )
