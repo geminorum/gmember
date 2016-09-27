@@ -220,9 +220,11 @@ class gMemberAdmin extends gPluginModuleCore
 			return $empty;
 
 		$html        = '';
+		$mode        = empty( $_REQUEST['mode'] ) ? 'list' : $_REQUEST['mode'];
+
 		$user        = get_user_by( 'id', $user_id );
-		$lastlogin   = get_user_meta( $user_id, 'lastlogin', TRUE );
-		$register_ip = get_user_meta( $user_id, 'register_ip', TRUE );
+		$lastlogin   = get_user_meta( $user_id, $this->constants['meta_lastlogin'], TRUE );
+		$register_ip = get_user_meta( $user_id, $this->constants['meta_register_ip'], TRUE );
 
 		$registered  = strtotime( get_date_from_gmt( $user->user_registered ) );
 		$lastlogged  = $lastlogin ? strtotime( get_date_from_gmt( $lastlogin ) ) : NULL;
