@@ -56,7 +56,7 @@ class gMemberLogin extends gPluginModuleCore
 		echo '<tr class="register_ip"><th>'.__( 'Registration IP', GMEMBER_TEXTDOMAIN )
 			.'</th><td><code>'.$register_ip.'</code></td></tr>';
 
-		$register_date = strtotime( $profileuser->user_registered );
+		$register_date = strtotime( get_date_from_gmt( $profileuser->user_registered ) );
 		$register_on = date_i18n( $date_format, $register_date ).
 			' <small><small><span class="description">('.
 			sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $register_date ) ) ).
@@ -71,7 +71,7 @@ class gMemberLogin extends gPluginModuleCore
 		if ( $store_lastlogin || current_user_can( 'edit_users' ) ) {
 
 			if ( isset( $profileuser->{$this->constants['meta_lastlogin']} ) && '' != $profileuser->{$this->constants['meta_lastlogin']} ) {
-				$lastlogin_date = strtotime( $profileuser->{$this->constants['meta_lastlogin']} );
+				$lastlogin_date = strtotime( get_date_from_gmt( $profileuser->{$this->constants['meta_lastlogin']} ) );
 				$lastlogin = date_i18n( $date_format, $lastlogin_date ).
 					' <small><small><span class="description">('.
 					sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date ) ) ).
