@@ -84,7 +84,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 			foreach ( $query->results as $user ) {
 
-				$registered = strtotime( $user->user_registered );
+				$registered = strtotime( get_date_from_gmt( $user->user_registered ) );
 
 				vprintf( $template, array(
 					( $alt ? ' class="alternate"' : '' ),
@@ -154,7 +154,7 @@ class gMemberAdmin extends gPluginModuleCore
 			foreach ( $query->results as $user ) {
 
 				if ( $meta = get_user_meta( $user->ID, $this->constants['meta_lastlogin'], TRUE ) )
-					$lastlogin = strtotime( $meta );
+					$lastlogin = strtotime( get_date_from_gmt( $meta ) );
 				else
 					continue;
 
@@ -224,23 +224,29 @@ class gMemberAdmin extends gPluginModuleCore
 		$lastlogin   = get_user_meta( $user_id, 'lastlogin', TRUE );
 		$register_ip = get_user_meta( $user_id, 'register_ip', TRUE );
 
+		$registered  = strtotime( get_date_from_gmt( $user->user_registered ) );
+		$lastlogged  = $lastlogin ? strtotime( get_date_from_gmt( $lastlogin ) ) : NULL;
+
 		$html .= '<table></tbody>';
 
 		$html .= '<tr><td>'.__( 'Registered', GMEMBER_TEXTDOMAIN ).'</td><td><code title="'
-			.mysql2date( 'g:i:s a', $user->user_registered ).'">'
-			.mysql2date( 'Y/m/d', $user->user_registered ).'</code></td></tr>';
+			.date_i18n( 'g:i:s a', $registered ).'">'
+			.date_i18n( 'Y/m/d', $registered ).'</code></td></tr>';
 
 		$html .= '<tr><td>'.__( 'Last Login', GMEMBER_TEXTDOMAIN ).'</td><td>'
-			.( $lastlogin ? '<code title="'.mysql2date( 'g:i:s a', $lastlogin ).'">'
-				.mysql2date( 'Y/m/d', $lastlogin ).'</code>'
+			.( $lastlogin ? '<code title="'.date_i18n( 'g:i:s a', $lastlogged ).'">'
+				.date_i18n( 'Y/m/d', $lastlogged ).'</code>'
 			: __( 'Never', GMEMBER_TEXTDOMAIN ) ).'</td></tr>';
 
 		if ( function_exists( 'bp_get_user_last_activity' ) ) {
-			$lastactivity = bp_get_user_last_activity( $user_id );
+
+			if ( $lastactivity = bp_get_user_last_activity( $user_id ) )
+				$lastactive = strtotime( get_date_from_gmt( $lastactivity ) );
+
 			$html .= '<tr><td>'.__( 'Last Activity', GMEMBER_TEXTDOMAIN ).'</td><td>'
 				.( $lastactivity
 					? '<code title="'.bp_core_time_since( $lastactivity ).'">'
-						.mysql2date( 'Y/m/d', $lastactivity )
+						.date_i18n( 'Y/m/d', $lastactive )
 					: '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ) )
 				.'</code></td></tr>';
 		}
