@@ -112,6 +112,18 @@ class gMemberNetwork extends gPluginNetworkCore
 		else
 			add_action( 'gmember_network_settings_sub_'.$sub, array( $this, 'network_settings_html' ), 10, 2 );
 	}
+
+	public function getIPLookup( $ip )
+	{
+		if ( $service = $this->settings->get( 'lookup_ip_service', 'http://freegeoip.net/?q=%s' ) )
+			return gPluginHTML::tag( 'a', array(
+				'href'   => esc_url( sprintf( $service, $ip ) ),
+				'class'  => '-ip-lookup',
+				'target' => '_blank',
+			), $ip );
+
+		return $ip;
+	}
 }
 
 class gMemberNetworkSettings   extends gPluginSettingsCore {}

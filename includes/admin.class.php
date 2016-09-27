@@ -225,6 +225,8 @@ class gMemberAdmin extends gPluginModuleCore
 		if ( 'timestamps' != $column_name )
 			return $empty;
 
+		global $gMemberNetwork;
+
 		$html        = '';
 		$mode        = empty( $_REQUEST['mode'] ) ? 'list' : $_REQUEST['mode'];
 
@@ -260,7 +262,7 @@ class gMemberAdmin extends gPluginModuleCore
 		}
 
 		$html .= '<tr><td>'.__( 'Register IP', GMEMBER_TEXTDOMAIN ).'</td><td><code>'
-			.( $register_ip ? $register_ip : __( 'N/A', GMEMBER_TEXTDOMAIN ) ).'</code></td></tr>';
+			.( $register_ip ? $gMemberNetwork->getIPLookup( $register_ip ) : __( 'N/A', GMEMBER_TEXTDOMAIN ) ).'</code></td></tr>';
 
 		$html .= '</tbody></table>';
 

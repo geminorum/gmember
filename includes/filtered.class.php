@@ -26,6 +26,13 @@ class gMemberFiltered extends gPluginFilteredCore
 						'title' => '',
 						'callback' => '__return_FALSE',
 						'fields' => array(
+							'lookup_ip_service' => array(
+								'title'   => __( 'Lookup IP URL', GMEMBER_TEXTDOMAIN ),
+								'desc'    => __( 'URL template to to use for looking up IP adresses. Will replace <code>%s</code> with the IP.', GMEMBER_TEXTDOMAIN ),
+								'type'    => 'text',
+								'default' => 'http://freegeoip.net/?q=%s',
+								'dir'     => 'ltr',
+							),
 							'search_authors' => array(
 								'title'   => __( 'Search Authors', GMEMBER_TEXTDOMAIN ),
 								'desc'    => __( 'Include by author display name in general post search queries.', GMEMBER_TEXTDOMAIN ),

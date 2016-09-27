@@ -49,7 +49,7 @@ class gMemberLogin extends gPluginModuleCore
 
 		if ( isset( $profileuser->{$this->constants['meta_register_ip']} )
 			&& $profileuser->{$this->constants['meta_register_ip']} )
-				$register_ip = $profileuser->{$this->constants['meta_register_ip']};
+				$register_ip = $gMemberNetwork->getIPLookup( $profileuser->{$this->constants['meta_register_ip']} );
 		else
 			$register_ip = __( 'No Data Available', GMEMBER_TEXTDOMAIN );
 
