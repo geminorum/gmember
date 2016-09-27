@@ -184,6 +184,13 @@ class gMemberAdmin extends gPluginModuleCore
 		if ( isset( $_GET['spam'] ) )
 			add_action( 'pre_user_query', array( $this, 'pre_user_query' ) );
 
+		// default sorting
+		if ( empty( $args['orderby'] ) ) {
+			$args['orderby'] = 'user_registered';
+			if ( empty( $args['order'] ) )
+				$args['order'] = 'DESC';
+		}
+
 		return $args;
 	}
 
@@ -210,8 +217,7 @@ class gMemberAdmin extends gPluginModuleCore
 	public function wpmu_users_columns( $users_columns )
 	{
 		unset( $users_columns['registered'] );
-		$users_columns['timestamps'] = __( 'Timestamps', GMEMBER_TEXTDOMAIN );
-		return $users_columns;
+		return array_merge( $users_columns, array( 'timestamps' => __( 'Timestamps', GMEMBER_TEXTDOMAIN ) ) );
 	}
 
 	public function manage_users_custom_column( $empty, $column_name, $user_id )
@@ -263,7 +269,6 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function manage_users_network_sortable_columns( $sortable_columns )
 	{
-		$sortable_columns['timestamps'] = 'id'; // order by id (registerdate)
-		return $sortable_columns;
+		return array_merge( $sortable_columns, array( 'timestamps' => 'user_registered' ) );
 	}
 }
