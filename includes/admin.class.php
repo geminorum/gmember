@@ -46,6 +46,8 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function dashboard_signups()
 	{
+		global $gMemberNetwork;
+
 		$query = new \WP_User_Query( array (
 			'blog_id' => 0,
 			'orderby' => 'registered',
@@ -103,10 +105,20 @@ class gMemberAdmin extends gPluginModuleCore
 					$last = $registered;
 			}
 
-			echo '</table><ul class="gmember-dashboard -list-signup">';
-				echo '<li>'.sprintf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
-				echo '<li>'.sprintf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( get_user_count() ) ).'</li>';
-			echo '</ul>';
+			echo '</table>';
+			echo '<table class="gmember-dashboard -table-summary"></tbody>';
+
+				echo '<tr><td>';
+					printf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) );
+				echo '</td><td>';
+					printf( _x( 'Super Admins: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( count( get_super_admins() ) ) );
+				echo '</td></tr><tr><td>';
+					printf( _x( 'Spam Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $gMemberNetwork->get_spam_count() ) );
+				echo '</td><td>';
+					printf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( get_user_count() ) );
+				echo '</td></tr>';
+
+			echo '</tbody></table>';
 		}
 	}
 
@@ -173,9 +185,7 @@ class gMemberAdmin extends gPluginModuleCore
 					$last = $lastlogin;
 			}
 
-			echo '</table><ul class="gmember-dashboard -list-logins">';
-				echo '<li>'.sprintf( _x( 'Last Login: %s ago', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
-			echo '</ul>';
+			echo '</table>';
 		}
 	}
 
