@@ -106,7 +106,7 @@ class gMemberGroups extends gPluginModuleCore
 
 		$terms = get_terms( $this->constants['group_tax'], array( 'hide_empty' => FALSE ) );
 
-		echo gPluginFormHelper::html( 'h2', __( 'Group', GMEMBER_TEXTDOMAIN ) );
+		echo gPluginHTML::tag( 'h2', __( 'Group', GMEMBER_TEXTDOMAIN ) );
 
 		echo '<table class="form-table">';
 			echo '<tr><th scope="row">'.__( 'Select Group', GMEMBER_TEXTDOMAIN ).'</th><td>';
@@ -115,7 +115,7 @@ class gMemberGroups extends gPluginModuleCore
 
 				foreach ( $terms as $term ) {
 
-					$html = gPluginFormHelper::html( 'input', array(
+					$html = gPluginHTML::tag( 'input', array(
 						'type'    => 'radio',
 						'name'    => 'groups',
 						'id'      => 'groups-'.$term->slug,
@@ -123,7 +123,7 @@ class gMemberGroups extends gPluginModuleCore
 						'checked' => is_object_in_term( $user->ID, $this->constants['group_tax'], $term ),
 					) );
 
-					echo '<p>'.gPluginFormHelper::html( 'label', array(
+					echo '<p>'.gPluginHTML::tag( 'label', array(
 						'for' => 'groups-'.$term->slug,
 					), $html.'&nbsp;'.esc_html( $term->name ) ).'</p>';
 				 }
@@ -165,7 +165,7 @@ class gMemberGroups extends gPluginModuleCore
 					// FIXME: use gMemberAvatar::get()
 					echo get_avatar( get_the_author_meta( 'email', $user_id ), '96' );
 
-					echo '<h2 class="user-title">'.gPluginFormHelper::html( 'a', array(
+					echo '<h2 class="user-title">'.gPluginHTML::tag( 'a', array(
 						'href' => get_author_posts_url( $user_id ),
 						'title' => '',
 					), get_the_author_meta( 'display_name', $user_id ) ).'<h2>';

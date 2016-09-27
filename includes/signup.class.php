@@ -160,11 +160,11 @@ class gMemberSignUp extends gPluginModuleCore
 				if ( 'already_active' == $current->get_error_code() || 'blog_taken' == $current->get_error_code() ) {
 					$signup = $current->get_error_data();
 
-					$activate = gPluginFormHelper::html( $args['title_wrap'], array(
+					$activate = gPluginHTML::tag( $args['title_wrap'], array(
 						'class' => 'member-signup-title member-signup-activate-title',
 					), __( 'Your account is now active!' ) );
 
-					$activate .= gPluginFormHelper::html( 'p', array(
+					$activate .= gPluginHTML::tag( 'p', array(
 						'class' => 'lead-in member-signup-activate-text',
 					), ( '' == $signup->domain.$signup->path ?
 							sprintf( __( 'Your account has been activated. You may now <a href="%1$s">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href="%4$s">reset your password</a>.'), network_site_url( 'wp-login.php', 'login' ), $signup->user_login, $signup->user_email, wp_lostpassword_url() ) :
@@ -172,21 +172,21 @@ class gMemberSignUp extends gPluginModuleCore
 					) );
 
 					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
-					return gPluginFormHelper::html( 'div', array(
+					return gPluginHTML::tag( 'div', array(
 						'class' => $args['class'].' member-signup-activate',
 					), $activate );
 
 				} else {
-					$activate = gPluginFormHelper::html( $args['title_wrap'], array(
+					$activate = gPluginHTML::tag( $args['title_wrap'], array(
 						'class' => 'member-signup-title member-signup-activate-title member-signup-activate-error-title',
 					), __( 'An error occurred during the activation' ) );
 
-					$activate .= gPluginFormHelper::html( 'p', array(
+					$activate .= gPluginHTML::tag( 'p', array(
 						'class' => 'member-signup-activate-error-text',
 					), $current->get_error_message() );
 
 					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
-					return gPluginFormHelper::html( 'div', array(
+					return gPluginHTML::tag( 'div', array(
 						'class' => $args['class'].' member-signup-activate-error',
 					), $activate );
 
@@ -196,28 +196,28 @@ class gMemberSignUp extends gPluginModuleCore
 
 				$user = get_userdata( (int) $current['user_id'] );
 
-				$activate = gPluginFormHelper::html( $args['title_wrap'], array(
+				$activate = gPluginHTML::tag( $args['title_wrap'], array(
 					'class' => 'member-signup-title member-signup-activate-title',
 				), __( 'Your account is now active!' ) );
 
-				$welcome = '<p>'.gPluginFormHelper::html( 'span', array(
+				$welcome = '<p>'.gPluginHTML::tag( 'span', array(
 					'class' => 'h3',
 				), $labels['user_name'] );
-				$welcome .= gPluginFormHelper::html( 'span', array(), $user->user_login ).'</p>';
+				$welcome .= gPluginHTML::tag( 'span', array(), $user->user_login ).'</p>';
 
-				$welcome .= '<p>'.gPluginFormHelper::html( 'span', array(
+				$welcome .= '<p>'.gPluginHTML::tag( 'span', array(
 					'class' => 'h3',
 				), $labels['user_pass'] );
-				$welcome .= gPluginFormHelper::html( 'span', array(), $current['password'] ).'</p>';
+				$welcome .= gPluginHTML::tag( 'span', array(), $current['password'] ).'</p>';
 
-				$activate .= gPluginFormHelper::html( 'div', array(
+				$activate .= gPluginHTML::tag( 'div', array(
 					'id' => 'signup-welcome',
 					'class' => 'member-signup-activate-welcome',
 				), $welcome );
 
 				$url = get_blogaddress_by_id( (int) $current['blog_id'] );
 
-				$activate .= gPluginFormHelper::html( 'p', array(
+				$activate .= gPluginHTML::tag( 'p', array(
 					'class' => 'view member-signup-activate-text',
 				), ( $url != network_home_url( '', 'http' ) ?
 					sprintf( __('Your account is now activated. <a href="%1$s">View your site</a> or <a href="%2$s">Log in</a>'), $url, $url . 'wp-login.php' ) :
@@ -225,7 +225,7 @@ class gMemberSignUp extends gPluginModuleCore
 					) );
 
 				defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
-				return gPluginFormHelper::html( 'div', array(
+				return gPluginHTML::tag( 'div', array(
 					'class' => $args['class'].' member-signup-activate',
 				), $activate );
 			}
@@ -235,10 +235,10 @@ class gMemberSignUp extends gPluginModuleCore
 			if ( $args['logged_in_redirect'] ) {
 				wp_redirect( $args['logged_in_redirect'] ); die();
 			} else {
-				$logged_in = gPluginFormHelper::html( 'p', array(
+				$logged_in = gPluginHTML::tag( 'p', array(
 					'class' => 'member-signup-logged-in',
 				), $args['logged_in_text'] );
-				return gPluginFormHelper::html( 'div', array(
+				return gPluginHTML::tag( 'div', array(
 					'class' => $args['class'],
 				), $logged_in );
 			}
@@ -249,10 +249,10 @@ class gMemberSignUp extends gPluginModuleCore
 			if ( $args['disabled_redirect'] ) {
 				wp_redirect( $args['disabled_redirect'] ); die();
 			} else {
-				$disabled = gPluginFormHelper::html( 'p', array(
+				$disabled = gPluginHTML::tag( 'p', array(
 					'class' => 'member-signup-disabled',
 				), $args['logged_disabled'] );
-				return gPluginFormHelper::html( 'div', array(
+				return gPluginHTML::tag( 'div', array(
 					'class' => $args['class'],
 				), $disabled );
 			}
@@ -270,11 +270,11 @@ class gMemberSignUp extends gPluginModuleCore
 				// removed beacause: the filter not checked wp nounce if its not on wp-signup.php and wp_die is not acceptable!
 				remove_filter( 'wpmu_validate_user_signup', 'signup_nonce_check' );
 				if ( wp_create_nonce( 'member_signup_form_'.$_POST['member_signup_form_id']) != $_POST['_member_signup_form'] ) {
-					$error = gPluginFormHelper::html( 'p', array(
+					$error = gPluginHTML::tag( 'p', array(
 						'class' => 'member-signup-error',
 					), __( 'Please try again.' ) );
 					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
-					return gPluginFormHelper::html( 'div', array(
+					return gPluginHTML::tag( 'div', array(
 						'class' => $args['class'],
 					), $error );
 				}
@@ -285,20 +285,20 @@ class gMemberSignUp extends gPluginModuleCore
 
 					wpmu_signup_user( $current['user_name'], $current['user_email'], apply_filters( 'add_signup_meta', array() ) );
 
-					$confirm = gPluginFormHelper::html( $args['title_wrap'], array(
+					$confirm = gPluginHTML::tag( $args['title_wrap'], array(
 						'class' => 'member-signup-title member-signup-title-confirm',
 					), sprintf( __( '%s is your new username' ), $current['user_name'] ) );
 
-					$confirm .= gPluginFormHelper::html( 'p', array(), __( 'But, before you can start using your new username, <strong>you must activate it</strong>.' ) );
-					$confirm .= gPluginFormHelper::html( 'p', array(), sprintf( __( 'Check your inbox at <strong>%s</strong> and click the link given.' ), $current['user_email'] ) );
-					$confirm .= gPluginFormHelper::html( 'p', array(), __( 'If you do not activate your username within two days, you will have to sign up again.' ) );
+					$confirm .= gPluginHTML::tag( 'p', array(), __( 'But, before you can start using your new username, <strong>you must activate it</strong>.' ) );
+					$confirm .= gPluginHTML::tag( 'p', array(), sprintf( __( 'Check your inbox at <strong>%s</strong> and click the link given.' ), $current['user_email'] ) );
+					$confirm .= gPluginHTML::tag( 'p', array(), __( 'If you do not activate your username within two days, you will have to sign up again.' ) );
 
 					ob_start();
 					do_action( 'signup_finished' );
 					$confirm .= ob_get_clean();
 
 					defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
-					return gPluginFormHelper::html( 'div', array(
+					return gPluginHTML::tag( 'div', array(
 						'class' => $args['class'].' member-signup-confirm',
 					), $confirm );
 				}
@@ -311,11 +311,11 @@ class gMemberSignUp extends gPluginModuleCore
 		do_action( 'preprocess_signup_form' );
 		$pre = ob_get_clean();
 
-		$header = gPluginFormHelper::html( $args['title_wrap'], array(
+		$header = gPluginHTML::tag( $args['title_wrap'], array(
 			'class' => 'member-signup-title',
 		), $args['title'] );
 
-		$fields_hidden = gPluginFormHelper::html( 'input', array(
+		$fields_hidden = gPluginHTML::tag( 'input', array(
 			'type'  => 'hidden',
 			'name'  => 'stage',
 			'value' => 'validate-user-signup',
@@ -323,7 +323,7 @@ class gMemberSignUp extends gPluginModuleCore
 
 		remove_action( 'signup_hidden_fields', 'signup_nonce_fields' );
 		$id_nonce = mt_rand();
-		$fields_hidden .= gPluginFormHelper::html( 'input', array(
+		$fields_hidden .= gPluginHTML::tag( 'input', array(
 			'type'  => 'hidden',
 			'name'  => 'member_signup_form_id',
 			'value' => $id_nonce,
@@ -336,16 +336,16 @@ class gMemberSignUp extends gPluginModuleCore
 		do_action( 'signup_hidden_fields' );
 		$fields_hidden .= ob_get_clean();
 
-		$field_user_name = gPluginFormHelper::html( 'label', array(
+		$field_user_name = gPluginHTML::tag( 'label', array(
 			'for' => 'user_name',
 		), $labels['user_name'] );
 
 		if ( $username_error = $current['errors']->get_error_message( 'user_name' ) )
-			$field_user_name .= gPluginFormHelper::html( 'p', array(
+			$field_user_name .= gPluginHTML::tag( 'p', array(
 				'class' => 'error',
 			), $username_error );
 
-		$field_user_name .= gPluginFormHelper::html( 'input', array(
+		$field_user_name .= gPluginHTML::tag( 'input', array(
 			'name'      => 'user_name',
 			'id'        => 'user_name',
 			'class'     => 'textInput',
@@ -355,24 +355,24 @@ class gMemberSignUp extends gPluginModuleCore
 		), false );
 
 		if ( $descriptions['user_name'] )
-			$field_user_name .= gPluginFormHelper::html( 'p', array(
+			$field_user_name .= gPluginHTML::tag( 'p', array(
 				'class' => 'description formHint',
 			), $descriptions['user_name'] );
 
-		$field_user_name = gPluginFormHelper::html( $args['field_wrap'], array(
+		$field_user_name = gPluginHTML::tag( $args['field_wrap'], array(
 			'class' => $args['field_wrap_class'].' ctrlHolder',
 		), $field_user_name );
 
-		$field_user_email = gPluginFormHelper::html( 'label', array(
+		$field_user_email = gPluginHTML::tag( 'label', array(
 			'for' => 'user_email',
 		), $labels['user_email'] );
 
 		if ( $useremail_error = $current['errors']->get_error_message( 'user_email' ) )
-			$field_user_email .= gPluginFormHelper::html( 'p', array(
+			$field_user_email .= gPluginHTML::tag( 'p', array(
 				'class' => 'error',
 			), $useremail_error );
 
-		$field_user_email .= gPluginFormHelper::html( 'input', array(
+		$field_user_email .= gPluginHTML::tag( 'input', array(
 			'name'      => 'user_email',
 			'id'        => 'user_email',
 			'class'     => 'textInput',
@@ -382,32 +382,32 @@ class gMemberSignUp extends gPluginModuleCore
 		), false );
 
 		if ( $descriptions['user_email'] )
-			$field_user_email .= gPluginFormHelper::html( 'p', array(
+			$field_user_email .= gPluginHTML::tag( 'p', array(
 				'class' => 'description formHint',
 			), $descriptions['user_email'] );
 
-		$field_user_email = gPluginFormHelper::html( $args['field_wrap'], array(
+		$field_user_email = gPluginHTML::tag( $args['field_wrap'], array(
 			'class' => $args['field_wrap_class'].' ctrlHolder',
 		), $field_user_email );
 
-		$user_email = gPluginFormHelper::html( 'fieldset', array(), $field_user_name.$field_user_email );
+		$user_email = gPluginHTML::tag( 'fieldset', array(), $field_user_name.$field_user_email );
 
 		ob_start();
 		do_action( 'signup_extra_fields', $current['errors'], $args );
 		$fields_extra = ob_get_clean();
 
-		$submit = gPluginFormHelper::html( 'input', array(
+		$submit = gPluginHTML::tag( 'input', array(
 			'name' => 'submit',
 			'class' => 'primaryAction',
 			'type' => 'submit',
 			'value' => esc_attr( $labels['submit'] ),
 		), false );
 
-		$submit = gPluginFormHelper::html( 'p', array(
+		$submit = gPluginHTML::tag( 'p', array(
 			'class' => 'submit buttonHolder',
 		), $submit );
 
-		$form = gPluginFormHelper::html( 'form', array(
+		$form = gPluginHTML::tag( 'form', array(
 			'id' => 'member_signup_form',
 			'method' => 'post',
 			'class' => 'uniForm',
@@ -415,7 +415,7 @@ class gMemberSignUp extends gPluginModuleCore
 		), $fields_hidden.$user_email.$fields_extra.$submit );
 
 		defined( 'DONOTCACHEPAGE' ) or define( 'DONOTCACHEPAGE', true );
-		return gPluginFormHelper::html( 'div', array(
+		return gPluginHTML::tag( 'div', array(
 			'class' => $args['class'],
 		), $pre.$header.$form );
 	}
