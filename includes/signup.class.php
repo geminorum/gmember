@@ -34,6 +34,9 @@ class gMemberSignUp extends gPluginModuleCore
 			add_action( 'login_form_register', array( $this, 'login_form_register' ), 5 ); // for direct login page
 		}
 
+		if ( $this->after = $gMemberNetwork->settings->get( 'signup_after', '' ) )
+			add_filter( 'registration_redirect', array( $this, 'registration_redirect' ), 15, 1 );
+
 		// FIXME: WORKING BUT DISABLED UNTIL COMPELETE REWRITE
 		// add_shortcode( 'signup-form', array( $this, 'signup_form_shortcode' ) );
 	}
@@ -68,6 +71,14 @@ class gMemberSignUp extends gPluginModuleCore
 	{
 		wp_redirect( $this->url );
 		exit();
+	}
+
+	public function registration_redirect( $after )
+	{
+		if ( $this->after )
+			return esc_url( trailingslashit( $this->after ) );
+
+		return $after;
 	}
 
 	public function user_register( $user_id )
