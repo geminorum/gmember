@@ -105,7 +105,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 			echo '</table><ul class="gmember-dashboard -list-signup">';
 				echo '<li>'.sprintf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) ).'</li>';
-				echo '<li>'.sprintf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $query->get_total() ) ).'</li>';
+				echo '<li>'.sprintf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( get_user_count() ) ).'</li>';
 			echo '</ul>';
 		}
 	}
