@@ -1,32 +1,28 @@
 @charset "UTF-8";
-
 @import "modules/all";
 @import "partials/base";
 @import "partials/admin.all";
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-
 // body.network-admin.users-php {
+// table.users-network {
+td.timestamps {
+  table td {
+    padding: 0 0 2px;
 
-	// table.users-network {
+    code {
+      cursor: pointer;
+    }
+  }
+}
 
-		td.timestamps {
-			table td {
-				padding: 0 0 2px;
-				code {
-					cursor: pointer;
-				}
-			}
-		}
+th.column-email {
+  width: 14%;
+}
 
-		th.column-email {
-			width: 14%;
-		}
-
-		th.column-timestamps {
-			width: 220px;
-		}
-	// }
+th.column-timestamps {
+  width: 220px;
+}
+// }
 // }

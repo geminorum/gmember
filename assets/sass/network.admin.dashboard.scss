@@ -1,36 +1,47 @@
 @charset "UTF-8";
-
 @import "modules/all";
 @import "partials/base";
 @import "partials/admin.all";
-
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
 .gmember-dashboard {
+  // &.-table-summary, // not used
+  &.-table-logins,
+  &.-table-signup {
+    .-month-day,
+    .-time-ago,
+    .-time-full {
+      cursor: pointer;
+    }
 
-	&.-table-logins,
-	&.-table-signup {
+    .-edit-link {}
+    .-mail-link {}
 
-		.-lastlogin-ago {}
+    .-month-day {
+      width: 15px;
+    }
 
-		.-registered-date {
-			cursor: pointer;
-		}
+    .-time-ago {
+      width: 65px;
+    }
+  }
 
-		.-edit-link {}
-		.-mail-link {}
-	}
+  &.-table-summary {
+    margin-top:0.5em;
+    width: 100%;
+    td {
+      width: 50%;
+      padding: 0 0 2px;
+    }
+  }
 
-	&.-list-logins,
-	&.-list-signup {
+  // &.-list-logins, // not used
+  &.-list-signup {
+    margin-left: 0.5em;
+    margin-bottom: 0;
 
-		margin-left: .5em;
-		margin-bottom: 0;
-
-		li {
-
-		}
-	}
+    li {}
+  }
 }
