@@ -33,15 +33,18 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function wp_network_dashboard_setup()
 	{
+		global $gMemberNetwork;
+
 		wp_add_dashboard_widget( 'gmember-signups',
 			_x( 'Latest Signups', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ),
 			array( $this, 'dashboard_signups' )
 		);
 
-		wp_add_dashboard_widget( 'gmember-logins',
-			_x( 'Latest Logins', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ),
-			array( $this, 'dashboard_logins' )
-		);
+		if ( $gMemberNetwork->settings->get( 'store_lastlogin', TRUE ) )
+			wp_add_dashboard_widget( 'gmember-logins',
+				_x( 'Latest Logins', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ),
+				array( $this, 'dashboard_logins' )
+			);
 	}
 
 	public function dashboard_signups()
