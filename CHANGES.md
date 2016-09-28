@@ -1,3 +1,19 @@
+### 2.13.0
+* all: moved to gPlugin html class generators
+* main/network: internal api for lookup ip
+* main/network: spam count event
+* main/admin: rethinking signup/login widget columns
+* main/admin: re-design for after dashboard widgets
+* main/admin: using wp helper to total user count
+* main/admin: correct datetime from gmt
+* main/admin: correct last logins order
+* main/admin: missed constants for meta key
+* main/admin: default/sort by registration date on users table list
+* main/groups: removed!
+* main/login: correct datetime from gmt
+* main/signup: extra check for custom signup url
+* main/signup: signup after url
+
 ### 2.12.0
 * admin: last logins widget
 * login: correct redirect to home/admin
