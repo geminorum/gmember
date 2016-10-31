@@ -20,7 +20,6 @@ class gMemberCleanUp extends gPluginModuleCore
 	}
 
 	// TODO: add bulk actions to remove existing empty default user metas
-	// @REF: https://core.trac.wordpress.org/ticket/31195
 	public function insert_user_meta( $meta, $user, $update )
 	{
 		if ( ! $update && isset( $meta['nickname'] ) && $user->user_login == $meta['nickname'] ) {
@@ -52,6 +51,7 @@ class gMemberCleanUp extends gPluginModuleCore
 			'admin_color'          => 'fresh',
 			'use_ssl'              => 0,
 			'show_admin_bar_front' => 'true',
+			'locale'               => '',
 		);
 	}
 
