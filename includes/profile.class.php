@@ -33,7 +33,6 @@ class gMemberProfile extends gPluginModuleCore
 		add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 		add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 
-		add_filter( 'user_contactmethods', array( $this, 'user_contactmethods' ), 10, 2 );
 
 		// FIXME: add option
 		remove_all_actions( 'admin_color_scheme_picker' );
@@ -109,15 +108,6 @@ class gMemberProfile extends gPluginModuleCore
 		if ( is_author() )
 			return $this->get_display_name( get_queried_object_id(), $current_display_name );
 		return $current_display_name;
-	}
-
-	public function user_contactmethods( $contactmethods, $user )
-	{
-		return apply_filters( 'gmember_contact_methods', array(
-			'googleplus' => __( 'Google+ Profile', GMEMBER_TEXTDOMAIN ),
-			'twitter'    => __( 'Twitter', GMEMBER_TEXTDOMAIN ),
-			'mobile'     => __( 'Mobile Phone', GMEMBER_TEXTDOMAIN ),
-		), $user, $contactmethods );
 	}
 
 	public function personal_options_late( $profileuser )
