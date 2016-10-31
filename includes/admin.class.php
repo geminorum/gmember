@@ -112,13 +112,26 @@ class gMemberAdmin extends gPluginModuleCore
 			echo '<table class="gmember-dashboard -table-summary"></tbody>';
 
 				echo '<tr><td>';
-					printf( _x( 'Last Registered: %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) );
+
+					printf( _x( 'Last User Registered %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) );
+
 				echo '</td><td>';
-					printf( _x( 'Super Admins: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( count( get_super_admins() ) ) );
+
+					if ( $spam_users = $gMemberNetwork->get_spam_count() )
+						printf( _nx( 'With %s Spam User', 'With %s Spam Users', $spam_users, 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $spam_users ) );
+					else
+						_ex( 'With No Spam User', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN );
+
 				echo '</td></tr><tr><td>';
-					printf( _x( 'Spam Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $gMemberNetwork->get_spam_count() ) );
+
+					$super_admins = count( get_super_admins() );
+					printf( _nx( 'And %s Super Admin', 'And %s Super Admins', $super_admins, 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $super_admins ) );
+
 				echo '</td><td>';
-					printf( _x( 'Total Users: %s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( get_user_count() ) );
+
+					$user_count = get_user_count();
+					printf( _nx( 'Total of One User', 'Total of %s Users', $user_count, 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), number_format_i18n( $user_count ) );
+
 				echo '</td></tr>';
 
 			echo '</tbody></table>';
