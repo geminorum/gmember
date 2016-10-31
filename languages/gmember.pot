@@ -8,6 +8,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: gmember.php:58
 msgid "gMember"
 msgstr ""
@@ -16,127 +17,138 @@ msgstr ""
 msgid "Logs"
 msgstr ""
 
-#: includes/admin.class.php:37
+#: includes/admin.class.php:39
 msgctxt "Signup Admin Widget"
 msgid "Latest Signups"
 msgstr ""
 
-#: includes/admin.class.php:42
+#: includes/admin.class.php:45
 msgctxt "Logins Admin Widget"
 msgid "Latest Logins"
 msgstr ""
 
-#: includes/admin.class.php:68
+#: includes/admin.class.php:71
 msgctxt "Signup Admin Widget"
 msgid "No User?!"
 msgstr ""
 
-#: includes/admin.class.php:73
+#: includes/admin.class.php:76
 msgctxt "Signup Admin Widget"
 msgid "On"
 msgstr ""
 
-#: includes/admin.class.php:74
+#: includes/admin.class.php:77
 msgctxt "Signup Admin Widget"
 msgid "Name"
 msgstr ""
 
-#: includes/admin.class.php:75
+#: includes/admin.class.php:78
 msgctxt "Signup Admin Widget"
 msgid "E-mail"
 msgstr ""
 
-#: includes/admin.class.php:95
+#: includes/admin.class.php:98
 msgctxt "Signup Admin Widget"
 msgid "j/m"
 msgstr ""
 
-#: includes/admin.class.php:96
+#: includes/admin.class.php:99
 msgctxt "Signup Admin Widget"
 msgid "j/m/Y"
 msgstr ""
 
-#: includes/admin.class.php:112
-msgctxt "Signup Admin Widget"
-msgid "Last Registered: %s ago"
-msgstr ""
-
-#: includes/admin.class.php:114
-msgctxt "Signup Admin Widget"
-msgid "Super Admins: %s"
-msgstr ""
-
 #: includes/admin.class.php:116
 msgctxt "Signup Admin Widget"
-msgid "Spam Users: %s"
+msgid "Last User Registered %s ago"
 msgstr ""
 
-#: includes/admin.class.php:118
+#: includes/admin.class.php:121
 msgctxt "Signup Admin Widget"
-msgid "Total Users: %s"
+msgid "With %s Spam User"
+msgid_plural "With %s Spam Users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin.class.php:123
+msgctxt "Signup Admin Widget"
+msgid "With No Spam User"
 msgstr ""
 
-#: includes/admin.class.php:147, includes/login.class.php:54, includes/login.class.php:80
+#: includes/admin.class.php:128
+msgctxt "Signup Admin Widget"
+msgid "And %s Super Admin"
+msgid_plural "And %s Super Admins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin.class.php:133
+msgctxt "Signup Admin Widget"
+msgid "Total of One User"
+msgid_plural "Total of %s Users"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin.class.php:163, includes/login.class.php:54, includes/login.class.php:80
 msgid "No Data Available"
 msgstr ""
 
-#: includes/admin.class.php:152
+#: includes/admin.class.php:168
 msgctxt "Logins Admin Widget"
 msgid "Ago"
 msgstr ""
 
-#: includes/admin.class.php:153
+#: includes/admin.class.php:169
 msgctxt "Logins Admin Widget"
 msgid "Name"
 msgstr ""
 
-#: includes/admin.class.php:154
+#: includes/admin.class.php:170
 msgctxt "Logins Admin Widget"
 msgid "Timestamp"
 msgstr ""
 
-#: includes/admin.class.php:179
+#: includes/admin.class.php:195
 msgctxt "Logins Admin Widget"
 msgid "H:i - F j, Y"
 msgstr ""
 
-#: includes/admin.class.php:224
+#: includes/admin.class.php:240
 msgctxt "Users List Table"
 msgid "Marked as Spam <span class=\"count\">(%s)</span>"
 msgid_plural "Marked as Spams <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin.class.php:227
+#: includes/admin.class.php:243
 msgctxt "Users List Table"
 msgid "Marked as Spam"
 msgstr ""
 
-#: includes/admin.class.php:236
+#: includes/admin.class.php:252
 msgid "Timestamps"
 msgstr ""
 
-#: includes/admin.class.php:258
+#: includes/admin.class.php:274
 msgid "Registered"
 msgstr ""
 
-#: includes/admin.class.php:262, includes/login.class.php:84
+#: includes/admin.class.php:278, includes/login.class.php:84
 msgid "Last Login"
 msgstr ""
 
-#: includes/admin.class.php:265
+#: includes/admin.class.php:281
 msgid "Never"
 msgstr ""
 
-#: includes/admin.class.php:272
+#: includes/admin.class.php:288
 msgid "Last Activity"
 msgstr ""
 
-#: includes/admin.class.php:276, includes/admin.class.php:281
+#: includes/admin.class.php:292, includes/admin.class.php:297
 msgid "N/A"
 msgstr ""
 
-#: includes/admin.class.php:280
+#: includes/admin.class.php:296
 msgid "Register IP"
 msgstr ""
 
@@ -154,7 +166,7 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
-#: includes/cleanup.class.php:78, includes/spam.class.php:12
+#: includes/cleanup.class.php:95, includes/spam.class.php:12
 msgid "Submit Changes"
 msgstr ""
 
@@ -191,100 +203,108 @@ msgid "Store Online Users"
 msgstr ""
 
 #: includes/filtered.class.php:61
-msgid "Signup IP"
-msgstr ""
-
-#: includes/filtered.class.php:66
-msgid "Network Signup URL"
-msgstr ""
-
-#: includes/filtered.class.php:67
-msgid "Full URL to the custom sign-up page. You can use <code>[signup-form]</code> shortcode or any other registration mechanisem."
+msgid "Disable Color Schemes"
 msgstr ""
 
 #: includes/filtered.class.php:74
+msgid "Signup IP"
+msgstr ""
+
+#: includes/filtered.class.php:79
+msgid "Network Signup URL"
+msgstr ""
+
+#: includes/filtered.class.php:80
+msgid "Full URL to the custom sign-up page. You can use <code>[signup-form]</code> shortcode or any other registration mechanisem."
+msgstr ""
+
+#: includes/filtered.class.php:87
 msgid "Signup after URL"
 msgstr ""
 
-#: includes/filtered.class.php:75
+#: includes/filtered.class.php:88
 msgid "Full URL to redirect after compelete signup."
 msgstr ""
 
-#: includes/filtered.class.php:90
+#: includes/filtered.class.php:103
 msgid "Display Name"
 msgstr ""
 
-#: includes/filtered.class.php:91
+#: includes/filtered.class.php:104
 msgid "Member's Universal Sidewide Display Name"
 msgstr ""
 
-#: includes/filtered.class.php:95
+#: includes/filtered.class.php:108
 msgctxt "BP Display Name Option"
 msgid "&mdash; Default &mdash;"
 msgstr ""
 
-#: includes/filtered.class.php:96
+#: includes/filtered.class.php:109
 msgctxt "BP Display Name Option"
 msgid "First and Last Name"
 msgstr ""
 
-#: includes/filtered.class.php:97
+#: includes/filtered.class.php:110
 msgctxt "BP Display Name Option"
 msgid "Username"
 msgstr ""
 
-#: includes/filtered.class.php:98
+#: includes/filtered.class.php:111
 msgctxt "BP Display Name Option"
 msgid "Nickname"
 msgstr ""
 
-#: includes/filtered.class.php:99
+#: includes/filtered.class.php:112
 msgctxt "BP Display Name Option"
 msgid "First Name"
 msgstr ""
 
-#: includes/filtered.class.php:100
+#: includes/filtered.class.php:113
 msgctxt "BP Display Name Option"
 msgid "Last Name"
 msgstr ""
 
-#: includes/filtered.class.php:113
+#: includes/filtered.class.php:126
 msgid "There was an error durring updating proccess"
 msgstr ""
 
-#: includes/filtered.class.php:114
+#: includes/filtered.class.php:127
 msgid "Settings successfully updated."
 msgstr ""
 
-#: includes/filtered.class.php:121, includes/filtered.class.php:122
+#: includes/filtered.class.php:134, includes/filtered.class.php:135
 msgid "gMember Settings"
 msgstr ""
 
-#: includes/filtered.class.php:129
+#: includes/filtered.class.php:142
 msgid "Overview"
 msgstr ""
 
-#: includes/filtered.class.php:130
+#: includes/filtered.class.php:143
 msgid "General"
 msgstr ""
 
-#: includes/filtered.class.php:131
+#: includes/filtered.class.php:144
+msgid "Profile"
+msgstr ""
+
+#: includes/filtered.class.php:145
 msgid "SignUp"
 msgstr ""
 
-#: includes/filtered.class.php:132
+#: includes/filtered.class.php:146
 msgid "BuddyPress"
 msgstr ""
 
-#: includes/filtered.class.php:133
+#: includes/filtered.class.php:147
 msgid "CleanUp"
 msgstr ""
 
-#: includes/filtered.class.php:134
+#: includes/filtered.class.php:148
 msgid "Spam Fight"
 msgstr ""
 
-#: includes/filtered.class.php:135
+#: includes/filtered.class.php:149
 msgid "Import Users"
 msgstr ""
 
@@ -345,27 +365,15 @@ msgstr ""
 msgid "Account disabled"
 msgstr ""
 
-#: includes/profile.class.php:117
-msgid "Google+ Profile"
-msgstr ""
-
-#: includes/profile.class.php:118
-msgid "Twitter"
-msgstr ""
-
 #: includes/profile.class.php:119
-msgid "Mobile Phone"
-msgstr ""
-
-#: includes/profile.class.php:127
 msgid "Blog Options"
 msgstr ""
 
-#: includes/profile.class.php:131
+#: includes/profile.class.php:123
 msgid "Nickname for this site"
 msgstr ""
 
-#: includes/profile.class.php:135
+#: includes/profile.class.php:127
 msgid "This will be displayed as your name in this site only"
 msgstr ""
 
