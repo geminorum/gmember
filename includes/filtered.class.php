@@ -52,6 +52,19 @@ class gMemberFiltered extends gPluginFilteredCore
 						),
 					),
 				),
+				'gmember_profile' => array(
+					'default' => array(
+						'title' => '',
+						'callback' => '__return_FALSE',
+						'fields' => array(
+							'disable_colorschemes' => array(
+								'title'   => __( 'Disable Color Schemes', GMEMBER_TEXTDOMAIN ),
+								'type'    => 'enabled',
+								'default' => '1',
+							),
+						),
+					),
+				),
 				'gmember_signup' => array(
 					'default' => array(
 						'title' => '',
@@ -128,6 +141,7 @@ class gMemberFiltered extends gPluginFilteredCore
 		return array(
 			'overview'   => __( 'Overview', GMEMBER_TEXTDOMAIN ),
 			'general'    => __( 'General', GMEMBER_TEXTDOMAIN ),
+			'profile'    => __( 'Profile', GMEMBER_TEXTDOMAIN ),
 			'signup'     => __( 'SignUp', GMEMBER_TEXTDOMAIN ),
 			'buddypress' => __( 'BuddyPress', GMEMBER_TEXTDOMAIN ),
 			'cleanup'    => __( 'CleanUp', GMEMBER_TEXTDOMAIN ),

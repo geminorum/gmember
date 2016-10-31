@@ -28,14 +28,15 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function admin_init()
 	{
+		global $gMemberNetwork;
+
 		add_action( 'admin_print_styles', array( $this, 'admin_print_styles' ) );
 		add_action( 'personal_options', array( $this, 'personal_options_late' ), 99, 1 );
 		add_action( 'personal_options_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 		add_action( 'edit_user_profile_update', array( $this, 'edit_user_profile_update' ), 10, 1 );
 
-
-		// FIXME: add option
-		remove_all_actions( 'admin_color_scheme_picker' );
+		if ( $gMemberNetwork->settings->get( 'disable_colorschemes', TRUE ) )
+			remove_all_actions( 'admin_color_scheme_picker' );
 	}
 
 	public function admin_print_styles()
