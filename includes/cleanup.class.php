@@ -5,10 +5,27 @@ class gMemberCleanUp extends gPluginModuleCore
 
 	public function setup_actions()
 	{
+		add_filter( 'update_user_metadata', array( $this, 'update_user_metadata' ), 12, 5 );
 		add_filter( 'get_user_metadata', array( $this, 'get_user_metadata' ), 12, 4 );
 		add_filter( 'insert_user_meta', array( $this, 'insert_user_meta' ), 12, 3 );
 		add_filter( 'get_user_option_rich_editing', array( $this, 'get_user_option_option' ), 8, 3 );
 		add_filter( 'get_user_option_comment_shortcuts', array( $this, 'get_user_option_option' ), 8, 3 );
+	}
+
+	public function update_user_metadata( $null, $object_id, $meta_key, $meta_value, $prev_value )
+	{
+		if ( ! array_key_exists( $meta_key, wp_get_user_contact_methods( $object_id ) ) )
+			return $null;
+
+		if ( ! $meta_value ) {
+
+			if ( get_metadata( 'user', $object_id, $meta_key ) )
+				delete_metadata( 'user', $object_id, $meta_key );
+
+			return TRUE;
+		}
+
+		return $null;
 	}
 
 	public function get_user_metadata( $null, $object_id, $meta_key, $single )
