@@ -17,12 +17,13 @@ class gMemberProfile extends gPluginModuleCore
 
 	public function init()
 	{
+		global $gMemberNetwork;
+
 		if ( ! is_admin() ) {
 			add_filter( 'edit_profile_url', array( $this, 'edit_profile_url' ), 8, 3 );
 
-			// FIXME: too early for settings
-			// if ( $gMemberNetwork->settings->get( 'search_authors', FALSE ) )
-			// 	add_filter( 'posts_search', array( $this, 'posts_search' ) );
+			if ( $gMemberNetwork->settings->get( 'search_authors', FALSE ) )
+				add_filter( 'posts_search', array( $this, 'posts_search' ) );
 		}
 	}
 
@@ -158,7 +159,7 @@ class gMemberProfile extends gPluginModuleCore
 		return get_admin_url( (int) $current_site->blog_id, 'profile.php', $scheme );
 	}
 
-	// https://gist.github.com/danielbachhuber/7126249
+	// @SOURCE: https://gist.github.com/danielbachhuber/7126249
 	// Include posts from authors in the search results where either their display name or user login matches the query string
 	// @author danielbachhuber
 	public function posts_search( $posts_search )
