@@ -111,7 +111,7 @@ class gMemberFiltered extends gPluginFilteredCore
 	{
 		return array(
 			'error'   => self::error( __( 'There was an error durring updating proccess', GMEMBER_TEXTDOMAIN ) ),
-			'updated' => self::updated( __( 'Settings successfully updated.', GMEMBER_TEXTDOMAIN ) ),
+			'updated' => self::success( __( 'Settings successfully updated.', GMEMBER_TEXTDOMAIN ) ),
 		);
 	}
 
