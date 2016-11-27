@@ -95,8 +95,8 @@ class gMemberAdmin extends gPluginModuleCore
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
 					esc_html( gPluginTextHelper::truncateString( $user->user_email, 32 ) ),
-					esc_html( date_i18n( _x( 'j/m', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
-					esc_attr( human_time_diff( $registered ).' &mdash; '.date_i18n( _x( 'j/m/Y', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), $registered ) ),
+					esc_html( $gMemberNetwork->getDate( $registered, 'monthday' ) ),
+					esc_attr( human_time_diff( $registered ).' &mdash; '.$gMemberNetwork->getDate( $registered ) ),
 					get_edit_user_link( $user->ID ),
 					'mailto:'.esc_attr( $user->user_email ),
 					$user->user_login,
@@ -192,7 +192,7 @@ class gMemberAdmin extends gPluginModuleCore
 					esc_html( human_time_diff( $lastlogin ) ),
 					get_edit_user_link( $user->ID ),
 					$user->user_login,
-					esc_html( date_i18n( _x( 'H:i - F j, Y', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ), $lastlogin ) ),
+					esc_html( $gMemberNetwork->getDate( $lastlogin, 'timedate' ) ),
 				) );
 
 				$alt = ! $alt;
@@ -272,12 +272,12 @@ class gMemberAdmin extends gPluginModuleCore
 		$html .= '<table></tbody>';
 
 		$html .= '<tr><td>'.__( 'Registered', GMEMBER_TEXTDOMAIN ).'</td><td><code title="'
-			.date_i18n( 'g:i:s a', $registered ).'">'
-			.date_i18n( 'Y/m/d', $registered ).'</code></td></tr>';
+			.$gMemberNetwork->getDate( $registered, 'timeampm' ).'">'
+			.$gMemberNetwork->getDate( $registered ).'</code></td></tr>';
 
 		$html .= '<tr><td>'.__( 'Last Login', GMEMBER_TEXTDOMAIN ).'</td><td>'
-			.( $lastlogin ? '<code title="'.date_i18n( 'g:i:s a', $lastlogged ).'">'
-				.date_i18n( 'Y/m/d', $lastlogged ).'</code>'
+			.( $lastlogin ? '<code title="'.$gMemberNetwork->getDate( $lastlogged, 'timeampm' ).'">'
+				.$gMemberNetwork->getDate( $lastlogged ).'</code>'
 			: __( 'Never', GMEMBER_TEXTDOMAIN ) ).'</td></tr>';
 
 		if ( function_exists( 'bp_get_user_last_activity' ) ) {
@@ -288,7 +288,7 @@ class gMemberAdmin extends gPluginModuleCore
 			$html .= '<tr><td>'.__( 'Last Activity', GMEMBER_TEXTDOMAIN ).'</td><td>'
 				.( $lastactivity
 					? '<code title="'.bp_core_time_since( $lastactivity ).'">'
-						.date_i18n( 'Y/m/d', $lastactive )
+						.$gMemberNetwork->getDate( $lastactive )
 					: '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ) )
 				.'</code></td></tr>';
 		}

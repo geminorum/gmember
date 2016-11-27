@@ -42,7 +42,6 @@ class gMemberLogin extends gPluginModuleCore
 		global $gMemberNetwork, $profileuser;
 
 		$store_lastlogin = $gMemberNetwork->settings->get( 'store_lastlogin', TRUE );
-		$date_format     = _x( 'M j, Y @ G:i', 'Registered/Last Login date format', GMEMBER_TEXTDOMAIN );
 
 		echo '><h2>'.__( 'Account Information', GMEMBER_TEXTDOMAIN ).'</h2>';
 		echo '<table class="form-table">';
@@ -57,7 +56,7 @@ class gMemberLogin extends gPluginModuleCore
 			.'</th><td><code>'.$register_ip.'</code></td></tr>';
 
 		$register_date = strtotime( get_date_from_gmt( $profileuser->user_registered ) );
-		$register_on = date_i18n( $date_format, $register_date ).
+		$register_on = $gMemberNetwork->getDate( $register_date, 'datetime' ).
 			' <small><small><span class="description">('.
 			sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $register_date ) ) ).
 			')</span></small></small>';
@@ -72,7 +71,7 @@ class gMemberLogin extends gPluginModuleCore
 
 			if ( isset( $profileuser->{$this->constants['meta_lastlogin']} ) && '' != $profileuser->{$this->constants['meta_lastlogin']} ) {
 				$lastlogin_date = strtotime( get_date_from_gmt( $profileuser->{$this->constants['meta_lastlogin']} ) );
-				$lastlogin = date_i18n( $date_format, $lastlogin_date ).
+				$lastlogin = $gMemberNetwork->getDate( $lastlogin_date, 'datetime' ).
 					' <small><small><span class="description">('.
 					sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date ) ) ).
 					')</span></small></small>';

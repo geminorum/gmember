@@ -152,6 +152,16 @@ class gMemberNetwork extends gPluginNetworkCore
 
 		return $ip;
 	}
+
+	public function getDate( $timestamp, $context = 'default' )
+	{
+		$formats = $this->getFilters( 'date_formats' );
+
+		if ( ! empty( $formats[$context] ) )
+			return date_i18n( $formats[$context], $timestamp );
+
+		return date_i18n( $formats['default'], $timestamp );
+	}
 }
 
 class gMemberNetworkSettings   extends gPluginSettingsCore {}

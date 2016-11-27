@@ -149,4 +149,15 @@ class gMemberFiltered extends gPluginFilteredCore
 			// 'import'     => __( 'Import Users', GMEMBER_TEXTDOMAIN ),
 		);
 	}
+
+	protected function date_formats()
+	{
+		return array(
+			'datetime' => _x( 'M j, Y @ G:i', 'Date Format', GMEMBER_TEXTDOMAIN ),
+			'timedate' => _x( 'H:i - F j, Y', 'Date Format', GMEMBER_TEXTDOMAIN ),
+			'timeampm' => _x( 'g:i a', 'Date Format', GMEMBER_TEXTDOMAIN ),
+			'monthday' => _x( 'n/j', 'Date Format', GMEMBER_TEXTDOMAIN ),
+			'default'  => _x( 'm/d/Y', 'Date Format', GMEMBER_TEXTDOMAIN ),
+		);
+	}
 }
