@@ -140,6 +140,8 @@ class gMemberAdmin extends gPluginModuleCore
 
 	public function dashboard_logins()
 	{
+		global $gMemberNetwork;
+
 		$query = new \WP_User_Query( array (
 			'blog_id'    => 0,
 			'meta_key'   => $this->constants['meta_lastlogin'],
