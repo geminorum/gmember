@@ -280,7 +280,7 @@ class gMemberAdmin extends gPluginModuleCore
 		$html .= '<tr><td>'.__( 'Last Login', GMEMBER_TEXTDOMAIN ).'</td><td>'
 			.( $lastlogin ? '<code title="'.$gMemberNetwork->getDate( $lastlogged, 'timeampm' ).'">'
 				.$gMemberNetwork->getDate( $lastlogged ).'</code>'
-			: __( 'Never', GMEMBER_TEXTDOMAIN ) ).'</td></tr>';
+			: '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ) ).'</code></td></tr>';
 
 		if ( function_exists( 'bp_get_user_last_activity' ) ) {
 

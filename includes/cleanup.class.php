@@ -14,7 +14,7 @@ class gMemberCleanUp extends gPluginModuleCore
 
 	public function update_user_metadata( $null, $object_id, $meta_key, $meta_value, $prev_value )
 	{
-		// prevent BP last actvity back-comp, SEE: http://wp.me/pLVLj-gc
+		// prevent BP last activity back-comp, SEE: http://wp.me/pLVLj-gc
 		if ( function_exists( 'buddypress' ) && 'last_activity' === $meta_key )
 			return TRUE;
 
