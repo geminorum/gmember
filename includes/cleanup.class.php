@@ -14,15 +14,18 @@ class gMemberCleanUp extends gPluginModuleCore
 
 	public function update_user_metadata( $null, $object_id, $meta_key, $meta_value, $prev_value )
 	{
-		if ( ! array_key_exists( $meta_key, wp_get_user_contact_methods( $object_id ) ) )
-			return $null;
-
-		if ( ! $meta_value ) {
-
-			if ( get_metadata( 'user', $object_id, $meta_key ) )
-				delete_metadata( 'user', $object_id, $meta_key );
-
+		// prevent BP last actvity back-comp, SEE: http://wp.me/pLVLj-gc
+		if ( function_exists( 'buddypress' ) && 'last_activity' === $meta_key )
 			return TRUE;
+
+		if ( array_key_exists( $meta_key, wp_get_user_contact_methods( $object_id ) ) ) {
+			if ( ! $meta_value ) {
+
+				if ( get_metadata( 'user', $object_id, $meta_key ) )
+					delete_metadata( 'user', $object_id, $meta_key );
+
+				return TRUE;
+			}
 		}
 
 		return $null;
