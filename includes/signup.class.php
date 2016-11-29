@@ -88,6 +88,9 @@ class gMemberSignUp extends gPluginModuleCore
 		if ( $gMemberNetwork->settings->get( 'signup_ip', TRUE ) )
 			update_user_meta( $user_id, $this->constants['meta_register_ip'], $_SERVER['REMOTE_ADDR'] ); // http://wordpress.org/plugins/register-ip-multisite/
 
+		if ( $colorscheme = $gMemberNetwork->settings->get( 'default_colorscheme', FALSE ) )
+			wp_update_user( array( 'ID' => $user_id, 'admin_color' => $colorscheme ) );
+
 		// NO NEED: we're not going to let the meta stored in the first place!
 		// update_user_meta( $user_id, 'show_welcome_panel', 0 ); // http://wpengineer.com/2470/hide-welcome-panel-for-wordpress-multisite/
 	}
