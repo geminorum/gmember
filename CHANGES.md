@@ -1,3 +1,15 @@
+### 2.14.0
+* main/network: date format helper
+* main/admin: rethinking admin widget footer
+* main/admin: disable widget if no last login stored
+* main/cleanup: skip empty locale meta
+* main/cleanup: skip empty contact method meta
+* main/cleanup: prevent bp last activity back-comp meta, [see](http://wp.me/pLVLj-gc)
+* main/profile: default contact methods removed
+* main/profile: option to disable color schemes
+* main/profile: option to include user display name in the search
+* main/signup: default color scheme
+
 ### 2.13.0
 * all: moved to gPlugin html class generators
 * main/network: internal api for lookup ip
