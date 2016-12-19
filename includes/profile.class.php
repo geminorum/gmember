@@ -5,9 +5,18 @@ class gMemberProfile extends gPluginModuleCore
 
 	private $display_name = array();
 
+	public function setup_actions()
+	{
+		if ( did_action( 'set_current_user' ) )
+			$this->set_current_user();
+		else
+			add_action( 'set_current_user', array( $this, 'set_current_user' ), 15 );
+
+		parent::setup_actions();
+	}
+
 	public function plugins_loaded()
 	{
-		add_action( 'set_current_user', array( $this, 'set_current_user' ), 15 );
 		add_filter( 'the_author', array( $this, 'the_author' ), 12 );
 		add_filter( 'get_the_author_display_name', array( $this, 'get_the_author_display_name' ), 12, 2 );
 		add_filter( 'get_comment_author', array( $this, 'get_comment_author' ), 12, 3 );
@@ -46,6 +55,8 @@ class gMemberProfile extends gPluginModuleCore
 			gPluginHTML::linkStyleSheet( $this->constants['plugin_url'].'assets/css/network.admin.profile.css', $this->constants['plugin_ver'] );
 	}
 
+	// fire order changed since WP 4.7.0
+	// @SEE: https://make.wordpress.org/core/?p=20592
 	public function set_current_user()
 	{
 		if ( ! is_user_logged_in() )
@@ -54,8 +65,7 @@ class gMemberProfile extends gPluginModuleCore
 		global $current_user, $user_identity;
 
 		$old = $current_user->display_name;
-		$current_user->display_name = $this->get_display_name( $current_user->ID, $current_user->display_name );
-		$user_identity = $current_user->display_name;
+		$user_identity = $current_user->display_name = $this->get_display_name( $current_user->ID, $current_user->display_name );
 
 		if ( $old != $user_identity )
 			update_user_caches( $current_user );
@@ -68,48 +78,38 @@ class gMemberProfile extends gPluginModuleCore
 
 		global $authordata;
 
-		if ( is_object( $authordata ) )
-			return $this->get_display_name( $authordata->ID, $authordata->display_name );
-		else
-			return NULL;
+		return is_object( $authordata ) ? $this->get_display_name( $authordata->ID, $authordata->display_name ) : NULL;
 	}
 
-	public function get_the_author_display_name( $current_display_name, $user_id )
+	public function get_the_author_display_name( $current, $user_id )
 	{
-		return $this->get_display_name( $user_id, $current_display_name );
+		return $this->get_display_name( $user_id, $current );
 	}
 
-	public function get_display_name( $user_id, $current_display_name = '' )
+	public function get_display_name( $user_id, $current = '' )
 	{
 		if ( ! isset( $this->display_name[$user_id] ) )
 			$this->display_name[$user_id] = get_user_meta( $user_id, 'gmember_display_name', TRUE );
 
-		if ( isset( $this->display_name[$user_id][$this->current_blog] )
-			&& $this->display_name[$user_id][$this->current_blog] )
-				return $this->display_name[$user_id][$this->current_blog];
+		if ( ! empty( $this->display_name[$user_id][$this->current_blog] ) )
+			return $this->display_name[$user_id][$this->current_blog];
 
-		return $current_display_name;
+		return $current;
 	}
 
 	public function get_comment_author( $author, $comment_ID, $comment )
 	{
-		if ( isset( $comment->user_id ) && $comment->user_id )
-			$author = $this->get_display_name( $comment->user_id, $author );
-
-		return $author;
+		return empty( $comment->user_id ) ? $author : $this->get_display_name( $comment->user_id, $author );
 	}
 
-	public function p2_get_user_display_name( $current_display_name )
+	public function p2_get_user_display_name( $current )
 	{
-		global $current_user;
-		return $this->get_display_name( $current_user->ID, $current_display_name );
+		return $this->get_display_name( $GLOBALS['current_user']->ID, $current );
 	}
 
-	public function p2_get_archive_author( $current_display_name )
+	public function p2_get_archive_author( $current )
 	{
-		if ( is_author() )
-			return $this->get_display_name( get_queried_object_id(), $current_display_name );
-		return $current_display_name;
+		return is_author() ? $this->get_display_name( get_queried_object_id(), $current ) : $current;
 	}
 
 	public function personal_options_late( $profileuser )
