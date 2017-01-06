@@ -99,7 +99,11 @@ class gMemberAdmin extends gPluginModuleCore
 					esc_html( $user->display_name ),
 					esc_html( gPluginTextHelper::truncateString( $user->user_email, 32 ) ),
 					esc_html( $gMemberNetwork->getDate( $registered, 'monthday' ) ),
-					esc_attr( human_time_diff( $registered ).' &mdash; '.$gMemberNetwork->getDate( $registered ) ),
+					esc_attr( sprintf(
+						_x( '%1$s ago &mdash; %2$s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ),
+						human_time_diff( $registered ),
+						$gMemberNetwork->getDate( $registered )
+					) ),
 					get_edit_user_link( $user->ID ),
 					'mailto:'.esc_attr( $user->user_email ),
 					$user->user_login,
