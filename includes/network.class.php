@@ -131,9 +131,7 @@ class gMemberNetwork extends gPluginNetworkCore
 	{
 		global $wpdb;
 
-		return $wpdb->get_var( "SELECT COUNT(ID) as c FROM $wpdb->users WHERE spam = '1' AND deleted = '0'" );
-
-		update_site_option( 'gmember_user_spam_count', $count );
+		update_site_option( 'gmember_user_spam_count', $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->users WHERE spam = '1' AND deleted = '0'" ) );
 	}
 
 	public function get_spam_count()
