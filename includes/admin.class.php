@@ -76,6 +76,7 @@ class gMemberAdmin extends gPluginModuleCore
 			echo '<th>'._x( 'On', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '<th>'._x( 'Name', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '<th>'._x( 'E-mail', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
+			echo '<th>'._x( 'IP', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '</tr></thead>';
 
 			$last = FALSE;
@@ -84,12 +85,14 @@ class gMemberAdmin extends gPluginModuleCore
 			$template = '<tr%1$s>'
 							.'<td class="-month-day" title="%5$s">%4$s</td>'
 							.'<td class="-edit-link"><a title="%8$s" href="%6$s" target="_blank">%2$s</a></td>'
-							.'<td class="-mail-link"><a title="%7$s" href="%7$s" target="_blank">%3$s</a></td>'
+							.'<td class="-mail-link"><a title="%7$s" href="%8$s" target="_blank">%3$s</a></td>'
+							.'<td class="-ip-info"><code>%9$s</code></td>'
 						.'</tr>';
 
 			foreach ( $query->results as $user ) {
 
 				$registered = strtotime( get_date_from_gmt( $user->user_registered ) );
+				$register_ip = get_user_meta( $user->ID, $this->constants['meta_register_ip'], TRUE );
 
 				vprintf( $template, array(
 					( $alt ? ' class="alternate"' : '' ),
@@ -100,6 +103,7 @@ class gMemberAdmin extends gPluginModuleCore
 					get_edit_user_link( $user->ID ),
 					'mailto:'.esc_attr( $user->user_email ),
 					$user->user_login,
+					( $register_ip ? $gMemberNetwork->getIPLookup( $register_ip ) : __( 'N/A', GMEMBER_TEXTDOMAIN ) )
 				) );
 
 				$alt = ! $alt;
