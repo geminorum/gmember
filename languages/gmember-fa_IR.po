@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: gMember v2.14.0\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: gMember v2.14.1\n"
+"Report-Msgid-Bugs-To: https://github.com/geminorum/gmember/issues\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2016-11-29 21:25+0330\n"
+"PO-Revision-Date: 2017-01-06 09:37+0330\n"
 "Last-Translator: geminorum <contact@geminorum.ir>\n"
 "Language-Team: geminorum <contact@geminorum.ir>\n"
 "Language: fa_IR\n"
@@ -16,148 +16,144 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 
 # @ gmember
-#: gmember.php:58
+#: gmember.php:59
 msgid "gMember"
-msgstr ""
+msgstr "اعضاء"
 
 # @ gmember
-#: gmember.php:62
+#: gmember.php:63
 msgid "Logs"
 msgstr ""
 
 #: includes/admin.class.php:39
 msgctxt "Signup Admin Widget"
 msgid "Latest Signups"
-msgstr ""
+msgstr "آخرین نام‌نویسی‌ها"
 
 #: includes/admin.class.php:45
 msgctxt "Logins Admin Widget"
 msgid "Latest Logins"
-msgstr ""
+msgstr "آخرین ورودها"
 
 #: includes/admin.class.php:71
 msgctxt "Signup Admin Widget"
 msgid "No User?!"
-msgstr ""
+msgstr "بدون کاربر؟!"
 
 #: includes/admin.class.php:76
 msgctxt "Signup Admin Widget"
 msgid "On"
-msgstr ""
+msgstr "در"
 
 #: includes/admin.class.php:77
 msgctxt "Signup Admin Widget"
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
 #: includes/admin.class.php:78
 msgctxt "Signup Admin Widget"
 msgid "E-mail"
 msgstr "ایمیل"
 
-#: includes/admin.class.php:116
+#: includes/admin.class.php:79
 msgctxt "Signup Admin Widget"
-msgid "Last User Registered %s ago"
+msgid "IP"
+msgstr "آی‌پی"
+
+#: includes/admin.class.php:103
+msgctxt "Signup Admin Widget"
+msgid "%1$s ago &mdash; %2$s"
+msgstr "%1$s پیش &mdash; %2$s"
+
+#: includes/admin.class.php:110, includes/admin.class.php:291,
+#: includes/admin.class.php:302, includes/admin.class.php:307
+msgid "N/A"
 msgstr ""
 
-#: includes/admin.class.php:121
+#: includes/admin.class.php:124
+msgctxt "Signup Admin Widget"
+msgid "Last User Registered %s ago"
+msgstr "آخرین نام‌نویسی در %s پیش"
+
+#: includes/admin.class.php:129
 msgctxt "Signup Admin Widget"
 msgid "With %s Spam User"
 msgid_plural "With %s Spam Users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "همراه با %s کاربر جفنگ"
+msgstr[1] "همراه با %s کاربر جفنگ"
 
-#: includes/admin.class.php:123
+#: includes/admin.class.php:131
 msgctxt "Signup Admin Widget"
 msgid "With No Spam User"
-msgstr ""
+msgstr "بدون کاربر جفنگ"
 
-#: includes/admin.class.php:128
+#: includes/admin.class.php:136
 msgctxt "Signup Admin Widget"
 msgid "And %s Super Admin"
 msgid_plural "And %s Super Admins"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "و %s مدیر کل"
+msgstr[1] "و %s مدیر کل"
 
-#: includes/admin.class.php:133
+#: includes/admin.class.php:141
 msgctxt "Signup Admin Widget"
 msgid "Total of One User"
 msgid_plural "Total of %s Users"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "در مجموع یک کاربر"
+msgstr[1] "در مجموع %s کاربر"
 
 # @ gmember
-#: includes/admin.class.php:165, includes/login.class.php:53,
+#: includes/admin.class.php:173, includes/login.class.php:53,
 #: includes/login.class.php:79
 msgid "No Data Available"
 msgstr "N/A"
 
-#: includes/admin.class.php:170
+#: includes/admin.class.php:178
 msgctxt "Logins Admin Widget"
 msgid "Ago"
-msgstr ""
+msgstr "پیش"
 
-#: includes/admin.class.php:171
+#: includes/admin.class.php:179
 msgctxt "Logins Admin Widget"
 msgid "Name"
-msgstr ""
+msgstr "نام"
 
-#: includes/admin.class.php:172
+#: includes/admin.class.php:180
 msgctxt "Logins Admin Widget"
 msgid "Timestamp"
-msgstr ""
+msgstr "زمان"
 
-#: includes/admin.class.php:242
+#: includes/admin.class.php:250
 msgctxt "Users List Table"
 msgid "Marked as Spam <span class=\"count\">(%s)</span>"
 msgid_plural "Marked as Spams <span class=\"count\">(%s)</span>"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "نشان‌گذاری‌شده به عنوان جفنگ <span class=\"count\">(%s)</span>"
+msgstr[1] "نشان‌گذاری‌شده به عنوان جفنگ <span class=\"count\">(%s)</span>"
 
-#: includes/admin.class.php:245
+#: includes/admin.class.php:253
 msgctxt "Users List Table"
 msgid "Marked as Spam"
-msgstr ""
+msgstr "نشان‌گذاری به عنوان جفنگ"
 
-#: includes/admin.class.php:254
+#: includes/admin.class.php:262
 msgid "Timestamps"
 msgstr ""
 
-#: includes/admin.class.php:276
+#: includes/admin.class.php:284
 msgid "Registered"
 msgstr ""
 
 # @ gmember
-#: includes/admin.class.php:280, includes/login.class.php:83
+#: includes/admin.class.php:288, includes/login.class.php:83
 msgid "Last Login"
 msgstr "آخرین ورود"
 
-#: includes/admin.class.php:283, includes/admin.class.php:294,
-#: includes/admin.class.php:299
-msgid "N/A"
-msgstr ""
-
-#: includes/admin.class.php:290
-msgid "Last Activity"
-msgstr ""
-
 #: includes/admin.class.php:298
+msgid "Last Activity"
+msgstr "آخرین فعالیت"
+
+#: includes/admin.class.php:306
 msgid "Register IP"
 msgstr "آی‌پی نام‌نویسی"
-
-#: includes/bp/field-type-phone.class.php:28
-msgctxt "xprofile field type category"
-msgid "Single Fields"
-msgstr ""
-
-#: includes/bp/field-type-phone.class.php:29
-msgctxt "xprofile field type"
-msgid "Phone"
-msgstr ""
-
-#: includes/bp/field-type-phone.class.php:107
-msgid "Phone"
-msgstr "تلفن"
 
 #: includes/cleanup.class.php:98, includes/spam.class.php:12
 msgid "Submit Changes"
@@ -210,42 +206,42 @@ msgstr ""
 #: includes/filtered.class.php:70
 msgctxt "Color Scheme Option"
 msgid "Default"
-msgstr ""
+msgstr "پیش‌فرض"
 
 #: includes/filtered.class.php:71
 msgctxt "Color Scheme Option"
 msgid "Light"
-msgstr ""
+msgstr "روشن"
 
 #: includes/filtered.class.php:72
 msgctxt "Color Scheme Option"
 msgid "Blue"
-msgstr ""
+msgstr "آبی"
 
 #: includes/filtered.class.php:73
 msgctxt "Color Scheme Option"
 msgid "Coffee"
-msgstr ""
+msgstr "قهوه"
 
 #: includes/filtered.class.php:74
 msgctxt "Color Scheme Option"
 msgid "Ectoplasm"
-msgstr ""
+msgstr "اثیری"
 
 #: includes/filtered.class.php:75
 msgctxt "Color Scheme Option"
 msgid "Midnight"
-msgstr ""
+msgstr "نیمه‌شب"
 
 #: includes/filtered.class.php:76
 msgctxt "Color Scheme Option"
 msgid "Ocean"
-msgstr ""
+msgstr "اقیانوس"
 
 #: includes/filtered.class.php:77
 msgctxt "Color Scheme Option"
 msgid "Sunrise"
-msgstr ""
+msgstr "طلوع"
 
 #: includes/filtered.class.php:89
 msgid "Signup IP"
@@ -271,7 +267,7 @@ msgstr ""
 
 #: includes/filtered.class.php:118
 msgid "Display Name"
-msgstr ""
+msgstr "نام نمایشی"
 
 #: includes/filtered.class.php:119
 msgid "Member's Universal Sidewide Display Name"
@@ -319,7 +315,7 @@ msgstr ""
 
 #: includes/filtered.class.php:149, includes/filtered.class.php:150
 msgid "gMember Settings"
-msgstr ""
+msgstr "تنظیمات اعضاء"
 
 # @ gmember
 #: includes/filtered.class.php:157
@@ -346,14 +342,6 @@ msgstr "بادی‌پرس"
 #: includes/filtered.class.php:162
 msgid "CleanUp"
 msgstr "پالایش"
-
-#: includes/filtered.class.php:163
-msgid "Spam Fight"
-msgstr ""
-
-#: includes/filtered.class.php:164
-msgid "Import Users"
-msgstr "درون‌ریزی افراد"
 
 #: includes/filtered.class.php:171
 msgctxt "Date Format"
@@ -483,3 +471,20 @@ msgstr "رمز عبور"
 #: includes/widgets.class.php:63
 msgid "Log In"
 msgstr "وارد شوید"
+
+#: includes/bp/field-type-phone.class.php:28
+msgctxt "xprofile field type category"
+msgid "Single Fields"
+msgstr ""
+
+#: includes/bp/field-type-phone.class.php:29
+msgctxt "xprofile field type"
+msgid "Phone"
+msgstr ""
+
+#: includes/bp/field-type-phone.class.php:107
+msgid "Phone"
+msgstr "تلفن"
+
+#~ msgid "Import Users"
+#~ msgstr "درون‌ریزی افراد"

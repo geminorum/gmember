@@ -1,4 +1,4 @@
-# Copyright (C) 2016 gMember
+# Copyright (C) 2017 gMember
 # This file is distributed under the same license as the gMember package.
 msgid ""
 msgstr ""
@@ -6,14 +6,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Report-Msgid-Bugs-To: https://github.com/geminorum/gmember/issues\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: gmember.php:58
+#: gmember.php:59
 msgid "gMember"
 msgstr ""
 
-#: gmember.php:62
+#: gmember.php:63
 msgid "Logs"
 msgstr ""
 
@@ -47,104 +47,100 @@ msgctxt "Signup Admin Widget"
 msgid "E-mail"
 msgstr ""
 
-#: includes/admin.class.php:116
+#: includes/admin.class.php:79
+msgctxt "Signup Admin Widget"
+msgid "IP"
+msgstr ""
+
+#: includes/admin.class.php:103
+msgctxt "Signup Admin Widget"
+msgid "%1$s ago &mdash; %2$s"
+msgstr ""
+
+#: includes/admin.class.php:110, includes/admin.class.php:291, includes/admin.class.php:302, includes/admin.class.php:307
+msgid "N/A"
+msgstr ""
+
+#: includes/admin.class.php:124
 msgctxt "Signup Admin Widget"
 msgid "Last User Registered %s ago"
 msgstr ""
 
-#: includes/admin.class.php:121
+#: includes/admin.class.php:129
 msgctxt "Signup Admin Widget"
 msgid "With %s Spam User"
 msgid_plural "With %s Spam Users"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin.class.php:123
+#: includes/admin.class.php:131
 msgctxt "Signup Admin Widget"
 msgid "With No Spam User"
 msgstr ""
 
-#: includes/admin.class.php:128
+#: includes/admin.class.php:136
 msgctxt "Signup Admin Widget"
 msgid "And %s Super Admin"
 msgid_plural "And %s Super Admins"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin.class.php:133
+#: includes/admin.class.php:141
 msgctxt "Signup Admin Widget"
 msgid "Total of One User"
 msgid_plural "Total of %s Users"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin.class.php:165, includes/login.class.php:53, includes/login.class.php:79
+#: includes/admin.class.php:173, includes/login.class.php:53, includes/login.class.php:79
 msgid "No Data Available"
 msgstr ""
 
-#: includes/admin.class.php:170
+#: includes/admin.class.php:178
 msgctxt "Logins Admin Widget"
 msgid "Ago"
 msgstr ""
 
-#: includes/admin.class.php:171
+#: includes/admin.class.php:179
 msgctxt "Logins Admin Widget"
 msgid "Name"
 msgstr ""
 
-#: includes/admin.class.php:172
+#: includes/admin.class.php:180
 msgctxt "Logins Admin Widget"
 msgid "Timestamp"
 msgstr ""
 
-#: includes/admin.class.php:242
+#: includes/admin.class.php:250
 msgctxt "Users List Table"
 msgid "Marked as Spam <span class=\"count\">(%s)</span>"
 msgid_plural "Marked as Spams <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin.class.php:245
+#: includes/admin.class.php:253
 msgctxt "Users List Table"
 msgid "Marked as Spam"
 msgstr ""
 
-#: includes/admin.class.php:254
+#: includes/admin.class.php:262
 msgid "Timestamps"
 msgstr ""
 
-#: includes/admin.class.php:276
+#: includes/admin.class.php:284
 msgid "Registered"
 msgstr ""
 
-#: includes/admin.class.php:280, includes/login.class.php:83
+#: includes/admin.class.php:288, includes/login.class.php:83
 msgid "Last Login"
 msgstr ""
 
-#: includes/admin.class.php:283, includes/admin.class.php:294, includes/admin.class.php:299
-msgid "N/A"
-msgstr ""
-
-#: includes/admin.class.php:290
+#: includes/admin.class.php:298
 msgid "Last Activity"
 msgstr ""
 
-#: includes/admin.class.php:298
+#: includes/admin.class.php:306
 msgid "Register IP"
-msgstr ""
-
-#: includes/bp/field-type-phone.class.php:28
-msgctxt "xprofile field type category"
-msgid "Single Fields"
-msgstr ""
-
-#: includes/bp/field-type-phone.class.php:29
-msgctxt "xprofile field type"
-msgid "Phone"
-msgstr ""
-
-#: includes/bp/field-type-phone.class.php:107
-msgid "Phone"
 msgstr ""
 
 #: includes/cleanup.class.php:98, includes/spam.class.php:12
@@ -325,14 +321,6 @@ msgstr ""
 msgid "CleanUp"
 msgstr ""
 
-#: includes/filtered.class.php:163
-msgid "Spam Fight"
-msgstr ""
-
-#: includes/filtered.class.php:164
-msgid "Import Users"
-msgstr ""
-
 #: includes/filtered.class.php:171
 msgctxt "Date Format"
 msgid "M j, Y @ G:i"
@@ -448,4 +436,18 @@ msgstr ""
 
 #: includes/widgets.class.php:63
 msgid "Log In"
+msgstr ""
+
+#: includes/bp/field-type-phone.class.php:28
+msgctxt "xprofile field type category"
+msgid "Single Fields"
+msgstr ""
+
+#: includes/bp/field-type-phone.class.php:29
+msgctxt "xprofile field type"
+msgid "Phone"
+msgstr ""
+
+#: includes/bp/field-type-phone.class.php:107
+msgid "Phone"
 msgstr ""
