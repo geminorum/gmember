@@ -1,3 +1,9 @@
+### 2.14.1
+* main/admin: ip column on last signup widget
+* main/admin: missing ago on timestamp
+* main/network: :warning: correct spam count storing
+* main/profile: change ordering for custom display name, [see](https://make.wordpress.org/core/?p=20592)
+
 ### 2.14.0
 * main/network: date format helper
 * main/admin: rethinking admin widget footer
