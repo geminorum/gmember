@@ -50,7 +50,7 @@ class gMemberLogin extends gPluginModuleCore
 			&& $profileuser->{$this->constants['meta_register_ip']} )
 				$register_ip = $gMemberNetwork->getIPLookup( $profileuser->{$this->constants['meta_register_ip']} );
 		else
-			$register_ip = __( 'No Data Available', GMEMBER_TEXTDOMAIN );
+			$register_ip = __( 'N/A', GMEMBER_TEXTDOMAIN );
 
 		echo '<tr class="register_ip"><th>'.__( 'Registration IP', GMEMBER_TEXTDOMAIN )
 			.'</th><td><code>'.$register_ip.'</code></td></tr>';
@@ -76,7 +76,7 @@ class gMemberLogin extends gPluginModuleCore
 					sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date ) ) ).
 					')</span></small></small>';
 			} else {
-				$lastlogin = '<code>'.__( 'No Data Available', GMEMBER_TEXTDOMAIN ).'</code>';
+				$lastlogin = '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ).'</code>';
 			}
 
 			echo '<tr class="last_login'.( $store_lastlogin ? '' : ' error' ).'"><th>'
