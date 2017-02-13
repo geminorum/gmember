@@ -68,7 +68,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 		if ( empty( $query->results ) ) {
 
-			_ex( 'No User?!', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN );
+			echo '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ).'</code>';
 
 		} else {
 
@@ -170,7 +170,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 		if ( empty( $query->results ) ) {
 
-			echo '<code>'.__( 'No Data Available', GMEMBER_TEXTDOMAIN ).'</code>';
+			echo '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ).'</code>';
 
 		} else {
 
