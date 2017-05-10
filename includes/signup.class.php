@@ -85,8 +85,11 @@ class gMemberSignUp extends gPluginModuleCore
 	{
 		global $gMemberNetwork;
 
-		if ( $gMemberNetwork->settings->get( 'signup_ip', TRUE ) )
-			update_user_meta( $user_id, $this->constants['meta_register_ip'], $_SERVER['REMOTE_ADDR'] ); // http://wordpress.org/plugins/register-ip-multisite/
+		if ( $gMemberNetwork->settings->get( 'signup_ip', TRUE ) ) {
+
+			if ( $ip = gPluginHTTP::normalizeIP( $_SERVER['REMOTE_ADDR'] ) )
+				update_user_meta( $user_id, $this->constants['meta_register_ip'], $ip );
+		}
 
 		if ( $colorscheme = $gMemberNetwork->settings->get( 'default_colorscheme', FALSE ) )
 			wp_update_user( array( 'ID' => $user_id, 'admin_color' => $colorscheme ) );
