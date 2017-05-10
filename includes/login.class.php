@@ -258,6 +258,11 @@ class gMemberLogin extends gPluginModuleCore
 		if ( ! empty( $requested_redirect_to ) )
 			return $requested_redirect_to;
 
+		global $gMemberNetwork;
+
+		if ( $logout_after = $gMemberNetwork->settings->get( 'logout_after', '' ) )
+			return $logout_after;
+
 		return get_option( 'home' );
 	}
 
