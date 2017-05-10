@@ -87,7 +87,7 @@ class gMemberLogin extends gPluginModuleCore
 				.'</td></tr>';
 		}
 
-		if ( ! IS_PROFILE_PAGE && current_user_can( 'edit_users' ) ) {
+		if ( current_user_can( 'edit_users' ) ) {
 
 			echo '</table><h2>'.__( 'Administrative Options', GMEMBER_TEXTDOMAIN ).'</h2>';
 			echo '<table class="form-table">';
@@ -98,18 +98,19 @@ class gMemberLogin extends gPluginModuleCore
 
 			echo '<tr><th><label for="gmember-slug">'.__( 'Slug', GMEMBER_TEXTDOMAIN )
 				.'</label></th><td><input type="text" name="gmember_slug" id="gmember_slug" value="'
-				.esc_attr( $nicename ).'" class="regular-text" dir="ltr"'
-				.( current_user_can( 'edit_users' ) ? '' : ' readonly="readonly" disabled="disabled"' )
-				.' /><p class="description">'.
+				.esc_attr( $nicename ).'" class="regular-text" dir="ltr" /><p class="description">'.
 					__( 'This will be used in the URL of the user\'s page', GMEMBER_TEXTDOMAIN )
 				.'</p></td></tr>';
 
-			echo '<tr><th>'.__( 'Account Login', GMEMBER_TEXTDOMAIN )
-				.'</th><td><label for="gmember_disable_user">'
-				.'<input type="checkbox" name="gmember_disable_user" id="gmember_disable_user" value="1"';
-					checked( 1, get_the_author_meta( $this->constants['meta_disable_user'], $profileuser->ID ) );
-			echo ' /> '.__( 'Disable user login with this account', GMEMBER_TEXTDOMAIN )
-				.'</label></td></tr>';
+			if ( ! IS_PROFILE_PAGE ) {
+				// prevent lockin out himself!
+				echo '<tr><th>'.__( 'Account Login', GMEMBER_TEXTDOMAIN )
+					.'</th><td><label for="gmember_disable_user">'
+					.'<input type="checkbox" name="gmember_disable_user" id="gmember_disable_user" value="1"';
+						checked( 1, get_the_author_meta( $this->constants['meta_disable_user'], $profileuser->ID ) );
+				echo ' /> '.__( 'Disable user login with this account', GMEMBER_TEXTDOMAIN )
+					.'</label></td></tr>';
+			}
 
 			echo '<tr><th>'.__( 'Password Reset', GMEMBER_TEXTDOMAIN )
 				.'</th><td><label for="gmember_password_reset">'
