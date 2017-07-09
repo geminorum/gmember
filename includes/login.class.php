@@ -41,6 +41,7 @@ class gMemberLogin extends gPluginModuleCore
 	{
 		global $gMemberNetwork, $profileuser;
 
+		$current_time    = current_time( 'timestamp' );
 		$store_lastlogin = $gMemberNetwork->settings->get( 'store_lastlogin', TRUE );
 
 		echo '><h2>'.__( 'Account Information', GMEMBER_TEXTDOMAIN ).'</h2>';
@@ -58,7 +59,7 @@ class gMemberLogin extends gPluginModuleCore
 		$register_date = strtotime( get_date_from_gmt( $profileuser->user_registered ) );
 		$register_on = $gMemberNetwork->getDate( $register_date, 'datetime' ).
 			' <small><small><span class="description">('.
-			sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $register_date ) ) ).
+			sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $register_date, $current_time ) ) ).
 			')</span></small></small>';
 
 		echo '<tr class="register_date"><th>'
@@ -73,7 +74,7 @@ class gMemberLogin extends gPluginModuleCore
 				$lastlogin_date = strtotime( get_date_from_gmt( $profileuser->{$this->constants['meta_lastlogin']} ) );
 				$lastlogin = $gMemberNetwork->getDate( $lastlogin_date, 'datetime' ).
 					' <small><small><span class="description">('.
-					sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date ) ) ).
+					sprintf( __( '%s ago', GMEMBER_TEXTDOMAIN ), apply_filters( 'string_format_i18n', human_time_diff( $lastlogin_date, $current_time ) ) ).
 					')</span></small></small>';
 			} else {
 				$lastlogin = '<code>'.__( 'N/A', GMEMBER_TEXTDOMAIN ).'</code>';

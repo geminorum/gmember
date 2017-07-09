@@ -79,6 +79,7 @@ class gMemberAdmin extends gPluginModuleCore
 			echo '<th>'._x( 'IP', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '</tr></thead>';
 
+			$time = current_time( 'timestamp' );
 			$last = FALSE;
 			$alt  = TRUE;
 
@@ -101,7 +102,7 @@ class gMemberAdmin extends gPluginModuleCore
 					esc_html( $gMemberNetwork->getDate( $registered, 'monthday' ) ),
 					esc_attr( sprintf(
 						_x( '%1$s ago &mdash; %2$s', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ),
-						human_time_diff( $registered ),
+						human_time_diff( $registered, $time ),
 						$gMemberNetwork->getDate( $registered )
 					) ),
 					get_edit_user_link( $user->ID ),
@@ -121,7 +122,7 @@ class gMemberAdmin extends gPluginModuleCore
 
 				echo '<tr><td>';
 
-					printf( _x( 'Last User Registered %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last ) );
+					printf( _x( 'Last User Registered %s ago', 'Signup Admin Widget', GMEMBER_TEXTDOMAIN ), human_time_diff( $last, $time ) );
 
 				echo '</td><td>';
 
@@ -180,6 +181,7 @@ class gMemberAdmin extends gPluginModuleCore
 			echo '<th>'._x( 'Timestamp', 'Logins Admin Widget', GMEMBER_TEXTDOMAIN ).'</th>';
 			echo '</tr></thead>';
 
+			$time = current_time( 'timestamp' );
 			$last = FALSE;
 			$alt  = TRUE;
 
@@ -199,7 +201,7 @@ class gMemberAdmin extends gPluginModuleCore
 				vprintf( $template, array(
 					( $alt ? ' class="alternate"' : '' ),
 					esc_html( $user->display_name ),
-					esc_html( human_time_diff( $lastlogin ) ),
+					esc_html( human_time_diff( $lastlogin, $time ) ),
 					get_edit_user_link( $user->ID ),
 					$user->user_login,
 					esc_html( $gMemberNetwork->getDate( $lastlogin, 'timedate' ) ),
