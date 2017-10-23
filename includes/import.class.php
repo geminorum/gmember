@@ -29,7 +29,7 @@ class gMemberImport extends gPluginImportCore
 			if ( ! class_exists( 'parseCSV' ) )
 				require_once( GMEMBER_DIR.'/assets/libs/parsecsv-for-php/parsecsv.lib.php' );
 
-			$csv = new parseCSV();
+			$csv = new \parseCSV();
 			$csv->encoding( 'UTF-16', 'UTF-8' );
 
 			if ( $offset )
@@ -66,7 +66,6 @@ class gMemberImport extends gPluginImportCore
 	{
 		return self::getCSVMap_google_contacts();
 		return array();
-
 	}
 
 	public static function getCSVMap_google_contacts()

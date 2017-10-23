@@ -71,7 +71,6 @@ class gMemberNetwork extends gPluginNetworkCore
 
 		do_action( 'gmember_network_settings_register', $sub );
 
-
 		if ( ! empty( $_POST ) ) {
 
 			if ( 'spam' == $sub ) {
@@ -131,7 +130,7 @@ class gMemberNetwork extends gPluginNetworkCore
 	{
 		global $wpdb;
 
-		update_site_option( 'gmember_user_spam_count', $wpdb->get_var( "SELECT COUNT(*) FROM $wpdb->users WHERE spam = '1' AND deleted = '0'" ) );
+		update_site_option( 'gmember_user_spam_count', $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->users} WHERE spam = '1' AND deleted = '0'" ) );
 	}
 
 	public function get_spam_count()

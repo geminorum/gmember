@@ -270,7 +270,7 @@ class gMemberLogin extends gPluginModuleCore
 
 	public function login_url( $login_url, $redirect )
 	{
-		if ( is_user_logged_in() || $this->main_site_id == get_current_blog_id() )
+		if ( is_user_logged_in() || is_main_site() )
 			return $login_url;
 
 		if ( ! empty( $redirect ) )
