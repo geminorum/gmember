@@ -10,6 +10,7 @@ class gMemberLogin extends gPluginModuleCore
 		parent::setup_actions();
 
 		$this->main_site_id = gPluginWPHelper::getCurrentSiteBlogID();
+		// $this->main_site_id = get_main_site_id(); // since WP 4.9
 
 		// WORKING : add settings
 		// allow only one session per user
@@ -216,7 +217,7 @@ class gMemberLogin extends gPluginModuleCore
 	{
 		// show the error message if it seems to be a disabled user
 		if ( isset( $_GET['disabled'] ) && $_GET['disabled'] == 1 )
-			$message = '<div id="login_error">'.apply_filters( 'gmember_disable_users_notice',
+			$message.= '<div id="login_error">'.apply_filters( 'gmember_disable_users_notice',
 				__( 'Account disabled', GMEMBER_TEXTDOMAIN ) ).'</div>';
 
 		return $message;
@@ -226,7 +227,7 @@ class gMemberLogin extends gPluginModuleCore
 	{
 		if ( ! is_user_logged_in() ) {
 			if ( FALSE !== strpos( $_SERVER['SCRIPT_NAME'], 'wp-login.php' ) ) {
-				if (  $this->main_site_id != get_current_blog_id() ) {
+				if ( $this->main_site_id != get_current_blog_id() ) {
 
 					$login_url = $this->get_main_site_login();
 					$redirect = empty( $_REQUEST['redirect_to'] ) ? FALSE : $_REQUEST['redirect_to'];

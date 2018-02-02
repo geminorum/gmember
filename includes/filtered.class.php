@@ -24,7 +24,7 @@ class gMemberFiltered extends gPluginFilteredCore
 				'gmember_general' => array(
 					'default' => array(
 						'title' => '',
-						'callback' => '__return_FALSE',
+						'callback' => '__return_false',
 						'fields' => array(
 							'lookup_ip_service' => array(
 								'title'   => __( 'Lookup IP URL', GMEMBER_TEXTDOMAIN ),
@@ -63,7 +63,7 @@ class gMemberFiltered extends gPluginFilteredCore
 				'gmember_profile' => array(
 					'default' => array(
 						'title' => '',
-						'callback' => '__return_FALSE',
+						'callback' => '__return_false',
 						'fields' => array(
 							'disable_colorschemes' => array(
 								'title'   => __( 'Disable Color Schemes', GMEMBER_TEXTDOMAIN ),
@@ -91,7 +91,7 @@ class gMemberFiltered extends gPluginFilteredCore
 				'gmember_signup' => array(
 					'default' => array(
 						'title' => '',
-						'callback' => '__return_FALSE',
+						'callback' => '__return_false',
 						'fields' => array(
 							'signup_ip' => array(
 								'title'   => __( 'Signup IP', GMEMBER_TEXTDOMAIN ),
@@ -120,7 +120,7 @@ class gMemberFiltered extends gPluginFilteredCore
 				'gmember_buddypress' => array(
 					'default' => array(
 						'title' => '',
-						'callback' => '__return_FALSE',
+						'callback' => '__return_false',
 						'fields' => array(
 							'bp_display_name' => array(
 								'title'   => __( 'Display Name', GMEMBER_TEXTDOMAIN ),
