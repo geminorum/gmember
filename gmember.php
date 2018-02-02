@@ -31,6 +31,9 @@ defined( 'GMEMBER_TEXTDOMAIN' ) or define( 'GMEMBER_TEXTDOMAIN', 'gmember' );
 
 function gmember_init( $gplugin_version = NULL ) {
 
+	if ( function_exists( 'gNetwork' ) )
+		return FALSE;
+
 	global $gMemberNetwork;
 
 	if ( ! $gplugin_version || ! version_compare( $gplugin_version, GMEMBER_VERSION_GPLUGIN, '>=' ) )
