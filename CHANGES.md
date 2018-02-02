@@ -1,3 +1,11 @@
+### 2.14.2
+* main/main: bail if gNetwork exists!
+* main/admin: :warning: current time for human time diff
+* main/login: :warning: current time for human time diff
+* main/login: :new: logout after url option
+* main/login: :warning: current super admin can change his nickname
+* main/signup: normalize register ip before storeing
+
 ### 2.14.1
 * main/admin: ip column on last signup widget
 * main/admin: missing ago on timestamp
