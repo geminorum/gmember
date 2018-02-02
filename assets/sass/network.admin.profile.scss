@@ -1,12 +1,9 @@
-@charset "UTF-8";
 @import "modules/all";
 @import "partials/base";
 @import "partials/admin.all";
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
-// body.profile-php,
-// body.user-edit-php {
 
 tr.register_ip {}
 
@@ -15,10 +12,3 @@ tr.register_date {}
 tr.last_login {
   &.error {}
 }
-
-input[type=text]#googleplus,
-input[type=text]#mobile,
-input[type=text]#twitter {
-  direction: ltr;
-}
-// }
